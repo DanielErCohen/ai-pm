@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Small builds - Daniel Cohen</title>
+<meta content="Two small tools: a page-saving Chrome extension and a local voice transcriber." name="description"/>
+<meta content="Small builds - Daniel Cohen" property="og:title"/>
+<meta content="Two small tools: a page-saving Chrome extension and a local voice transcriber." property="og:description"/>
+<meta content="https://danielercohen.github.io/ai-pm/toolkit/small-builds.html" property="og:url"/>
+<meta content="https://danielercohen.github.io/ai-pm/assets/daniel-cohen.jpg" property="og:image"/>
+<meta content="light" name="color-scheme"/>
+<link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
+<link as="font" crossorigin="" href="../assets/fonts/source-serif-4-latin-700-normal.woff2" rel="preload" type="font/woff2"/>
+<link href="../style.css" rel="stylesheet"/>
+<script defer="" src="../js/site.js"></script>
+<link href="https://danielercohen.github.io/ai-pm/toolkit/small-builds.html" rel="canonical"/></head>
+<body>
+<svg aria-hidden="true" focusable="false" height="0" style="position:absolute" width="0"><defs>
+<symbol id="i-setup" viewbox="0 0 24 24"><path d="M4 6h8M18 6h2M4 12h2M12 12h8M4 18h10M20 18h0"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></symbol>
+<symbol id="i-method" viewbox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.5-5.8M20 4v4h-4"></path></symbol>
+<symbol id="i-skills" viewbox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.5l-5.4 3 1.2-6L3.3 9.3l6.1-.7z"></path></symbol>
+<symbol id="i-routines" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></symbol>
+<symbol id="i-career" viewbox="0 0 24 24"><path d="M7 3h7l4 4v14H7zM14 3v4h4M10 12h5M10 16h5"></path></symbol>
+<symbol id="i-builds" viewbox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM12 12l8-4.5M12 12v9M12 12L4 7.5"></path></symbol>
+<symbol id="i-copy" viewbox="0 0 24 24"><rect height="11" rx="2" width="11" x="9" y="9"></rect><path d="M5 15V6a2 2 0 0 1 2-2h9"></path></symbol>
+<symbol id="i-check" viewbox="0 0 24 24"><path d="M5 12l5 5L20 7"></path></symbol>
+<symbol id="i-arrow" viewbox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></symbol>
+</defs></svg>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+<a class="brand" href="../index.html"><span aria-hidden="true" class="dot"><i style="background:var(--c-setup)"></i><i style="background:var(--c-method)"></i><i style="background:var(--c-skills)"></i><i style="background:var(--c-routines)"></i><i style="background:var(--c-career)"></i><i style="background:var(--c-builds)"></i></span>Daniel Cohen</a>
+<nav aria-label="Main" class="main"><a aria-current="page" href="../toolkit/index.html">Toolkit</a><a href="../projects/index.html">Projects</a><a href="../principles/index.html">How I work</a><a href="../personal/index.html">Personal</a><a href="../about.html">About</a></nav>
+</div></header>
+<main id="main">
+<nav aria-label="Breadcrumb" class="crumbs"><div class="wrap"><ol><li><a href="index.html">Toolkit</a></li><li aria-current="page">Small builds</li></ol></div></nav>
+<section class="band cat-builds"><div class="wrap band-grid"><div class="band-text">
+<p class="eyebrow"><span class="ico"><svg aria-hidden="true" class="i"><use href="#i-builds"></use></svg></span>Small builds</p>
+<h1>Small builds</h1><p class="lede">Two small tools I built where I could not find a ready-made one.</p>
+<div class="row"><span class="badge time"><svg aria-hidden="true" class="i"><use href="#i-routines"></use></svg> 10 to 20 min</span><span class="badge">No Claude needed</span><a class="btn" data-goatcounter-click="folder-small-builds" data-goatcounter-title="Open small-builds/ on GitHub" href="https://github.com/DanielErCohen/how-i-work/tree/main/small-builds">Open small-builds/ on GitHub <svg aria-hidden="true" class="i"><use href="#i-arrow"></use></svg></a></div></div>
+<div class="band-vis"><div class="doc"><div class="doc-bar"><span>00-inbox/2026-04-15_meeting-ideas.md</span><span class="tag">Saved note</span></div><div aria-label="Sample output, scrollable" class="doc-body" role="region" tabindex="0"><pre>---
+date: 2026-04-15
+source_file: voice-note.m4a
+language: en
+type: voice-note
+---
+
+## Meeting ideas
+
+(the transcript text)</pre></div></div><p class="sample-note">The format <code>transcribe.py --save</code> writes, from the voice-transcriber readme.</p></div></div></section>
+<section aria-labelledby="get-h" class="sec tsec cat-builds"><div class="wrap"><h2 id="get-h">What you get</h2><div class="why"><ul><li><strong>Page-saving extension</strong> is a Chrome extension that saves a web page as an AI-written note in a GitHub repo (a project folder with a saved history) or a Notion database.</li><li><strong>Voice transcriber</strong> is a local Whisper transcriber for voice notes in 99 languages. It writes a markdown note. It needs no internet after the one-time model download.</li></ul></div><p class="credit">Builds on: Readability.js by Arc90 and the Mozilla contributors (Apache 2.0), inside the page-saving extension. <a data-goatcounter-click="repo-how-i-work" data-goatcounter-title="how-i-work link" href="https://github.com/DanielErCohen/how-i-work/blob/main/THIRD-PARTY-NOTICES.md">Notices in the repo</a>.</p></div></section>
+<section aria-labelledby="copy-h" class="sec alt tsec cat-builds"><div class="wrap"><h2 id="copy-h">Copy it</h2>
+<p>Time to set up: <strong>10 to 20 minutes each</strong>. Pick the assistant you use. The choice is remembered on this device.</p>
+<div class="tabs" data-tabs=""><div aria-label="Choose your assistant" class="tablist" role="tablist"><button aria-controls="panel-code" aria-selected="false" class="tab" data-key="code" id="tab-code" role="tab" tabindex="-1" type="button">Claude Code</button><button aria-controls="panel-app" aria-selected="false" class="tab" data-key="app" id="tab-app" role="tab" tabindex="-1" type="button">Claude app / Cowork</button><button aria-controls="panel-other" aria-selected="false" class="tab" data-key="other" id="tab-other" role="tab" tabindex="-1" type="button">Other assistants</button></div><div aria-labelledby="tab-code" class="tabpanel" hidden="" id="panel-code" role="tabpanel"><p>The voice transcriber runs in a terminal on an Apple Silicon Mac.</p><div class="codeblock"><div class="cb-cap">Set up and run the transcriber</div><pre><code>[ -d ~/how-i-work ] || git clone https://github.com/DanielErCohen/how-i-work.git ~/how-i-work
+cd ~/how-i-work/small-builds/voice-transcriber
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+brew install ffmpeg
+# Replace voice-note.m4a with the path to your own recording
+python3 transcribe.py voice-note.m4a --save</code></pre><button class="copy" data-copy="[ -d ~/how-i-work ] || git clone https://github.com/DanielErCohen/how-i-work.git ~/how-i-work
+cd ~/how-i-work/small-builds/voice-transcriber
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+brew install ffmpeg
+# Replace voice-note.m4a with the path to your own recording
+python3 transcribe.py voice-note.m4a --save" data-goatcounter-click="copy-small-builds-code-0" data-goatcounter-title="Copy Set up and run the transcriber" type="button"><svg aria-hidden="true" class="i"><use href="#i-copy"></use></svg><span class="no">Copy</span><span class="ok"><svg aria-hidden="true" class="i"><use href="#i-check"></use></svg> Copied</span></button></div><p>The first run downloads the model once. <code>ffmpeg</code> is required: the transcriber uses it to read every audio file. Replace <code>voice-note.m4a</code> with the path to your own recording. <code>python3</code> must be an Apple Silicon build. Check with <code>python3 -c "import platform; print(platform.machine())"</code>, which prints <code>arm64</code>.</p></div><div aria-labelledby="tab-app" class="tabpanel" hidden="" id="panel-app" role="tabpanel"><p>Neither tool needs Claude to run. Open the link, copy the readme text and follow its steps in a terminal.</p><div class="codeblock"><div class="cb-cap">Voice transcriber readme (raw)</div><pre><code>https://raw.githubusercontent.com/DanielErCohen/how-i-work/main/small-builds/voice-transcriber/readme.md</code></pre><button class="copy" data-copy="https://raw.githubusercontent.com/DanielErCohen/how-i-work/main/small-builds/voice-transcriber/readme.md" data-goatcounter-click="copy-small-builds-app-0" data-goatcounter-title="Copy Voice transcriber readme (raw)" type="button"><svg aria-hidden="true" class="i"><use href="#i-copy"></use></svg><span class="no">Copy</span><span class="ok"><svg aria-hidden="true" class="i"><use href="#i-check"></use></svg> Copied</span></button></div></div><div aria-labelledby="tab-other" class="tabpanel" hidden="" id="panel-other" role="tabpanel"><p>The page-saving extension loads as an unpacked extension in Chrome: open <code>chrome://extensions</code>, turn on Developer mode and choose Load unpacked. Open the link, copy the readme text and follow its steps.</p><div class="codeblock"><div class="cb-cap">Extension readme (raw)</div><pre><code>https://raw.githubusercontent.com/DanielErCohen/how-i-work/main/small-builds/page-saving-extension/readme.md</code></pre><button class="copy" data-copy="https://raw.githubusercontent.com/DanielErCohen/how-i-work/main/small-builds/page-saving-extension/readme.md" data-goatcounter-click="copy-small-builds-other-0" data-goatcounter-title="Copy Extension readme (raw)" type="button"><svg aria-hidden="true" class="i"><use href="#i-copy"></use></svg><span class="no">Copy</span><span class="ok"><svg aria-hidden="true" class="i"><use href="#i-check"></use></svg> Copied</span></button></div></div></div>
+<h3>Setup steps</h3><ol class="rules"><li>Voice transcriber: clone <code>how-i-work</code>, then on an Apple Silicon Mac follow the setup in the <a data-goatcounter-click="repo-how-i-work" data-goatcounter-title="how-i-work link" href="https://github.com/DanielErCohen/how-i-work/blob/main/small-builds/voice-transcriber/readme.md">readme</a>: a virtual environment, <code>pip install -r requirements.txt</code>, <code>brew install ffmpeg</code> and the one-time model download (10 minutes).</li><li>Page-saving extension: create a private GitHub repo for captures (notes land in <code>02-areas/saved-articles</code>) and a fine-grained token, then open <code>chrome://extensions</code>, turn on Developer mode, choose Load unpacked and select the extension folder. The <a data-goatcounter-click="repo-how-i-work" data-goatcounter-title="how-i-work link" href="https://github.com/DanielErCohen/how-i-work/blob/main/small-builds/page-saving-extension/readme.md">readme</a> has every step (15 to 20 minutes).</li></ol></div></section>
+<section aria-labelledby="where-h" class="sec tsec cat-builds"><div class="wrap"><h2 id="where-h">Where it works</h2>
+<table class="where"><thead><tr><th scope="col">Assistant</th><th scope="col">Support</th></tr></thead><tbody><tr><th scope="row">Claude Code</th><td class="part">Not needed to run them. Useful if you want to change one.</td></tr><tr><th scope="row">Claude app / Cowork</th><td class="part">Not needed to run them.</td></tr><tr><th scope="row">Other assistants</th><td class="part">Not needed. The extension needs Chrome and the transcriber needs an Apple Silicon Mac.</td></tr></tbody></table></div></section>
+<section aria-labelledby="why-h" class="sec alt tsec cat-builds why-sec"><div class="wrap why"><h2 id="why-h">Why I use it</h2><p>Each one covers a task where I could not find a tool that fit. Each has one job and few files. Neither needs a server. Building them also showed me what a non-coder can ship with agents (separate Claude helpers, each on one task).</p></div></section>
+<section aria-labelledby="came-h" class="sec tsec cat-builds came"><div class="wrap"><h2 id="came-h">Came from</h2><p>These did not come from one of the five projects. Each solved a task of mine: saving what I read and turning voice notes into text. The products themselves are on the <a href="../projects/index.html">projects page</a>.</p></div></section>
+<section aria-label="More tools" class="sec alt pn-sec"><div class="wrap"><nav aria-label="More tools" class="pn"><a class="pn-card prev" href="cv-tailor.html" style="--cc:var(--c-career)"><span class="dir">← Previous</span><span class="nm">cv-tailor</span></a><a class="btn" href="index.html">All tools</a><span></span></nav></div></section>
+</main>
+<footer class="site foot-dark"><div class="wrap">
+<div><h2>Contact</h2>
+<p>Everything in the toolkit is free under an MIT licence. Email is the fastest way to reach me.</p>
+<div class="email-row"><code>[email removed]</code>
+<button class="copy" data-copy="[email removed]" data-goatcounter-click="copy-email" data-goatcounter-title="Copy email" type="button"><svg aria-hidden="true" class="i"><use href="#i-copy"></use></svg><span class="no">Copy email</span><span class="ok"><svg aria-hidden="true" class="i"><use href="#i-check"></use></svg> Copied</span></button>
+<a data-goatcounter-click="email" data-goatcounter-title="Email link" href="mailto:[email removed]">Open in mail app</a></div></div>
+<div><ul>
+<li><a data-goatcounter-click="linkedin" data-goatcounter-title="LinkedIn" href="https://www.linkedin.com/in/danielercohen">LinkedIn</a></li>
+<li><a data-goatcounter-click="github-profile" data-goatcounter-title="GitHub profile" href="https://github.com/DanielErCohen">GitHub</a></li>
+<li><a data-goatcounter-click="repo-how-i-work" data-goatcounter-title="how-i-work link" href="https://github.com/DanielErCohen/how-i-work">how-i-work</a></li>
+<li><a data-goatcounter-click="repo-cv-tailor" data-goatcounter-title="cv-tailor link" href="https://github.com/DanielErCohen/cv-tailor">cv-tailor</a></li>
+<li><a href="../about.html#offenlegung">Imprint and privacy</a></li>
+</ul></div>
+<p class="small">Daniel Cohen. Tools under an MIT licence, copyright Daniel Cohen 2026, with the credits listed in the repo notices.</p>
+</div></footer>
+</body>
+</html>
