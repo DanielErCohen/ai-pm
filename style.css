@@ -756,6 +756,7 @@ code.nb{white-space:nowrap}
 .people.sm .mono{width:42px;height:42px;font-size:.92rem}
 .people.sm .pname{font-size:1.1rem}
 .people-head{font-size:1.3rem;margin:34px 0 14px}
+.people-more{margin-top:18px;color:var(--muted)}
 .people-end{margin-top:22px;font-weight:700}
 .credit a{white-space:nowrap}
 @media (max-width:980px){
