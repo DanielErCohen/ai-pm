@@ -1,4 +1,4 @@
-/* ai-pm site: copy buttons, install tabs, filter chips, book search, cycle ring, timeline. No dependencies. */
+/* ai-pm site: copy buttons, install tabs, filter chips, book search, cycle ring. No dependencies. */
 (function () {
   'use strict';
   document.documentElement.classList.add('js');
@@ -140,69 +140,5 @@
         if (!open) { b.setAttribute('aria-expanded', 'true'); panel.hidden = false; }
       });
     });
-  }
-
-  /* Setup timeline: one detail card on desktop, an accordion on small screens */
-  var grow = document.querySelector('[data-grow]');
-  if (grow) {
-    var gb = [].slice.call(grow.querySelectorAll('.g-btn'));
-    var gdetail = grow.querySelector('[data-grow-detail]');
-    var wide = window.matchMedia('(min-width:900px)');
-    var gcur = wide.matches ? 0 : -1;
-    var gpanel = function (i) { return document.getElementById(gb[i].getAttribute('aria-controls')); };
-    var gplace = function () {
-      gb.forEach(function (b, i) {
-        var p = gpanel(i), on = i === gcur;
-        b.setAttribute('aria-expanded', on ? 'true' : 'false');
-        p.hidden = !on;
-        if (on && wide.matches) { gdetail.appendChild(p); }
-        else if (p.parentNode !== b.parentNode) { b.parentNode.appendChild(p); }
-      });
-    };
-    var grove = function (i) { gb.forEach(function (b, k) { b.tabIndex = k === i ? 0 : -1; }); };
-    gb.forEach(function (b, i) {
-      b.addEventListener('click', function () {
-        gcur = (gcur === i && !wide.matches) ? -1 : i;
-        grove(i); gplace();
-      });
-      b.addEventListener('keydown', function (e) {
-        var j = null;
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { j = Math.min(i + 1, gb.length - 1); }
-        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { j = Math.max(i - 1, 0); }
-        else if (e.key === 'Home') { j = 0; } else if (e.key === 'End') { j = gb.length - 1; }
-        if (j !== null) { e.preventDefault(); grove(j); gb[j].focus(); }
-      });
-    });
-    var gchange = function () { if (wide.matches && gcur < 0) { gcur = 0; } gplace(); gnavUpdate(); };
-    if (wide.addEventListener) { wide.addEventListener('change', gchange); } else { wide.addListener(gchange); }
-
-    /* Long histories: earlier/later buttons, and the chosen milestone is scrolled to the middle */
-    var gscroll = grow.querySelector('.grow-scroll');
-    var gmotion = window.matchMedia('(prefers-reduced-motion:reduce)').matches ? 'auto' : 'smooth';
-    var gnav = null, gprev = null, gnext = null;
-    var gnavUpdate = function () {
-      if (!gnav) { return; }
-      var over = wide.matches && gscroll.scrollWidth > gscroll.clientWidth + 4;
-      gnav.hidden = !over;
-      gprev.disabled = gscroll.scrollLeft <= 2;
-      gnext.disabled = gscroll.scrollLeft + gscroll.clientWidth >= gscroll.scrollWidth - 2;
-    };
-    var gcenter = function (i) {
-      if (!gscroll || !wide.matches) { return; }
-      var li = gb[i].parentNode;
-      gscroll.scrollTo({ left: Math.max(0, li.offsetLeft - (gscroll.clientWidth - li.offsetWidth) / 2), behavior: gmotion });
-    };
-    if (gscroll) {
-      gnav = document.createElement('div'); gnav.className = 'grow-nav';
-      gnav.innerHTML = '<button type="button" class="btn sm" aria-label="Scroll to earlier milestones">&larr; Earlier</button><button type="button" class="btn sm" aria-label="Scroll to later milestones">Later &rarr;</button>';
-      gprev = gnav.children[0]; gnext = gnav.children[1];
-      gscroll.parentNode.insertBefore(gnav, gscroll);
-      gprev.addEventListener('click', function () { gscroll.scrollBy({ left: -gscroll.clientWidth * 0.8, behavior: gmotion }); });
-      gnext.addEventListener('click', function () { gscroll.scrollBy({ left: gscroll.clientWidth * 0.8, behavior: gmotion }); });
-      gscroll.addEventListener('scroll', gnavUpdate);
-      window.addEventListener('resize', gnavUpdate);
-      gb.forEach(function (b, i) { b.addEventListener('click', function () { gcenter(i); }); b.addEventListener('focus', function () { gcenter(i); }); });
-    }
-    grove(Math.max(gcur, 0)); gplace(); gnavUpdate();
   }
 })();

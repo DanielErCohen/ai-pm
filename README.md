@@ -7,7 +7,7 @@ Live site: [danielercohen.github.io/ai-pm](https://danielercohen.github.io/ai-pm
 ## Serve locally
 
 ```bash
-python3 -m http.server
+python3 -m http.server --bind 127.0.0.1
 ```
 
 Run it in this folder and open http://localhost:8000.
