@@ -4,10 +4,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Small builds - Daniel Cohen</title>
-<meta content="Two small tools: a page-saving Chrome extension and a local voice transcriber." name="description"/>
-<meta content="Small builds - Daniel Cohen" property="og:title"/>
-<meta content="Two small tools: a page-saving Chrome extension and a local voice transcriber." property="og:description"/>
+<title>Page-saving extension - Daniel Cohen</title>
+<meta content="A Chrome extension that saves a web page or a podcast transcript from YouTube as an AI-written note in your second brain." name="description"/>
+<meta content="Page-saving extension - Daniel Cohen" property="og:title"/>
+<meta content="A Chrome extension that saves a web page or a podcast transcript from YouTube as an AI-written note in your second brain." property="og:description"/>
 <meta content="https://danielercohen.github.io/ai-pm/toolkit/small-builds.html" property="og:url"/>
 <meta content="https://danielercohen.github.io/ai-pm/assets/daniel-cohen.jpg" property="og:image"/>
 <meta content="light" name="color-scheme"/>
@@ -34,42 +34,39 @@
 <nav aria-label="Main" class="main"><a aria-current="page" href="../toolkit/index.html">Toolkit</a><a href="../projects/index.html">Projects</a><a href="../principles/index.html">How I work</a><a href="../personal/index.html">Personal</a><a href="../about.html">About</a></nav>
 </div></header>
 <main id="main">
-<nav aria-label="Breadcrumb" class="crumbs"><div class="wrap"><ol><li><a href="index.html">Toolkit</a></li><li aria-current="page">Small builds</li></ol></div></nav>
+<nav aria-label="Breadcrumb" class="crumbs"><div class="wrap"><ol><li><a href="index.html">Toolkit</a></li><li aria-current="page">Page-saving extension</li></ol></div></nav>
 <section class="band cat-builds"><div class="wrap band-grid"><div class="band-text">
 <p class="eyebrow"><span class="ico"><svg aria-hidden="true" class="i"><use href="#i-builds"></use></svg></span>Small builds</p>
-<h1>Small builds</h1><p class="lede">Two small tools I built where I could not find a ready-made one.</p>
-<div class="row"><span class="badge time"><svg aria-hidden="true" class="i"><use href="#i-routines"></use></svg> 10 to 20 min</span><span class="badge">Extension needs an AI API key</span><a class="btn" href="https://github.com/DanielErCohen/how-i-work/tree/main/small-builds">Open small-builds/ on GitHub <svg aria-hidden="true" class="i"><use href="#i-arrow"></use></svg></a></div></div>
-<div class="band-vis"><div class="doc"><div class="doc-bar"><span>00-inbox/2026-04-15_meeting-ideas.md</span><span class="tag">Saved note</span></div><div aria-label="Sample output, scrollable" class="doc-body" role="region" tabindex="0"><pre>---
-date: 2026-04-15
-source_file: voice-note.m4a
-language: en
-type: voice-note
+<h1>Page-saving extension</h1><p class="lede">A Chrome extension that saves a web page or a podcast transcript from YouTube as an AI-written note in your second brain.</p>
+<details class="whyline"><summary><span class="whyline-k">Why I built it</span><span class="whyline-t">Links I sent to my own WhatsApp inbox got read once and never found again, so I built a one-click path into my second brain.</span></summary><ul><li>It detects the page type and pulls transcripts from YouTube, which covers the podcasts I follow.</li><li>It writes an AI summary note and files it in a GitHub repo or a Notion database.</li><li>Only the pages I pick get saved, so the second brain holds the significant ones.</li></ul></details>
+<div class="row"><span class="badge time"><svg aria-hidden="true" class="i"><use href="#i-routines"></use></svg> 15 to 20 min</span><span class="badge">Extension needs an AI API key</span><a class="btn" href="https://github.com/DanielErCohen/how-i-work/tree/main/small-builds/page-saving-extension">Open page-saving-extension/ on GitHub <svg aria-hidden="true" class="i"><use href="#i-arrow"></use></svg></a></div></div>
+<div class="band-vis"><div class="doc"><div class="doc-bar"><span>00-inbox/2026-10-12_why-onboarding-checklists-stall.md</span><span class="tag">Sample, invented</span></div><div aria-label="Sample output, scrollable" class="doc-body" role="region" tabindex="0"><pre>---
+date: 2026-10-12
+source_url: https://example.com/onboarding-checklists
+source_type: article
+category: product
+tags: [onboarding, activation, checklists]
 ---
 
-## Meeting ideas
+## Why onboarding checklists stall
 
-(the transcript text)</pre></div></div><p class="sample-note">The format <code>transcribe.py --save</code> writes, from the voice-transcriber readme.</p></div></div></section>
-<section aria-labelledby="get-h" class="sec tsec cat-builds"><div class="wrap"><h2 id="get-h">What you get</h2><div class="why"><ul><li><strong>Page-saving extension</strong> is a Chrome extension that saves a web page as an AI-written note in a GitHub repo or a Notion database.</li><li><strong>Voice transcriber</strong> is a local Whisper transcriber for voice notes in 99 languages. It writes a markdown note. It works offline after the one-time model download.</li></ul></div><p class="credit">Builds on: Readability.js by Arc90 and the Mozilla contributors (Apache 2.0), inside the page-saving extension. <a href="https://github.com/DanielErCohen/how-i-work/blob/main/THIRD-PARTY-NOTICES.md">Notices in the repo</a>.</p></div></section>
+### Summary
+A checklist helps when each step is a task the user already wants to do. The article reports that one team cut its checklist from seven steps to three and more new users finished it.
+
+### Key insights
+- Every step the user did not choose is a place to quit.
+- Order the steps by the value the user sees first.
+- Measure completion per step to find where users leave.
+
+### Notable quote or data point
+&gt; "Every step you remove is one fewer place to quit."
+
+### My notes
+</pre></div></div><p class="sample-note">Sample, invented. The article, the team and the quote are made up. The layout is the one the extension writes.</p></div></div></section>
+<section aria-labelledby="get-h" class="sec tsec cat-builds"><div class="wrap"><h2 id="get-h">What you get</h2><div class="why"><p>A Chrome extension you load unpacked from the repo.</p><ul><li>It saves with one click to one or more GitHub second brains, a Notion database or both.</li></ul></div><p class="credit">Builds on: Readability.js by Arc90 and the Mozilla contributors (Apache 2.0), inside the extension. <a href="https://github.com/DanielErCohen/how-i-work/blob/main/THIRD-PARTY-NOTICES.md">Notices in the repo</a>.</p></div></section>
 <section aria-labelledby="copy-h" class="sec alt tsec cat-builds"><div class="wrap"><h2 id="copy-h">Copy it</h2>
-<p>Time to set up: <strong>10 to 20 minutes each</strong>. The extension needs an AI API key. The transcriber runs offline on Apple Silicon.</p>
-<h3>Voice transcriber</h3><p>It runs in a terminal on an Apple Silicon Mac.</p><div class="codeblock"><div class="cb-cap">Set up and run the transcriber</div><pre><code>[ -d ~/how-i-work ] || git clone https://github.com/DanielErCohen/how-i-work.git ~/how-i-work
-cd ~/how-i-work/small-builds/voice-transcriber
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-brew install ffmpeg
-# Replace voice-note.m4a with the path to your own recording
-python3 transcribe.py voice-note.m4a --save</code></pre><button class="copy" data-copy="[ -d ~/how-i-work ] || git clone https://github.com/DanielErCohen/how-i-work.git ~/how-i-work
-cd ~/how-i-work/small-builds/voice-transcriber
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-brew install ffmpeg
-# Replace voice-note.m4a with the path to your own recording
-python3 transcribe.py voice-note.m4a --save" type="button"><svg aria-hidden="true" class="i"><use href="#i-copy"></use></svg><span class="no">Copy</span><span class="ok"><svg aria-hidden="true" class="i"><use href="#i-check"></use></svg> Copied</span></button></div><p>The first run downloads the model once. <code>ffmpeg</code> reads every audio file. <code>python3</code> must be an Apple Silicon build. Check with <code>python3 -c "import platform; print(platform.machine())"</code>, which prints <code>arm64</code>. The <a href="https://github.com/DanielErCohen/how-i-work/blob/main/small-builds/voice-transcriber/readme.md">readme</a> has the rest.</p>
-<h3>Page-saving extension</h3><p>It loads as an unpacked extension in Chrome.</p><div class="codeblock"><div class="cb-cap">Get the extension folder</div><pre><code>[ -d ~/how-i-work ] || git clone https://github.com/DanielErCohen/how-i-work.git ~/how-i-work</code></pre><button class="copy" data-copy="[ -d ~/how-i-work ] || git clone https://github.com/DanielErCohen/how-i-work.git ~/how-i-work" type="button"><svg aria-hidden="true" class="i"><use href="#i-copy"></use></svg><span class="no">Copy</span><span class="ok"><svg aria-hidden="true" class="i"><use href="#i-check"></use></svg> Copied</span></button></div><ol class="rules"><li>Open <code>chrome://extensions</code>, turn on Developer mode and choose Load unpacked.</li><li>Select <code>~/how-i-work/small-builds/page-saving-extension</code>.</li><li>Create a private GitHub repo for captures (notes land in <code>00-inbox/</code>) and a fine-grained token limited to that one repo. The extension keeps the token in the browser's extension storage in plain text.</li></ol><p>The <a href="https://github.com/DanielErCohen/how-i-work/blob/main/small-builds/page-saving-extension/readme.md">readme</a> has every step (15 to 20 minutes).</p></div></section>
-<section aria-labelledby="why-h" class="sec alt tsec cat-builds why-sec"><div class="wrap why"><h2 id="why-h">Why I use it</h2><p>Each one covers a task where I could not find a tool that fit. Each has one job and few files. Building them also showed me what a non-coder can ship with agents (separate Claude helpers, each on one task).</p></div></section>
-<section aria-labelledby="came-h" class="sec tsec cat-builds came"><div class="wrap"><h2 id="came-h">Came from</h2><p>Each solved a task of mine: saving what I read and turning voice notes into text. The products themselves are on the <a href="../projects/index.html">projects page</a>.</p></div></section>
+<p>Time to set up: <strong>15 to 20 minutes</strong>. The extension needs an AI API key.</p>
+<p>It loads as an unpacked extension in Chrome.</p><div class="codeblock"><div class="cb-cap">Get the extension folder</div><pre><code>[ -d ~/how-i-work ] || git clone https://github.com/DanielErCohen/how-i-work.git ~/how-i-work</code></pre><button class="copy" data-copy="[ -d ~/how-i-work ] || git clone https://github.com/DanielErCohen/how-i-work.git ~/how-i-work" type="button"><svg aria-hidden="true" class="i"><use href="#i-copy"></use></svg><span class="no">Copy</span><span class="ok"><svg aria-hidden="true" class="i"><use href="#i-check"></use></svg> Copied</span></button></div><ol class="rules"><li>Open <code>chrome://extensions</code>, turn on Developer mode and choose Load unpacked.</li><li>Select <code>~/how-i-work/small-builds/page-saving-extension</code>.</li><li>Create a private GitHub repo for captures (notes land in <code>00-inbox/</code>) and a fine-grained token limited to that one repo. The extension keeps the token in the browser's extension storage in plain text.</li></ol><p>The <a href="https://github.com/DanielErCohen/how-i-work/blob/main/small-builds/page-saving-extension/readme.md">readme</a> has every step (15 to 20 minutes).</p></div></section>
 <section aria-label="More tools" class="sec alt pn-sec"><div class="wrap"><nav aria-label="More tools" class="pn"><a class="pn-card prev" href="cv-tailor.html" style="--cc:var(--c-career)"><span class="dir">← Previous</span><span class="nm">cv-tailor</span></a><a class="btn" href="index.html">All tools</a><span></span></nav></div></section>
 </main>
 <footer class="site foot-dark"><div class="wrap">

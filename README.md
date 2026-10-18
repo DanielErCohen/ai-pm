@@ -1,6 +1,6 @@
 # Daniel Cohen: PM tools and practice
 
-Free PM skills, templates and small builds, with a nine-step PM workflow and the principles behind the work. It is a static site with no build step.
+Free PM tools, each built for a problem in my own work, with a nine-step PM workflow and the principles behind it. It is a static site with no build step.
 
 Live site: [danielercohen.github.io/ai-pm](https://danielercohen.github.io/ai-pm/)
 

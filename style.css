@@ -918,3 +918,18 @@ code.nb{white-space:nowrap}
 .sb-feature .sb-vis .pj-vis{height:auto;padding:0;border:0;background:none;overflow:visible}
 .sb-feature .sb-vis .pj-vis .browser{border-radius:10px;border-bottom:1px solid var(--line)}
 .pj-vis .browser .body img.shot.sp{object-position:50% 0}
+
+/* why line: one visible sentence, the story opens on tap */
+.whyline{margin:0 0 20px;max-width:46em}
+.whyline summary{cursor:pointer;list-style:none;display:block;position:relative;padding-left:24px;line-height:1.5}
+.whyline summary::-webkit-details-marker{display:none}
+.whyline summary::before{content:"+";position:absolute;left:0;top:0;width:16px;text-align:center;font-weight:700}
+.whyline[open] summary::before{content:"\2212"}
+.whyline summary:hover .whyline-t{text-decoration:underline;text-underline-offset:3px}
+.whyline summary:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:4px}
+.whyline-k{display:block;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.85}
+.whyline ul{margin:10px 0 0;padding-left:44px}
+.whyline li{margin-bottom:6px}
+.band .whyline{color:#fff}
+.whyline-t::after{content:"Read more";margin-left:.4em;font-weight:700;white-space:nowrap;text-decoration:underline;text-underline-offset:3px}
+.whyline[open] .whyline-t::after{content:"Show less"}
