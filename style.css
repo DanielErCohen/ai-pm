@@ -78,7 +78,7 @@ button.chip[aria-pressed="true"]::before{background:#fff}
 .hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center}
 .hero h1{font-size:clamp(2.1rem,4.2vw,3.1rem);max-width:16em;text-wrap:balance}
 .hero h1 mark{background:linear-gradient(transparent 62%,var(--amber) 62%);color:inherit;padding:0 .05em}
-.hero .lede{margin-bottom:22px}
+.hero .lede{margin-bottom:14px} .hero .invite{margin:0 0 24px;padding-left:12px;border-left:3px solid var(--amber);font-weight:600;color:var(--accent);font-size:1.05rem;line-height:1.5} .hero .invite a{color:inherit;text-decoration:underline;text-decoration-color:var(--amber);text-decoration-thickness:2px;text-underline-offset:3px}
 .cta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px}
 .contact{font-size:.98rem;color:var(--muted)}
 .contact a{font-weight:600}
