@@ -1,4 +1,4 @@
-/* ai-pm site: copy buttons, install tabs, filter chips, book search, cycle ring. No dependencies. */
+/* ai-pm site: copy buttons, install tabs, filter chips, book search, cycle ring, visit counts (GoatCounter). No dependencies. */
 (function () {
   'use strict';
   document.documentElement.classList.add('js');
@@ -139,6 +139,31 @@
         btns.forEach(function (o) { o.setAttribute('aria-expanded', 'false'); document.getElementById(o.getAttribute('aria-controls')).hidden = true; });
         if (!open) { b.setAttribute('aria-expanded', 'true'); panel.hidden = false; }
       });
+    });
+  }
+
+  /* Visit counts: GoatCounter, self-hosted count.js, no cookies. Live site only. */
+  var me = document.currentScript;
+  if (me && location.hostname === 'danielercohen.github.io') {
+    var gc = document.createElement('script');
+    gc.async = true;
+    gc.src = me.src.replace(/site\.js(\?.*)?$/, 'count.js');
+    gc.setAttribute('data-goatcounter', 'https://danielercohen.goatcounter.com/count');
+    document.head.appendChild(gc);
+    /* Clicks that show a tool was taken: copy buttons, zip downloads, GitHub and LinkedIn links */
+    document.addEventListener('click', function (e) {
+      if (!window.goatcounter || !window.goatcounter.count) { return; }
+      var page = location.pathname.replace(/^\/ai-pm/, '') || '/';
+      var name = null, el = e.target.closest('[data-copy], a[href]');
+      if (!el) { return; }
+      if (el.hasAttribute('data-copy')) { name = 'copy ' + page; }
+      else {
+        var href = el.getAttribute('href');
+        if (/\.zip$/.test(href)) { name = 'download ' + href.split('/').pop(); }
+        else if (/github\.com\/DanielErCohen\//i.test(href)) { name = 'github ' + href.replace(/^https?:\/\/github\.com\/DanielErCohen\//i, ''); }
+        else if (/linkedin\.com\/in\/danielercohen/i.test(href)) { name = 'linkedin from ' + page; }
+      }
+      if (name) { window.goatcounter.count({ path: name, title: name, event: true }); }
     });
   }
 })();
