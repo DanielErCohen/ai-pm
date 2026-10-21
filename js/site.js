@@ -156,7 +156,7 @@
       var page = location.pathname.replace(/^\/ai-pm/, '') || '/';
       var name = null, el = e.target.closest('[data-copy], a[href]');
       if (!el) { return; }
-      if (el.hasAttribute('data-copy')) { name = 'copy ' + page; }
+      if (el.hasAttribute('data-copy')) { name = (el.closest('.adapt') ? 'adapt ' : 'copy ') + page; }
       else {
         var href = el.getAttribute('href');
         if (/\.zip$/.test(href)) { name = 'download ' + href.split('/').pop(); }
