@@ -17,6 +17,10 @@ Run it in this folder and open http://localhost:8000.
 - `python3 tools/linkcheck.py` checks internal links, anchors and accessibility references.
 - `python3 tools/screens.py <output-folder>` takes desktop and mobile screenshots. It needs Playwright and Chromium.
 
+## Artifact previews
+
+All nine toolkit pages use the shared preview, download and copy pattern. [ARTIFACTS.md](ARTIFACTS.md) explains how to add an artifact, keep its source and agent guidelines aligned, build the packs and verify publication.
+
 ## Where the skills come from
 
 The skill zips in `downloads/` are built by `tools/build-skill-zips.sh` from [how-i-work](https://github.com/DanielErCohen/how-i-work) and [cv-tailor](https://github.com/DanielErCohen/cv-tailor). Those repositories hold the sources and the third-party notices.
