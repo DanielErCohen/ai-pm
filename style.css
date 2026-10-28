@@ -938,3 +938,51 @@ code.nb{white-space:nowrap}
 .adapt{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:12px;padding:16px 18px;margin:18px 0}
 .adapt>p{margin:0 0 12px;font-size:.98rem}
 .adapt .codeblock{margin:0}
+
+/* cycle page: ring overview and collapsible steps */
+.ph-research{--lc:#0F6E6E}.ph-decisions{--lc:#2A5A8C}.ph-delivery{--lc:#7A3E6B}.ph-learning{--lc:#4A6B23}
+.cyc-overview .ov-lede{max-width:46em;margin-bottom:22px}
+.cyc-overview .ringwrap{display:grid;grid-template-columns:minmax(300px,440px) 1fr;gap:36px;align-items:center}
+.ring .phase-arc{fill:none;stroke-width:9;stroke-linecap:round}
+.ring .dir{fill:none;stroke:#9C9586;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.ring .dir.back{stroke:var(--amber);stroke-width:3}
+.ring .ctr-loop{fill:var(--muted);font:italic 12px var(--sans);text-anchor:middle}
+.ring-panel{background:var(--surface);border:1px solid var(--line);border-top:8px solid var(--lc);border-radius:var(--r);padding:22px 24px}
+.ring-panel .rp-ph{font:700 .76rem var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--lc);margin:0 0 6px}
+.ring-panel h3{margin:0 0 .35em;font-size:1.7rem}
+.ring-panel .rp-q{font:600 1.15rem/1.45 var(--serif);color:var(--ink);margin-bottom:12px}
+.ring-panel .improves{margin:0 0 12px}
+.ring-panel .rp-out{color:#2C373B}
+.rp-nav{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:16px}
+.steps-tools{margin:6px 0 4px}
+details.stepcard{padding:0;scroll-margin-top:90px}
+details.stepcard>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:52px 1fr 32px;gap:14px;align-items:center;padding:18px 22px}
+details.stepcard>summary::-webkit-details-marker{display:none}
+details.stepcard>summary:hover{background:color-mix(in srgb,var(--lc) 6%,#fff);border-radius:0 var(--r) var(--r) 0}
+details.stepcard .num{font:700 2.4rem/1 var(--serif);color:var(--lc);text-align:center}
+details.stepcard .sm-tx{display:flex;flex-direction:column;gap:2px;min-width:0}
+details.stepcard .sm-ph{font:700 .72rem var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--lc)}
+details.stepcard h3{margin:0;font-size:1.4rem}
+details.stepcard .sm-q{color:#2C373B;font-size:1rem;line-height:1.45}
+details.stepcard .tog{width:32px;height:32px;border-radius:50%;border:2px solid var(--lc);color:var(--lc);display:grid;place-items:center;font:700 1.2rem/1 var(--sans)}
+details.stepcard .tog::before{content:"+"}
+details.stepcard[open] .tog::before{content:"\2212"}
+details.stepcard .step-body{padding:4px 26px 22px 88px;border-top:1px solid var(--line);padding-top:16px}
+.step-next{display:flex;flex-wrap:wrap;gap:8px 22px;margin:16px 0 0;font-weight:600}
+.prompts-note{margin-top:26px}
+.prompts-note h3{margin-top:0}
+@media (max-width:980px){.cyc-overview .ringwrap{grid-template-columns:1fr;gap:20px}.cyc-overview .ring{max-width:380px}}
+@media (max-width:640px){
+  .cyc-overview .ringwrap{display:grid}
+  .cyc-overview .ring{max-width:340px}
+  details.stepcard>summary{grid-template-columns:34px 1fr 28px;gap:10px;padding:14px 14px}
+  details.stepcard .num{font-size:1.7rem}
+  details.stepcard h3{font-size:1.2rem}
+  details.stepcard .tog{width:28px;height:28px}
+  details.stepcard .step-body{padding:12px 16px 18px}
+  .ring-panel{padding:18px}
+  .ring-panel h3{font-size:1.4rem}
+  .rp-nav .btn.primary{flex:1 1 100%;justify-content:center}
+  .rp-nav .btn.sm{flex:1;justify-content:center}
+}
+.cyc-overview .legend{gap:8px 14px;font-size:.85rem}

@@ -103,7 +103,9 @@
     var nodes = [].slice.call(ring.querySelectorAll('.node'));
     var panels = [].slice.call(document.querySelectorAll('[data-ring-panel]'));
     var cname = ring.querySelector('.ctr-name'), clane = ring.querySelector('.ctr-lane'), chint = ring.querySelector('.ctr-hint');
+    var cur = 0;
     var pick = function (i, focus) {
+      cur = i;
       nodes.forEach(function (n, k) { n.setAttribute('aria-pressed', k === i ? 'true' : 'false'); n.setAttribute('tabindex', k === i ? '0' : '-1'); });
       panels.forEach(function (p, k) { p.hidden = k !== i; });
       var n = nodes[i];
@@ -124,7 +126,41 @@
         if (j !== null) { e.preventDefault(); pick(j, true); }
       });
     });
-    pick(0, false);
+    ring.querySelectorAll('[data-ring-step]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        pick((cur + Number(b.getAttribute('data-ring-step')) + nodes.length) % nodes.length, false);
+      });
+    });
+    var fromHash = /^#step-(\d)$/.exec(location.hash);
+    pick(fromHash ? Number(fromHash[1]) - 1 : 0, false);
+  }
+
+  /* Collapsible steps: open the step a link points to, and open or close all */
+  var openFromHash = function () {
+    var el = location.hash.length > 1 && document.getElementById(location.hash.slice(1));
+    if (el && el.tagName === 'DETAILS') { el.open = true; }
+  };
+  openFromHash();
+  window.addEventListener('hashchange', openFromHash);
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) { return; }
+    var el = document.getElementById(a.getAttribute('href').slice(1));
+    if (el && el.tagName === 'DETAILS') { el.open = true; }
+  });
+  var all = document.querySelector('[data-expand-all]');
+  if (all) {
+    var cards = [].slice.call(document.querySelectorAll('details.stepcard'));
+    var sync = function () {
+      all.textContent = cards.every(function (d) { return d.open; }) ? 'Close all steps' : 'Open all steps';
+    };
+    all.addEventListener('click', function () {
+      var open = !cards.every(function (d) { return d.open; });
+      cards.forEach(function (d) { d.open = open; });
+      sync();
+    });
+    cards.forEach(function (d) { d.addEventListener('toggle', sync); });
+    sync();
   }
 
   /* Timeline */
