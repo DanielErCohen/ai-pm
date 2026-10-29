@@ -996,3 +996,7 @@ details.stepcard .step-body{padding:4px 26px 22px 88px;border-top:1px solid var(
 .nw{white-space:nowrap}
 .sub-note{margin:10px 0 0;padding:8px 12px;border-left:4px solid var(--amber);background:#FFF7E6;border-radius:0 8px 8px 0;font-size:.95rem}
 @media (min-width:981px){.cyc-overview .ringwrap{align-items:start}.cyc-overview .ring-panels{position:sticky;top:96px;margin-top:40px}}
+
+/* section highlight on sub-pages, and where a tool sits in the nine steps */
+nav.main a[aria-current="true"]{background:var(--ink);color:#fff}
+.fits{margin:6px 0 0;font-size:.95rem;color:var(--muted)}
