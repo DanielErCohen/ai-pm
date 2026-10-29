@@ -985,6 +985,14 @@ details.stepcard .step-body{padding:4px 26px 22px 88px;border-top:1px solid var(
   .rp-nav .btn.primary{flex:1 1 100%;justify-content:center}
   .rp-nav .btn.sm{flex:1;justify-content:center}
 }
-.cyc-overview .legend{flex-direction:column;align-items:flex-start;gap:6px;font-size:.92rem;font-weight:500;max-width:340px;margin:14px auto 0}
-.cyc-overview .legend b{font-weight:700}
+.cyc-overview .legend{display:grid;grid-template-columns:1fr;gap:12px;margin:18px 0 0;font-weight:500}
+.cyc-overview .lg p{display:flex;align-items:center;gap:7px;margin:0 0 6px;font-size:.88rem;line-height:1.3;color:var(--lc)}
+.cyc-overview .lg p b{color:var(--ink);white-space:nowrap}
+.cyc-overview .lg{display:flex;flex-wrap:wrap;gap:6px}
+.cyc-overview .lg p{flex:1 1 100%}
+.cyc-overview .lg button{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--lc);border-radius:8px;padding:5px 10px;font:600 .88rem/1.3 var(--sans);color:var(--ink);cursor:pointer}
+.cyc-overview .lg button:hover{background:color-mix(in srgb,var(--lc) 8%,transparent)}
+.ring-panel .rp-lab{font:700 .74rem var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--lc);margin:0 0 4px}
+.nw{white-space:nowrap}
 .sub-note{margin:10px 0 0;padding:8px 12px;border-left:4px solid var(--amber);background:#FFF7E6;border-radius:0 8px 8px 0;font-size:.95rem}
+@media (min-width:981px){.cyc-overview .ringwrap{align-items:start}.cyc-overview .ring-panels{position:sticky;top:96px;margin-top:40px}}

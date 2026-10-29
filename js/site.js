@@ -131,6 +131,16 @@
         pick((cur + Number(b.getAttribute('data-ring-step')) + nodes.length) % nodes.length, false);
       });
     });
+    ring.querySelectorAll('[data-ring-pick]').forEach(function (b) {
+      b.addEventListener('click', function () { pick(Number(b.getAttribute('data-ring-pick')) - 1, false); });
+    });
+    /* Keep the ring on the step the reader opened below */
+    document.querySelectorAll('details.stepcard').forEach(function (d) {
+      d.addEventListener('toggle', function () {
+        var m = /^step-(\d)$/.exec(d.id);
+        if (d.open && m) { pick(Number(m[1]) - 1, false); }
+      });
+    });
     var fromHash = /^#step-(\d)$/.exec(location.hash);
     pick(fromHash ? Number(fromHash[1]) - 1 : 0, false);
   }
