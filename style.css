@@ -940,13 +940,13 @@ code.nb{white-space:nowrap}
 .adapt .codeblock{margin:0}
 
 /* cycle page: ring overview and collapsible steps */
-.ph-research{--lc:#0F6E6E}.ph-decisions{--lc:#2A5A8C}.ph-delivery{--lc:#7A3E6B}.ph-learning{--lc:#4A6B23}
+.ph-understand{--lc:#0F6E6E}.ph-choose{--lc:#2A5A8C}.ph-deliver{--lc:#7A3E6B}
 .cyc-overview .ov-lede{max-width:46em;margin-bottom:22px}
 .cyc-overview .ringwrap{display:grid;grid-template-columns:minmax(300px,440px) 1fr;gap:36px;align-items:center}
 .ring .phase-arc{fill:none;stroke-width:9;stroke-linecap:round}
 .ring .dir{fill:none;stroke:#9C9586;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .ring .dir.back{stroke:var(--amber);stroke-width:3}
-.ring .ctr-loop{fill:var(--muted);font:italic 12px var(--sans);text-anchor:middle}
+.ring .ctr-loop{fill:var(--muted);font:600 15px var(--sans);text-anchor:middle}
 .ring-panel{background:var(--surface);border:1px solid var(--line);border-top:8px solid var(--lc);border-radius:var(--r);padding:22px 24px}
 .ring-panel .rp-ph{font:700 .76rem var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--lc);margin:0 0 6px}
 .ring-panel h3{margin:0 0 .35em;font-size:1.7rem}
@@ -985,4 +985,6 @@ details.stepcard .step-body{padding:4px 26px 22px 88px;border-top:1px solid var(
   .rp-nav .btn.primary{flex:1 1 100%;justify-content:center}
   .rp-nav .btn.sm{flex:1;justify-content:center}
 }
-.cyc-overview .legend{gap:8px 14px;font-size:.85rem}
+.cyc-overview .legend{flex-direction:column;align-items:flex-start;gap:6px;font-size:.92rem;font-weight:500;max-width:340px;margin:14px auto 0}
+.cyc-overview .legend b{font-weight:700}
+.sub-note{margin:10px 0 0;padding:8px 12px;border-left:4px solid var(--amber);background:#FFF7E6;border-radius:0 8px 8px 0;font-size:.95rem}
