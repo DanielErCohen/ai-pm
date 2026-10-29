@@ -20,7 +20,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--sans)}
 a{color:var(--accent);text-underline-offset:3px}
 a:hover{color:#0A4F4F}
 :focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:4px}
-.band :focus-visible,footer.site :focus-visible,.codeblock :focus-visible{outline-color:#fff}
+footer.site :focus-visible,.codeblock :focus-visible{outline-color:#fff}
 .skip{position:absolute;left:-999px;top:0;background:var(--ink);color:#fff;padding:8px 12px;z-index:50}
 .skip:focus{left:8px;top:8px}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
@@ -75,7 +75,7 @@ button.chip[aria-pressed="true"]::before{background:#fff}
 .hero::before{content:"";position:absolute;right:-90px;top:-110px;width:420px;height:420px;border-radius:50%;background:var(--amber);opacity:.28}
 .hero::after{content:"";position:absolute;left:-120px;bottom:-170px;width:360px;height:360px;border-radius:50%;background:var(--accent);opacity:.12}
 .hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center}
-.hero h1{font-size:clamp(2.1rem,4.2vw,3.1rem);max-width:16em;text-wrap:balance}
+.hero h1{font-size:clamp(2rem,4.2vw,3.1rem);max-width:16em;text-wrap:balance}
 .hero h1 mark{background:linear-gradient(transparent 62%,var(--amber) 62%);color:inherit;padding:0 .05em}
 .hero .lede{margin-bottom:14px} .hero .invite{margin:0 0 24px;padding-left:12px;border-left:3px solid var(--amber);font-weight:600;color:var(--accent);font-size:1.05rem;line-height:1.5} .hero .invite a{color:inherit;text-decoration:underline;text-decoration-color:var(--amber);text-decoration-thickness:2px;text-underline-offset:3px}
 .cta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px}
@@ -409,7 +409,7 @@ table.t td{border-bottom:1px solid #eef0f2;padding:6px}
   .pj .yrs{margin-left:0;width:100%}
 }
 .codeblock code{background:none;color:inherit;padding:0;font:inherit}
-.band code,.tile code.tile-cmd{color:var(--ink)}
+.tile code.tile-cmd{color:var(--ink)}
 
 /* setup timeline */
 .grow-leg{display:flex;flex-wrap:wrap;gap:6px 20px;font-size:.9rem;font-weight:700;margin:0 0 6px}
@@ -604,8 +604,6 @@ code.nb{white-space:nowrap}
   .stepgrid{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:900px){
-  .band-grid{grid-template-columns:1fr;gap:28px}
-  .band-vis .doc-body{max-height:none;overflow:visible}
 }
 @media (max-width:760px){
   .pn{grid-template-columns:1fr}
@@ -978,3 +976,10 @@ nav.main a[aria-current="true"]{background:var(--ink);color:#fff}
 /* pager columns hold their place when Previous or Next is missing */
 .pn .btn{grid-column:2}.pn .pn-card.next{grid-column:3}
 @media (max-width:760px){.pn .btn,.pn .pn-card.next{grid-column:auto}}
+
+/* phones: smaller header circle; 44px tap targets for small buttons; space above case jump links */
+@media (max-width:640px){.pagehead::before{width:200px;height:200px;right:-60px;top:-80px}}
+.btn.sm{min-height:44px}
+.pverdict+.cta{margin-top:14px}
+/* work-in-progress amber is too light for text: status eyebrows use ochre */
+.pagehead.detail[style*="--s-wip"]{--sct:#8A5A00}

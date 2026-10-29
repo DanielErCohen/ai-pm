@@ -1,6 +1,6 @@
 # Design system
 
-The site follows the home page and the section pages built with it (Toolkit, Projects, Personal, About). Every page uses the tokens in `style.css` `:root`, one page header, one section pattern and the components below. Tool pages also load `assets/artifact-ui.css`, which styles only their previews.
+The site follows the home page and the section pages built with it (Toolkit, Projects, Personal, About). Every page uses the tokens in `style.css` `:root`, one page header, one section pattern and the components below. Tool pages also load `assets/artifact-ui.css` for their previews; its last block makes their header, actions and container follow this system.
 
 ## Tokens
 
@@ -27,7 +27,7 @@ Section colours mark where a reader is. Each section has a colour for the circle
 | Personal | berry `--c-personal` | berry | `.pagehead.personal` |
 | Home, About | amber and teal | muted | `.hero`, `.about-hero` |
 
-Detail pages take the eyebrow colour of what they show: a tool's category colour, a project's status colour (ochre for work in progress).
+Detail pages take the eyebrow colour of what they show: a tool's category colour, or a project's status colour (live olive `--s-live`, stopped grey `--s-stopped`, work in progress ochre #8A5A00 for text and amber for the pill). Tool categories reuse the section hues (teal Setup, blue Template, ochre Small builds); the breadcrumb and nav carry the section.
 
 Type scale: h1 `clamp(2rem, 4.2vw, 3.1rem)` with -.01em tracking on every page, h2 `clamp(1.5rem, 2.6vw, 2rem)`, h3 1.2 to 1.4rem, body 17px/1.6, lede 1.2rem, eyebrow .78rem bold uppercase with .09em tracking.
 
@@ -41,8 +41,7 @@ One header per page, on the page background. Three variants share the eyebrow, h
 
 Header parts, in order:
 
-- **Eyebrow**, **h1**, one **lede** paragraph.
-- **Meta line (detail):** status pill and dates on project pages.
+- **Eyebrow**, then on project pages a **meta line** (status pill and dates), then the **h1** and one **lede** paragraph.
 - **Why I built it** (tools and projects): one closed line under the lede that opens to three to five bullets.
 - **Used in How I work: step N** (tools that serve a step).
 - **Actions:** the first is `.btn.primary`, at most two more `.btn`; a lone action is primary. Tool pages keep download and copy in a right column on wide screens. Long case pages may add a row of small jump links (`.btn.sm`).
