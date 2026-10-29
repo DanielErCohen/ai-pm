@@ -137,6 +137,7 @@
     /* Keep the ring on the step the reader opened below */
     document.querySelectorAll('details.stepcard').forEach(function (d) {
       d.addEventListener('toggle', function () {
+        if (d._bulk) { d._bulk = false; return; }
         var m = /^step-(\d)$/.exec(d.id);
         if (d.open && m) { pick(Number(m[1]) - 1, false); }
       });
@@ -166,7 +167,7 @@
     };
     all.addEventListener('click', function () {
       var open = !cards.every(function (d) { return d.open; });
-      cards.forEach(function (d) { d.open = open; });
+      cards.forEach(function (d) { if (d.open !== open) { d._bulk = true; d.open = open; } });
       sync();
     });
     cards.forEach(function (d) { d.addEventListener('toggle', sync); });

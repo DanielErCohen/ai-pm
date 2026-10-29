@@ -27,7 +27,7 @@ Section colours mark where a reader is. Each section has a colour for the circle
 | Personal | berry `--c-personal` | berry | `.pagehead.personal` |
 | Home, About | amber and teal | muted | `.hero`, `.about-hero` |
 
-Detail pages take the eyebrow colour of what they show: a tool's category colour, or a project's status colour (live olive `--s-live`, stopped grey `--s-stopped`, work in progress ochre #8A5A00 for text and amber for the pill). Tool categories reuse the section hues (teal Setup, blue Template, ochre Small builds); the breadcrumb and nav carry the section.
+Detail pages take the eyebrow colour of what they show: a tool's category colour, or a project's status colour (live olive `--s-live`, stopped grey `--s-stopped`, work in progress ochre #8A5A00 for text and amber for the pill). Tool categories have their own colours (teal Setup, plum Skills, olive Routines, rust Career, ochre Small builds, blue Template), some shared with sections; the breadcrumb and nav carry the section. The nine steps use the home page's group colours: blue Understand, plum Choose, teal Deliver.
 
 Type scale: h1 `clamp(2rem, 4.2vw, 3.1rem)` with -.01em tracking on every page, h2 `clamp(1.5rem, 2.6vw, 2rem)`, h3 1.2 to 1.4rem, body 17px/1.6, lede 1.2rem, eyebrow .78rem bold uppercase with .09em tracking.
 
@@ -45,7 +45,7 @@ Header parts, in order:
 - **Why I built it** (tools and projects): one closed line under the lede that opens to three to five bullets.
 - **Used in How I work: step N** (tools that serve a step).
 - **Actions:** the first is `.btn.primary`, at most two more `.btn`; a lone action is primary. Tool pages keep download and copy in a right column on wide screens. Long case pages may add a row of small jump links (`.btn.sm`).
-- **Facts strip (projects):** type and role; status and dates live in the meta line.
+- **Facts strip (projects, when known):** type and role; status and dates live in the meta line.
 
 ## Sections
 
@@ -64,6 +64,6 @@ Header parts, in order:
 ## Rules
 
 - Dates show as Mmm 'YY. Timelines whose entries share a month use D Mmm 'YY; a year alone is fine when only the year is known.
-- No em-dashes in copy.
+- No em-dashes or spaced en-dashes in copy.
 - Light mode only.
 - Change a token or component here first, then in `style.css`, then on the pages.

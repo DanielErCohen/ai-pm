@@ -101,7 +101,7 @@ button.chip[aria-pressed="true"]::before{background:#fff}
 .sec{padding:60px 0}
 .sec.alt{background:#FFFDF8;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .sec-head{max-width:46em;margin-bottom:28px}
-.sec-head p{color:#2C373B;font-size:1.08rem;margin:0}
+.sec-head p:not(.eyebrow){color:#2C373B;font-size:1.08rem;margin:0}
 
 /* bento and tiles */
 .bento{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;padding:0;margin:0;list-style:none}
@@ -912,7 +912,7 @@ code.nb{white-space:nowrap}
 .adapt .codeblock{margin:0}
 
 /* cycle page: ring overview and collapsible steps */
-.ph-understand{--lc:#0F6E6E}.ph-choose{--lc:#2A5A8C}.ph-deliver{--lc:#7A3E6B}
+.ph-understand{--lc:var(--c-method)}.ph-choose{--lc:var(--c-skills)}.ph-deliver{--lc:var(--c-setup)}
 .cyc-overview .ov-lede{max-width:46em;margin-bottom:22px}
 .cyc-overview .ringwrap{display:grid;grid-template-columns:minmax(300px,440px) 1fr;gap:36px;align-items:center}
 .ring .phase-arc{fill:none;stroke-width:9;stroke-linecap:round}
@@ -983,3 +983,8 @@ nav.main a[aria-current="true"]{background:var(--ink);color:#fff}
 .pverdict+.cta{margin-top:14px}
 /* work-in-progress amber is too light for text: status eyebrows use ochre */
 .pagehead.detail[style*="--s-wip"]{--sct:#8A5A00}
+
+/* release QA */
+.pagehead h1{text-wrap:balance}
+.tile .foot{margin-top:auto}
+@media (max-width:760px){.pn>span:empty{display:none}}

@@ -184,3 +184,8 @@
 /* tool-page actions: no overlap with the lede on wide screens, stacked full width on phones */
 .artifact .top-actions{max-width:none}
 @media (max-width:640px){.artifact .top-actions{grid-template-columns:1fr;justify-items:stretch;width:100%}.artifact .actions a.button,.artifact .actions button.copy-prompt{width:100%;justify-content:center}}
+/* release QA: preview edge in the tool's category colour; support panel on the content width; record headings spaced */
+.artifact .demo{border-left:3px solid var(--cat,var(--career))}
+.artifact-support{max-width:calc(var(--max,1120px) - 48px)}
+@media (max-width:640px){.artifact-support{margin-left:18px;margin-right:18px}}
+.artifact .example-record h3{margin:1.2em 0 .3em}
