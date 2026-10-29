@@ -169,3 +169,15 @@
 @media(max-width:760px){.artifact .intro h1{max-width:15ch}.artifact-support{margin-left:12px;margin-right:12px}.artifact .preview-source{padding-left:16px;padding-right:16px}.artifact .entry table{font-size:12px}.artifact .entry th,.artifact .entry td{padding:8px}.artifact .preview-example .entry{max-height:480px}}@media(prefers-reduced-motion:reduce){.artifact *, .artifact *::before,.artifact *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;transform:none!important}}
 
 .artifact .setup-link{margin-top:-12px;margin-bottom:22px}.artifact .setup-link a{font-weight:600}
+
+/* Page frame follows the site design system (DESIGN.md); preview styles above are unchanged */
+.artifact .wrap{max-width:var(--max,1120px);padding-left:24px;padding-right:24px}
+.artifact .intro{padding:40px 0 32px;align-items:end}
+.artifact .intro .eyebrow{font:700 .78rem/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;margin:0 0 14px;color:var(--sct,var(--muted))}
+.artifact .intro h1{font-family:var(--serif);font-weight:700;font-size:clamp(2rem,4.2vw,3.1rem);line-height:1.2;letter-spacing:-.01em;margin:0 0 .45em;max-width:16em}
+.artifact .intro .lede{font-size:1.2rem;line-height:1.55;max-width:46em;color:#2C373B;margin:0 0 14px}
+.artifact .intro .fits{margin:6px 0 0}
+.artifact .actions a.button,.artifact .actions button.copy-prompt{border-radius:99px;border:2px solid var(--ink);font:700 1rem/1 var(--sans)}
+.artifact .actions a.button.primary{border-color:var(--accent);background:var(--accent);color:#fff}
+@media (max-width:640px){.artifact .wrap{padding-left:18px;padding-right:18px}}
+.artifact .actions a.button,.artifact .actions button.copy-prompt{white-space:nowrap}
