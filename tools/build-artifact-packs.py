@@ -55,7 +55,7 @@ def main():
    "1. Read AGENT-ARTIFACT-GUIDE.md, then the matching source README or SKILL.md. Guide links point to the canonical public source.\n"
    "2. Copy adaptation-prompt.txt into your assistant and attach only the files needed for your task. Replace the bracketed context.\n"
    "3. Review the result and save it in your own private folder.\n\n"
-   "This is a source pack, separate from an installable skill ZIP. It does not install, schedule, send or publish anything. Public examples are synthetic; configuration and layout excerpts are labeled separately. Keep real personal and company inputs private.\n"
+   "This is a source pack, separate from an installable skill ZIP. It does not install, schedule, send or publish anything. Public examples are made up; configuration and layout excerpts are labeled separately. Keep real personal and company inputs private.\n"
   ).encode()
   archive(SITE/'downloads'/f"{item['pack']}-artifact-pack.zip", item['pack'], files)
   print(f"{item['pack']}: {len(files)} files")

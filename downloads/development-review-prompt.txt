@@ -5,6 +5,6 @@ My next decision or practice: [add one goal]
 Inputs I am permitted to use: [add a small, redacted set of notes]
 Preferred format and constraints: [add browser/editor needs]
 
-Replace every synthetic record. If an input is missing, leave an explicit gap. Separate observations from interpretations, event evidence from pattern confidence, proposed practices from accepted actions, and delivered work from measured outcomes. Keep assessment changes and achievement selection pending my review. Do not invent ratings, dates, quotes, metrics, sources or impact.
+Replace every made-up record. If an input is missing, leave an explicit gap. Separate observations from interpretations, event evidence from pattern confidence, proposed practices from accepted actions, and delivered work from measured outcomes. Keep assessment changes and achievement selection pending my review. Do not invent ratings, dates, quotes, metrics, sources or impact.
 
 Return a complete data JSON file compatible with schema.json and a short change list. Keep personal data in my local working copy. Notes attached to an online assistant go to its provider. Share only material permitted there. Do not connect services, upload source material to additional services, install skills or publish anything. Explain how to open starter.html, import the JSON and check all four tabs. Validate schema, unknowns, readability at 320px and keyboard navigation. Ask me to review the evidence and wording before reuse.

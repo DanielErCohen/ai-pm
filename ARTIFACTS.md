@@ -5,10 +5,10 @@ Each toolkit page uses the shared `assets/artifact-ui.css` and `js/artifact-ui.j
 ## Page pattern
 
 - Lead with the task, one short description, Download pack and Copy prompt. Repeat the actions below the preview.
-- Show a synthetic example and an empty preview. Label configuration excerpts and layouts separately. State what the page saves and what stays in the user's own files.
+- Show a made-up example and an empty preview. Label configuration excerpts and layouts separately. State what the page saves and what stays in the user's own files.
 - Keep setup steps, licenses, source links and the editable prompt in collapsed details. Preserve existing anchor links and keyboard access.
 - A tool whose source is its own repo (Project start) links to the repo's GitHub ZIP instead of a pack and sets `data-copy-message` on `.artifact` for its copy feedback.
-- Keep sample content wholly synthetic. Never turn private reviews, company numbers or source links into public examples by changing names.
+- Make sample content up from scratch. Never turn private reviews, company numbers or source links into public examples by changing names.
 
 The canonical source and agent guides live in [how-i-work](https://github.com/DanielErCohen/how-i-work/blob/main/ARTIFACTS.md) and [cv-tailor](https://github.com/DanielErCohen/cv-tailor/blob/main/ARTIFACTS.md). Add creation and adaptation instructions there when adding an artifact here. Include the editable source, prompt, validation notes and licenses in its pack. Existing installable skill ZIPs remain separate from artifact source packs.
 

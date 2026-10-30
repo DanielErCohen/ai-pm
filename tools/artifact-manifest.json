@@ -10,15 +10,15 @@
   {
     "page": "skills",
     "pack": "skills",
-    "label": "Synthetic example",
+    "label": "Made-up example",
     "source": "artifacts/examples/product-sparring.md",
     "source_repo": "how-i-work",
-    "prompt": "Read the included skills, examples and AGENT-ARTIFACT-GUIDE.md. Ask which skill fits my task and what evidence I can supply. Wait for my answers, then use that skill to draft an artifact for review. Keep observations, assumptions and proposed tests separate. Treat the synthetic example as a format reference only. Do not file an issue or send anything.\n\nContext: [My task, audience and permitted evidence]"
+    "prompt": "Read the included skills, examples and AGENT-ARTIFACT-GUIDE.md. Ask which skill fits my task and what evidence I can supply. Wait for my answers, then use that skill to draft an artifact for review. Keep observations, assumptions and proposed tests separate. Treat the made-up example as a format reference only. Do not file an issue or send anything.\n\nContext: [My task, audience and permitted evidence]"
   },
   {
     "page": "second-brain",
     "pack": "second-brain",
-    "label": "Synthetic example",
+    "label": "Made-up example",
     "source": "artifacts/examples/memory-note.md",
     "source_repo": "how-i-work",
     "prompt": "Read the included second-brain template and AGENT-ARTIFACT-GUIDE.md. Ask about my existing folders and the note I want to create. Wait for my answers, then draft one note and suggest where it belongs. Preserve my existing vault, state uncertain facts and ask before filing ambiguous material.\n\nContext: [My note and existing folder structure]"
@@ -34,7 +34,7 @@
   {
     "page": "meeting-review",
     "pack": "meeting-review",
-    "label": "Synthetic example",
+    "label": "Made-up example",
     "source": "meeting-review/sample-output.md",
     "source_repo": "how-i-work",
     "prompt": "Read the included meeting-review skill, fictional sample and AGENT-ARTIFACT-GUIDE.md. Ask which speaker labels are mine, which dates to cover and whether my policy permits using these transcripts with this assistant. Wait for my answers. Review only my words, verify every quote against its source and state missing evidence. Save the review privately; do not send or publish it.\n\nContext: [Permitted transcripts, speaker labels and date range]"
@@ -42,7 +42,7 @@
   {
     "page": "cv-tailor",
     "pack": "cv-tailor",
-    "label": "Synthetic example",
+    "label": "Made-up example",
     "source": "examples/marlow-quinnet/changes.md",
     "source_repo": "cv-tailor",
     "prompt": "Read the included CV skills, templates and AGENT-ARTIFACT-GUIDE.md. Ask for my confirmed main CV, achievements bank and the target job description. Wait for my answers. Return an editable tailored CV and changes.md with unresolved questions. Adapt only supported claims, preserve employers, dates and numbers, and list missing evidence in changes.md. Keep the CV in plain ATS-readable formatting. Do not send, submit or publish anything.\n\nContext: [Confirmed CV, achievements and target role]"
@@ -50,7 +50,7 @@
   {
     "page": "small-builds",
     "pack": "page-saving-extension",
-    "label": "Synthetic example",
+    "label": "Made-up example",
     "source": "artifacts/examples/saved-page.md",
     "source_repo": "how-i-work",
     "prompt": "Read the included page-saving extension source, README and AGENT-ARTIFACT-GUIDE.md. Ask about my destination and permitted article input. Wait for my answers, then draft one Markdown note from an article I am permitted to share. Keep the source attribution and separate summary from my notes. Treat example content as invented. Do not install, connect accounts or send anything.\n\nContext: [Permitted article and destination format]"
@@ -58,7 +58,7 @@
   {
     "page": "decision-record",
     "pack": "decision-record",
-    "label": "Synthetic example",
+    "label": "Made-up example",
     "source": "templates/decision-example.md",
     "source_repo": "how-i-work",
     "prompt": "Read decision-record.md, decision-example.md, problem-outline.md and AGENT-ARTIFACT-GUIDE.md. Ask what decision I own, which alternatives I have and what evidence supports them. Wait for my answers, then draft one record. Keep observations and assumptions separate, state the strongest counter and write a test rule before its result. Leave unknowns explicit. Do not invent evidence or make the decision for me.\n\nContext: [Decision, alternatives and permitted evidence]"
