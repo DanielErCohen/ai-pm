@@ -178,7 +178,7 @@
 .artifact .intro .lede{font-size:1.2rem;line-height:1.55;max-width:46em;color:#2C373B;margin:0 0 14px}
 .artifact .intro .fits{margin:6px 0 0}
 .artifact .actions a.button,.artifact .actions button.copy-prompt{border-radius:99px;border:2px solid var(--ink);font:700 1rem/1 var(--sans)}
-.artifact .actions a.button.primary{border-color:var(--accent);background:var(--accent);color:#fff}
+.artifact .actions a.button.primary,.artifact .actions button.copy-prompt.primary{border-color:var(--accent);background:var(--accent);color:#fff}
 @media (max-width:640px){.artifact .wrap{padding-left:18px;padding-right:18px}}
 .artifact .actions a.button,.artifact .actions button.copy-prompt{white-space:nowrap}
 /* tool-page actions: no overlap with the lede on wide screens, stacked full width on phones */

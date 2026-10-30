@@ -15,7 +15,7 @@ document.querySelectorAll('[data-artifact-viewer]').forEach(function(root){
 document.querySelectorAll('.artifact .copy-prompt').forEach(function(button){button.addEventListener('click',async function(){
  var root=button.closest('.artifact');var field=root.querySelector('.prompt');var group=button.closest('.actions');var status=group.querySelector('.copy-feedback')||(group.nextElementSibling&&group.nextElementSibling.matches('.copy-feedback')?group.nextElementSibling:root.querySelector('.copy-feedback'));
  root.querySelectorAll('.copy-feedback').forEach(function(n){n.textContent='';});
- try{await navigator.clipboard.writeText(field.value);status.textContent=root.querySelector('#development-demo')?'Copied. Unzip the pack; attach starter.html, schema.json, blank-data.json and README.md.':'Copied. Unzip the pack and attach the relevant files in your assistant.';button.textContent='Copied';setTimeout(function(){button.textContent='Copy prompt';},2500);}
+ try{await navigator.clipboard.writeText(field.value);status.textContent=root.getAttribute('data-copy-message')||(root.querySelector('#development-demo')?'Copied. Unzip the pack; attach starter.html, schema.json, blank-data.json and README.md.':'Copied. Unzip the pack and attach the relevant files in your assistant.');button.textContent='Copied';setTimeout(function(){button.textContent='Copy prompt';},2500);}
  catch(error){field.closest('details').open=true;field.focus();field.select();status.textContent='The prompt is selected. Use your keyboard copy command.';}
 });});
 })();
