@@ -1,6 +1,6 @@
 # Site tools
 
-Three scripts for checking the site and building the skill zips. Run each from this repository's root folder. The site itself has no build step.
+Five scripts for checking the site and building the skill zips. Run each from this repository's root folder. The site itself has no build step.
 
 ## linkcheck.py
 

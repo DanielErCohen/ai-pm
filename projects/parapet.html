@@ -57,7 +57,7 @@
 <p>An eval is a fixed test set with a scoring sheet. Mine compared the AI's draft of an estimator's scope list (one row per item, grouped by trade division) with the list a human estimator wrote for the same drawings. I wrote the thresholds down before each build, so a round could say no.</p>
 <p>From Sep '26 the sheet scores 14 criteria from 0 to 10. The headline cannot exceed the correction-cost score plus 2, so a list that needs heavy correction cannot score well however much it found. The first pipeline used an earlier sheet of 13 criteria, and scores from the two sheets do not compare.</p>
 <h3>The thresholds</h3>
-<div class="thr"><div><b>95% recall</b><span>Share of the estimator's own rows that the AI found, per drawing set. Below it, extraction leaves the product's core. Written into the rebuild in Sep '26.</span></div><div><b>Above 7.5 of 10</b><span>The whole-list score had to hold above this across sets. I set the bar in Aug '26, when I chose to rebuild extraction. 7.5 was the best score any earlier run had reached, in Jun '26.</span></div></div>
+<div class="thr"><div><b>95% recall</b><span>Share of the estimator's own rows that the AI found, per drawing set. Below it, extraction leaves the product's core. Written into the redesign on 3 Sep '26.</span></div><div><b>Above 7.5 of 10</b><span>The whole-list score had to hold above this across sets. I set the bar in Aug '26, when I chose to rebuild extraction. 7.5 was the best score any earlier run had reached, in Jun '26.</span></div></div>
 <h3>Five scoring rounds on the first pipeline</h3>
 <figure><svg aria-label="Dot chart of scores out of 10 for each drawing set in five scoring rounds from 2026-05-02 to 2026-06-07, against a dashed line at 7.5. Only one set reached the line, at 7.5 on 2026-06-04. The next best was 7.4 on 2026-05-13." class="chart" role="img" viewbox="0 0 760 330" xmlns="http://www.w3.org/2000/svg">
 <line stroke="#E2DDD2" stroke-width="1" x1="46" x2="744" y1="286.0" y2="286.0"></line>
@@ -170,7 +170,7 @@
 <li>The last release shipped ten targeted fixes. One moved its score line: addenda, from 3.0 to 8.0, on the one set that has an addendum.</li>
 <li>Correction cost sat 10 to 70 times above the target. Across 583 rows on three sets, none was correct in every field.</li>
 <li>Quantities stayed at 2 to 3 out of 10 for four releases, because the pipeline reads quantities from tables and never measures.</li>
-<li>At the median the drawings hold about 60% of an estimator's list, so even a perfect reader leaves about 40% to write by hand.</li></ul>
+<li>At the median the drawings hold about 60% of an estimator's list, so even a perfect reader leaves about 40% to write by hand. This comes from a separate coverage analysis and does not compare with the scores above.</li></ul>
 <p>Rows that come from printed schedules (doors, finishes, millwork) and addenda might still have worked. That was unproven, and the same round showed those divisions broken.</p>
 <p id="metric-change">The whole-list score stopped being the success metric that day. The new test was the estimator's clock: time one estimator reviewing the AI list against starting from a past list, with a kill line of under 50% of review time saved. I stopped Parapet nine days after the verdict, before any estimator was timed.</p>
 </div></section>

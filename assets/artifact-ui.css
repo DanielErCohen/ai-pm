@@ -21,7 +21,7 @@
 .artifact header{border-bottom:1px solid var(--line)}
 .artifact header .wrap{display:flex;justify-content:space-between;align-items:center;min-height:76px;gap:20px}
 .artifact .brand{font-family:SourceSerif,Georgia,serif;font-size:22px;color:var(--ink);text-decoration:none;white-space:nowrap}
-.artifact .dots{color:var(--teal);letter-spacing:2px;margin-right:9px}
+
 .artifact nav{font-size:13px}
 .artifact nav a{text-decoration:none;border-radius:8px;padding:9px 11px}
 .artifact nav a:hover{background:#E9EFE8}
@@ -87,12 +87,7 @@
 .artifact .bottom-actions{padding:20px;margin-top:24px;background:white;border:1px solid var(--line);border-radius:16px}
 .artifact .status{min-height:24px;font-size:13px;color:var(--teal);margin:10px 0}
 .artifact .status.copy-feedback{margin:10px 0}
-.artifact .related{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:34px 0 30px}
-.artifact .related h2{grid-column:1/-1;font-size:22px;margin-bottom:2px}
-.artifact .related details{border:1px solid var(--line);border-radius:12px;padding:0 18px;background:#FCFBF7;align-self:start}
-.artifact .related summary{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:14px;line-height:1.5}
-.artifact .related summary span{font-weight:500;color:var(--muted);font-size:10px;border:1px solid var(--control-line);border-radius:5px;padding:1px 5px}
-.artifact .related details>a{display:inline-block;margin-bottom:18px;font-size:13px}
+
 .artifact footer{border-top:1px solid var(--line);padding-top:22px!important;padding-bottom:22px!important;font-size:12px;color:var(--muted)}
 .artifact footer p{margin:0}
 .artifact .skip{position:absolute;top:-120px}
@@ -134,8 +129,7 @@
 .artifact .entry>strong{font-size:18px}
 .artifact .entry>p{font-size:15px;line-height:1.7}
 .artifact .options>details{padding:0 18px}
-.artifact .related{grid-template-columns:1fr;padding-top:28px}
-.artifact .related h2{grid-column:auto}
+
 .artifact .bottom-actions{padding:18px}
 .artifact .section{padding-top:28px}
 .artifact .section>h1{font-size:38px}
@@ -144,7 +138,7 @@
 .artifact .intro{padding-top:26px}
 .artifact h1{font-size:38px}
 .artifact .brand{font-size:18px}
-.artifact .dots{margin-right:6px;letter-spacing:1px}
+
 .artifact .top-actions{grid-template-columns:1fr;width:100%}
 .artifact .top-actions .action-help,.artifact .top-actions .copy-feedback{grid-column:auto}
 .artifact .actions .download-pack{width:100%}
@@ -156,7 +150,7 @@
 .artifact .panel{padding-left:12px;padding-right:12px}
 .artifact .panel .entry{padding:18px 15px}
 .artifact .options>details{padding:0 16px}
-.artifact .related summary{gap:6px}
+
 .artifact .file input{width:100%}}
 @media(min-width:381px) and (max-width:480px){.artifact .top-actions{grid-template-columns:1fr auto;width:100%}
 .artifact .top-actions button,.artifact .top-actions .button{font-size:13px;padding:11px 12px;white-space:nowrap}
@@ -165,8 +159,8 @@
 @media(prefers-reduced-motion:reduce){.artifact{scroll-behavior:auto}
 .artifact *,.artifact *::before,.artifact *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 .artifact button:hover,.artifact a.button:hover{transform:none!important}}
-.artifact{padding-bottom:28px}.artifact .wrap{max-width:1180px}.artifact .intro h1{max-width:none}.artifact .entry .dh{font-size:18px;font-weight:650;color:var(--ink);margin:20px 0 8px}.artifact .entry .dh:first-child{margin-top:0}.artifact .entry pre{font:13px/1.65 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;margin:0}.artifact .entry table{width:100%;border-collapse:collapse;font-size:14px}.artifact .entry th,.artifact .entry td{text-align:left;padding:10px;border-bottom:1px solid var(--line);vertical-align:top}.artifact .entry th{color:var(--ink)}.artifact .entry .tscroll{max-width:100%;overflow:auto}.artifact .entry .meta{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-bottom:18px}.artifact .preview-source{font-size:13px;color:var(--muted);padding:20px 28px 0}.artifact .preview-source a{font-size:inherit}.artifact .panel{min-height:0}.artifact .entry p:last-child{margin-bottom:0}.artifact-support{max-width:1180px;margin:0 auto 32px;border:1px solid #DDDCD5;border-radius:16px;background:#FCFBF7}.artifact-support>summary{padding:20px 28px;cursor:pointer;font-weight:650;font-size:16px;min-height:60px}.artifact-support>div{border-top:1px solid #DDDCD5}.artifact-support .sec{padding:28px 0}.artifact-support .whyline{margin-bottom:18px}.artifact-support .wrap{max-width:1120px}.artifact-support summary:focus-visible{outline:3px solid #0F6E6E;outline-offset:3px}.artifact .demo-head button:focus-visible{outline:3px solid var(--teal);outline-offset:4px}.artifact [hidden]{display:none!important}.artifact .preview-example .entry{max-height:540px;overflow:auto}.artifact .demo-head .mode-caption{font-size:13px;color:var(--muted)}.artifact .tablist{margin-bottom:0}.artifact .options{margin-top:20px}
-@media(max-width:760px){.artifact .intro h1{max-width:15ch}.artifact-support{margin-left:12px;margin-right:12px}.artifact .preview-source{padding-left:16px;padding-right:16px}.artifact .entry table{font-size:12px}.artifact .entry th,.artifact .entry td{padding:8px}.artifact .preview-example .entry{max-height:480px}}@media(prefers-reduced-motion:reduce){.artifact *, .artifact *::before,.artifact *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;transform:none!important}}
+.artifact{padding-bottom:28px}.artifact .wrap{max-width:1180px}.artifact .intro h1{max-width:none}.artifact .entry .dh{font-size:18px;font-weight:650;color:var(--ink);margin:20px 0 8px}.artifact .entry .dh:first-child{margin-top:0}.artifact .entry pre{font:13px/1.65 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;margin:0}.artifact .entry table{width:100%;border-collapse:collapse;font-size:14px}.artifact .entry th,.artifact .entry td{text-align:left;padding:10px;border-bottom:1px solid var(--line);vertical-align:top}.artifact .entry th{color:var(--ink)}.artifact .entry .tscroll{max-width:100%;overflow:auto}.artifact .entry .meta{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-bottom:18px}.artifact .panel{min-height:0}.artifact .entry p:last-child{margin-bottom:0}.artifact-support{max-width:1180px;margin:0 auto 32px;border:1px solid #DDDCD5;border-radius:16px;background:#FCFBF7}.artifact-support>summary{padding:20px 28px;cursor:pointer;font-weight:650;font-size:16px;min-height:60px}.artifact-support>div{border-top:1px solid #DDDCD5}.artifact-support .sec{padding:28px 0}.artifact-support .whyline{margin-bottom:18px}.artifact-support .wrap{max-width:1120px}.artifact-support summary:focus-visible{outline:3px solid #0F6E6E;outline-offset:3px}.artifact .demo-head button:focus-visible{outline:3px solid var(--teal);outline-offset:4px}.artifact [hidden]{display:none!important}.artifact .preview-example .entry{max-height:540px;overflow:auto}.artifact .demo-head .mode-caption{font-size:13px;color:var(--muted)}.artifact .tablist{margin-bottom:0}.artifact .options{margin-top:20px}
+@media(max-width:760px){.artifact .intro h1{max-width:15ch}.artifact-support{margin-left:12px;margin-right:12px}.artifact .entry table{font-size:12px}.artifact .entry th,.artifact .entry td{padding:8px}.artifact .preview-example .entry{max-height:480px}}@media(prefers-reduced-motion:reduce){.artifact *, .artifact *::before,.artifact *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;transform:none!important}}
 
 .artifact .setup-link{margin-top:-12px;margin-bottom:22px}.artifact .setup-link a{font-weight:600}
 
