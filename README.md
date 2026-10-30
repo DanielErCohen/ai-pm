@@ -19,7 +19,7 @@ Run it in this folder and open http://localhost:8000.
 
 ## Artifact previews
 
-All nine toolkit pages use the shared preview, download and copy pattern. [ARTIFACTS.md](ARTIFACTS.md) explains how to add an artifact, keep its source and agent guidelines aligned, build the packs and verify publication.
+All ten toolkit pages use the shared preview, download and copy pattern. [ARTIFACTS.md](ARTIFACTS.md) explains how to add an artifact, keep its source and agent guidelines aligned, build the packs and verify publication.
 
 ## Where the skills come from
 
