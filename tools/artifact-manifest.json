@@ -37,7 +37,7 @@
     "label": "Made-up example",
     "source": "meeting-review/sample-output.md",
     "source_repo": "how-i-work",
-    "prompt": "Read the included meeting-review skill, fictional sample and AGENT-ARTIFACT-GUIDE.md. Ask which speaker labels are mine, which dates to cover and whether my policy permits using these transcripts with this assistant. Wait for my answers. Review only my words, verify every quote against its source and state missing evidence. Save the review privately; do not send or publish it.\n\nContext: [Permitted transcripts, speaker labels and date range]"
+    "prompt": "Read the included meeting-review skill, made-up sample and AGENT-ARTIFACT-GUIDE.md. Ask which speaker labels are mine, which dates to cover and whether my policy permits using these transcripts with this assistant. Wait for my answers. Review only my words, verify every quote against its source and state missing evidence. Save the review privately; do not send or publish it.\n\nContext: [Permitted transcripts, speaker labels and date range]"
   },
   {
     "page": "cv-tailor",

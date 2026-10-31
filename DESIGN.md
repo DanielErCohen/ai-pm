@@ -42,7 +42,7 @@ One header per page, on the page background. Three variants share the eyebrow, h
 Header parts, in order:
 
 - **Eyebrow**, then on project pages a **meta line** (status pill and dates), then the **h1** and one **lede** paragraph.
-- **Why I built it** (tools and projects): one closed line under the lede that opens to three to five bullets.
+- **Why I built it** (tools and projects): one closed line under the lede that opens to three to five bullets. On tool pages it opens the collapsed Setup and support panel (`.artifact-support`, below the preview), which holds the tool's own sections, Came from and the setup steps.
 - **Used in How I work: step N** (tools that serve a step).
 - **Actions:** the first is `.btn.primary`, at most two more `.btn`; a lone action is primary. Tool pages keep download and copy in a right column on wide screens. Long case pages may add a row of small jump links (`.btn.sm`).
 - **Facts strip (projects, when known):** type and role; status and dates live in the meta line.

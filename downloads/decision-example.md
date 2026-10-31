@@ -11,7 +11,7 @@ Review on: 2026-09-08
 Test a short checklist alongside the current setup page before building a new flow.
 
 ## Evidence
-Observed behavior in a fictional usability study on 2026-08-28: three of five participants asked where to find the import setting. Support notes also mention the setting, but we have not counted how often.
+Observed behavior in a made-up usability study on 2026-08-28: three of five participants asked where to find the import setting. Support notes also mention the setting, but we have not counted how often.
 
 ## Strongest counter
 The setting's label may be the problem. A checklist could add another thing to read without making the page clearer.

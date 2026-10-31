@@ -550,7 +550,7 @@ code.nb{white-space:nowrap}
 
 .pcards.two{grid-template-columns:repeat(2,1fr)}
 
-/* book cards and rows: a spine in the category colour, CSS only */
+/* book cards and rows: a spine in the category color, CSS only */
 
 /* books page: search and single-select category chips; hidden without JavaScript */
 
@@ -715,7 +715,7 @@ code.nb{white-space:nowrap}
 .story-vis.logo span{font-family:"Source Serif 4",Georgia,serif;font-weight:700;font-size:1.6rem;color:var(--ink)}
 @media(max-width:700px){.story-vis{margin:-22px -22px 16px;height:130px}}
 
-/* round 7: more room between headings and their text, and centred journey arrows on phones */
+/* round 7: more room between headings and their text, and centered journey arrows on phones */
 .sec-head .eyebrow{margin-bottom:8px}
 .deck .card h3{margin-bottom:8px}
 .trycard .tc-text h3,.pcard h3,.tile h3,.person .pbody h3,.qa li h3{margin-bottom:12px}
@@ -831,3 +831,9 @@ nav.main a[aria-current="true"]{background:var(--ink);color:#fff}
 .pagehead h1{text-wrap:balance}
 .tile .foot{margin-top:auto}
 @media (max-width:760px){.pn>span:empty{display:none}}
+.codeblock pre.wrap{padding:0;max-width:none}
+.why details.sources>summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:10px;color:var(--accent);font-weight:600}
+.why details.sources>summary::-webkit-details-marker{display:none}
+.why details.sources>summary::after{content:"";width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin-top:-3px}
+.why details.sources[open]>summary::after{transform:rotate(225deg);margin-top:3px}
+.why details.sources p{margin:6px 0 0}
