@@ -183,6 +183,8 @@
 .artifact-support{max-width:calc(var(--max,1120px) - 48px)}
 @media (max-width:640px){.artifact-support{margin-left:18px;margin-right:18px}}
 .artifact .example-record h3{margin:1.2em 0 .3em}
+.artifact .tscroll{overflow-x:auto}
+@media (max-width:640px){.artifact .tscroll.is-scroll::before{content:"Scroll sideways for the full table";display:block;font-size:12px;color:var(--muted,#5B6266);margin:0 0 4px}}
 .artifact-support>summary{position:relative;list-style:none;padding-right:56px}
 .artifact-support>summary::-webkit-details-marker{display:none}
 .artifact-support>summary::after{content:"";position:absolute;right:31px;top:25px;width:7px;height:7px;border-right:1.5px solid var(--accent,#0F6E6E);border-bottom:1.5px solid var(--accent,#0F6E6E);transform:rotate(45deg);transition:transform 140ms ease}

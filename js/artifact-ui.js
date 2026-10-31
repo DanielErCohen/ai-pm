@@ -18,4 +18,6 @@ document.querySelectorAll('.artifact .copy-prompt').forEach(function(button){but
  try{await navigator.clipboard.writeText(field.value);status.textContent=root.getAttribute('data-copy-message')||(root.querySelector('#development-demo')?'Copied. Unzip the pack; attach starter.html, schema.json, blank-data.json and README.md.':'Copied. Unzip the pack and attach the relevant files in your assistant.');button.textContent='Copied';setTimeout(function(){button.textContent='Copy prompt';},2500);}
  catch(error){field.closest('details').open=true;field.focus();field.select();status.textContent='The prompt is selected. Use your keyboard copy command.';}
 });});
+function markScroll(){document.querySelectorAll('.artifact .tscroll').forEach(function(t){t.classList.toggle('is-scroll',t.scrollWidth>t.clientWidth+2);});}
+markScroll();window.addEventListener('resize',markScroll);document.querySelectorAll('.artifact [data-view-mode]').forEach(function(b){b.addEventListener('click',function(){setTimeout(markScroll,0);});});
 })();

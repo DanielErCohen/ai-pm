@@ -404,6 +404,7 @@ code.nb{white-space:nowrap}
 .evals figcaption{font-size:.85rem;color:var(--muted);margin:6px 2px 6px;max-width:60em}
 .evals svg.chart{display:block;width:100%;height:auto;max-width:760px}
 .evals svg.chart text{font-family:var(--sans);fill:#454C50}
+@media (max-width:640px){.evals figure{overflow-x:auto}.evals svg.chart{min-width:560px}.evals figure::before{content:"Scroll sideways to read the chart";display:block;font-size:.78rem;color:var(--muted);margin:0 0 6px}}
 .evals .vd{padding:16px 20px;background:var(--surface);border:1px solid var(--line);border-left:8px solid var(--ink);border-radius:var(--r);margin:12px 0 18px}
 .evals .vd p{margin:0 0 .6em}
 .evals .vd p:last-child{margin-bottom:0}
@@ -611,7 +612,7 @@ code.nb{white-space:nowrap}
 
 /* A single entry and printable practice pages. */
 
-.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.story-card{padding:28px;background:var(--paper,#fffdf8);border:1px solid var(--line,#d9d5cc);border-radius:14px}.story-card h3{font-size:1.6rem;margin:16px 0}.story-card p{margin-bottom:20px}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.story-card{padding:28px;background:var(--surface);border:1px solid var(--line);border-left:8px solid var(--sc,var(--amber));border-radius:var(--r)}.story-card h3{font-size:1.6rem;margin:16px 0}.story-card p{margin-bottom:20px}
 .record-text{white-space:pre-wrap;overflow-wrap:anywhere;padding:24px;background:#fffdf8;border:1px solid #d9d5cc;border-radius:12px;font-size:.92rem;line-height:1.65;margin-top:22px}.record-text code{white-space:pre-wrap}
 .teaching-steps{padding-left:24px}.teaching-steps li{padding:8px 0 16px 8px}
 .evidence-note{padding:24px;border-left:4px solid #0f6e6e;background:#edf3ef;margin:24px 0}.evidence-note h3{margin-top:0}
