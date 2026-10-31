@@ -17,7 +17,7 @@ The site follows the home page and the section pages built with it (Toolkit, Pro
 | `--max` / `.wrap` | 1120px, 24px side padding | Every container, tool pages included |
 | `--r` | 16px | Cards and panels |
 
-Section colours mark where a reader is. Each section has a colour for the circle and a text colour for its eyebrow (AA contrast on the page background):
+Section colors mark where a reader is. Each section has a color for the circle and a text color for its eyebrow (AA contrast on the page background):
 
 | Section | Circle | Eyebrow text | Class |
 |---|---|---|---|
@@ -27,7 +27,7 @@ Section colours mark where a reader is. Each section has a colour for the circle
 | Personal | berry `--c-personal` | berry | `.pagehead.personal` |
 | Home, About | amber and teal | muted | `.hero`, `.about-hero` |
 
-Detail pages take the eyebrow colour of what they show: a tool's category colour, or a project's status colour (live olive `--s-live`, stopped grey `--s-stopped`, work in progress ochre #8A5A00 for text and amber for the pill). Tool categories have their own colours (teal Setup, plum Skills, olive Routines, rust Career, ochre Small builds, blue Template), some shared with sections; the breadcrumb and nav carry the section. The nine steps use the home page's group colours: blue Understand, plum Choose, teal Deliver.
+Detail pages take the eyebrow color of what they show: a tool's category color, or a project's status color (live olive `--s-live`, stopped gray `--s-stopped`, work in progress ochre #8A5A00 for text and amber for the pill). Tool categories have their own colors (teal Setup, plum Skills, olive Routines, rust Career, ochre Small builds, blue Template), some shared with sections; the breadcrumb and nav carry the section. The nine steps use the home page's group colors: blue Understand, plum Choose, teal Deliver.
 
 Type scale: h1 `clamp(2rem, 4.2vw, 3.1rem)` with -.01em tracking on every page, h2 `clamp(1.5rem, 2.6vw, 2rem)`, h3 1.2 to 1.4rem, body 17px/1.6, lede 1.2rem, eyebrow .78rem bold uppercase with .09em tracking.
 
@@ -36,7 +36,7 @@ Type scale: h1 `clamp(2rem, 4.2vw, 3.1rem)` with -.01em tracking on every page, 
 One header per page, on the page background. Three variants share the eyebrow, h1, lede and actions:
 
 - **Hero** (Home, About): two circles and a visual on the right.
-- **Landing** (`.pagehead` with a section class; Toolkit, Projects, How I work, Personal): one 320px circle top right in the section colour at .22 opacity. No breadcrumb.
+- **Landing** (`.pagehead` with a section class; Toolkit, Projects, How I work, Personal): one 320px circle top right in the section color at .22 opacity. No breadcrumb.
 - **Detail** (`.pagehead.detail`; projects, Habits and principles; tool pages use `.artifact .intro`, styled the same): a breadcrumb bar above (`Section / Page`), no circle. The eyebrow names the kind of page: the tool category, "Side project", "How I work".
 
 Header parts, in order:
@@ -55,8 +55,8 @@ Header parts, in order:
 ## Components
 
 - **Buttons:** pill-shaped `.btn` (ink outline), `.btn.primary` (teal), `.btn.sm` for secondary controls inside cards.
-- **Cards:** white or tinted surface, `--r` corners, an 8px top or left edge in the item's colour (`.tile`, `.pj`, `.stepcard`, `.ring-panel`, `.trycard`). Small list cards (people, books, facts) use a 5 to 6px edge.
-- **Chips and badges:** pills with a colour dot (`.chip`), small outlined labels (`.badge`).
+- **Cards:** white or tinted surface, `--r` corners, an 8px top or left edge in the item's color (`.tile`, `.pj`, `.stepcard`, `.ring-panel`, `.trycard`). Small list cards (people, books, facts) use a 5 to 6px edge.
+- **Chips and badges:** pills with a color dot (`.chip`), small outlined labels (`.badge`).
 - **Code and prompts:** dark `.codeblock` with a caption and one amber copy button.
 - **Pager:** `.pn` with Previous, All and Next where they exist, at the foot of detail pages, always visible.
 - **Footer:** the same dark footer on every page.

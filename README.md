@@ -25,6 +25,6 @@ All ten toolkit pages use the shared preview and copy pattern. Nine download a s
 
 The skill zips in `downloads/` are built by `tools/build-skill-zips.sh` from [how-i-work](https://github.com/DanielErCohen/how-i-work) and [cv-tailor](https://github.com/DanielErCohen/cv-tailor). Those repositories hold the sources and the third-party notices.
 
-## Licence
+## License
 
-The code and text are MIT, copyright Daniel Cohen 2026. The portrait, the product logos and the screenshots are not covered by the MIT licence. The fonts are under the SIL Open Font License, which sits beside them in `assets/fonts/`.
+The code and text are MIT, copyright Daniel Cohen 2026. The portrait, the product logos and the screenshots are not covered by the MIT license. The fonts are under the SIL Open Font License, which sits beside them in `assets/fonts/`.
