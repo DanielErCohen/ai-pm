@@ -63,6 +63,13 @@
     });
   });
 
+  /* A link with data-tab opens the install tab it names before the page jumps to the tabs */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[data-tab]');
+    var tab = a && document.getElementById('tab-' + a.getAttribute('data-tab'));
+    if (tab) { tab.click(); }
+  });
+
   /* Filter chips on the toolkit index */
   var grid = document.querySelector('[data-filter-grid]');
   if (grid) {
@@ -79,7 +86,8 @@
       items.forEach(function (li) {
         var okC = !cats.length || cats.indexOf(li.getAttribute('data-cat')) > -1;
         var have = (li.getAttribute('data-surfaces') || '').split(' ');
-        var okS = !surfs.length || surfs.every(function (s) { return have.indexOf(s) > -1; });
+        /* Works-with labels: a card shows when it carries any chosen label */
+        var okS = !surfs.length || surfs.some(function (s) { return have.indexOf(s) > -1; });
         li.hidden = !(okC && okS);
         if (!li.hidden) { shown++; }
       });
@@ -146,18 +154,35 @@
     pick(fromHash ? Number(fromHash[1]) - 1 : 0, false);
   }
 
-  /* Collapsible steps: open the step a link points to, and open or close all */
-  var openFromHash = function () {
-    var el = location.hash.length > 1 && document.getElementById(location.hash.slice(1));
-    if (el && el.tagName === 'DETAILS') { el.open = true; }
+  /* Reveal a link target: open every closed details around it and select the tab that holds it */
+  var reveal = function (el) {
+    var changed = false;
+    for (var n = el; n && n !== document.body; n = n.parentElement) {
+      if (n.tagName === 'DETAILS' && !n.open) { n.open = true; changed = true; }
+      if (n.getAttribute('role') === 'tabpanel' && n.hidden) {
+        var t = document.querySelector('[role="tab"][aria-controls="' + n.id + '"]');
+        if (t) { t.click(); changed = true; }
+      }
+    }
+    return changed;
   };
-  openFromHash();
+  var hashTarget = function () {
+    var id = location.hash.slice(1);
+    try { id = decodeURIComponent(id); } catch (err) { /* keep the raw id */ }
+    return id ? document.getElementById(id) : null;
+  };
+  var openFromHash = function () {
+    var el = hashTarget();
+    return el ? reveal(el) : false;
+  };
+  /* On load the browser has already tried to scroll to a target that was hidden, so scroll again once it shows */
+  if (openFromHash()) { hashTarget().scrollIntoView(); }
   window.addEventListener('hashchange', openFromHash);
   document.addEventListener('click', function (e) {
     var a = e.target.closest('a[href^="#"]');
     if (!a) { return; }
     var el = document.getElementById(a.getAttribute('href').slice(1));
-    if (el && el.tagName === 'DETAILS') { el.open = true; }
+    if (el) { reveal(el); }
   });
   var all = document.querySelector('[data-expand-all]');
   if (all) {

@@ -1,6 +1,6 @@
 # Try a checklist before a new onboarding flow
 
-Made-up teaching example. The team, dates and results are invented.
+Made-up teaching example. The team, dates and results are made up.
 
 Decision owner: the PM
 Date: 2026-09-01

@@ -19,7 +19,7 @@ Run it in this folder and open http://localhost:8000.
 
 ## Artifact previews
 
-All ten toolkit pages use the shared preview and copy pattern. Nine download a source pack; Project start downloads its template repo from GitHub. [ARTIFACTS.md](ARTIFACTS.md) explains how to add an artifact, keep its source and agent guidelines aligned, build the packs and verify publication.
+All ten toolkit pages use the shared preview and copy pattern. Nine download an editable pack. Project start downloads its template repo from GitHub. [ARTIFACTS.md](ARTIFACTS.md) explains how to add an artifact, keep its source and agent guidelines aligned, build the packs and verify publication.
 
 ## Where the skills come from
 
@@ -27,4 +27,4 @@ The skill zips in `downloads/` are built by `tools/build-skill-zips.sh` from [ho
 
 ## License
 
-The code and text are MIT, copyright Daniel Cohen 2026. The portrait, the product logos and the screenshots are not covered by the MIT license. The fonts are under the SIL Open Font License, which sits beside them in `assets/fonts/`.
+The code and text are MIT, copyright Daniel Cohen 2026. The portrait, the product logos and the screenshots are not covered by the MIT license. The fonts are under the SIL Open Font License, which sits beside them in `assets/fonts/`. `js/count.js` is the GoatCounter visit counter under its ISC license. The notice sits at the top of the file.

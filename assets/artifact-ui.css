@@ -61,7 +61,7 @@
 .artifact .entry>strong{display:block;font-size:20px;letter-spacing:-.015em;line-height:1.35;font-weight:650}
 .artifact .entry>p{max-width:80ch;margin:10px 0 0;line-height:1.7;color:#394448}
 .artifact .entry details{margin-top:20px;border-top:1px solid var(--line);border-bottom:0;font-size:14px}
-.artifact .entry details summary{color:var(--teal);font-size:13px;min-height:42px;padding:12px 0 2px}
+.artifact .entry details summary{color:var(--teal);font-size:13px;min-height:44px;padding:12px 0 2px}
 .artifact .entry details summary::after{top:18px}
 .artifact .entry details p{margin:12px 0 0;max-width:82ch;color:var(--muted)}
 .artifact .empty{padding:26px;border:1px dashed var(--control-line);border-radius:14px;background:#FBFCF8}
@@ -189,3 +189,42 @@
 .artifact-support>summary::-webkit-details-marker{display:none}
 .artifact-support>summary::after{content:"";position:absolute;right:31px;top:25px;width:7px;height:7px;border-right:1.5px solid var(--accent,#0F6E6E);border-bottom:1.5px solid var(--accent,#0F6E6E);transform:rotate(45deg);transition:transform 140ms ease}
 .artifact-support[open]>summary::after{transform:rotate(225deg);top:29px}
+
+/* Start here block (every tool page, directly under the header): one line per assistant, the pack as a secondary link */
+.artifact .start{background:var(--surface);border:1px solid var(--line);border-left:8px solid var(--cat,var(--accent));border-radius:var(--r,16px);padding:22px 26px;margin:0 0 28px}
+.artifact .start h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.2;letter-spacing:-.01em;margin:0 0 10px}
+.artifact .start-list{list-style:none;margin:0;padding:0}
+.artifact .start-list li{display:grid;grid-template-columns:9.5em minmax(0,1fr);gap:4px 20px;margin:0;padding:12px 0;border-top:1px solid var(--line);font-size:1rem;line-height:1.55}
+.artifact .start-k{font:700 .78rem/1.6 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--cat,var(--ink))}
+.artifact .start-t{min-width:0;overflow-wrap:anywhere}
+.artifact .start .codeblock{margin:6px 0 4px}
+.artifact .start-note{margin:10px 0 0;font-size:.95rem;color:var(--muted)}
+.artifact .start-pack{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:4px 0 0;padding-top:16px;border-top:1px solid var(--line)}
+.artifact .start-pack .action-help{flex-basis:100%;order:3;margin:0;font-size:.92rem;color:var(--muted)}
+.artifact .start-pack .copy-feedback{flex-basis:100%;order:4}
+.artifact .start-t a.button,.artifact .start-pack a.button,.artifact .start-pack button.copy-prompt,.artifact .bottom-actions a.button,.artifact .bottom-actions button.copy-prompt{min-height:44px;padding:9px 16px;font-size:.92rem;border:2px solid var(--ink);border-radius:99px;background:var(--surface);color:var(--ink);white-space:normal;text-align:center}
+.artifact .start-t a.button:hover,.artifact .start-pack a.button:hover,.artifact .start-pack button.copy-prompt:hover,.artifact .bottom-actions a.button:hover,.artifact .bottom-actions button.copy-prompt:hover{background:#FFF7E6;border-color:var(--ink)}
+.artifact .start-t a.button.primary,.artifact .start-pack a.button.primary,.artifact .start-pack button.copy-prompt.primary,.artifact .bottom-actions a.button.primary,.artifact .bottom-actions button.copy-prompt.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.artifact .start-t a.button.primary:hover,.artifact .start-pack a.button.primary:hover,.artifact .start-pack button.copy-prompt.primary:hover,.artifact .bottom-actions a.button.primary:hover,.artifact .bottom-actions button.copy-prompt.primary:hover{background:#0A5A5A;border-color:#0A5A5A}
+.artifact .bottom-actions .action-help{order:3}
+.artifact .start-t a.button{display:flex;width:fit-content;max-width:100%;margin:10px 0 2px}
+/* code blocks inside the artifact frame keep the site's dark block and amber copy button */
+.artifact .codeblock{margin:0 0 14px}
+.artifact .codeblock code{background:none;color:inherit;padding:0;border-radius:0;font:inherit}
+.artifact .codeblock .copy{min-height:44px;padding:10px 14px;gap:8px;border:2px solid var(--amber);border-radius:99px;background:var(--amber);color:var(--ink);font:700 .9rem/1 var(--sans)}
+.artifact .codeblock :focus-visible{outline-color:#fff}
+.artifact .codeblock .copy:hover{background:var(--amber);border-color:var(--amber);filter:brightness(.92)}
+.artifact .codeblock .copy.done,.artifact .codeblock .copy.done:hover{background:#fff;border-color:#fff;filter:none}
+/* a short list of facts under the preview, in the muted note style */
+.artifact .note-list{max-width:94ch;margin:-12px 0 24px;padding-left:1.2em;font-size:14px;color:var(--muted)}
+.artifact .note-list li{margin:4px 0}
+@media (max-width:640px){
+ .artifact .start{padding:18px 16px}
+ .artifact .start-list li{grid-template-columns:minmax(0,1fr);gap:2px}
+}
+.artifact a.button:not(.primary) .filetype{border-color:currentColor}
+/* Preview card follows the Start here card: same corners, 8px edge, category color */
+.artifact .demo{border-radius:var(--r,16px);border-left-width:8px}
+.artifact .panel .entry{border-left-color:var(--cat,var(--career))}
+/* Copy fallback message sits above the prompt field and clears the sticky header */
+.artifact .copy-fallback{scroll-margin-top:96px;margin:0 0 8px;font-size:14px;color:var(--ink)}

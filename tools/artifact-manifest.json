@@ -53,7 +53,7 @@
     "label": "Made-up example",
     "source": "artifacts/examples/saved-page.md",
     "source_repo": "how-i-work",
-    "prompt": "Read the included page-saving extension source, README and AGENT-ARTIFACT-GUIDE.md. Ask about my destination and permitted article input. Wait for my answers, then draft one Markdown note from an article I am permitted to share. Keep the source attribution and separate summary from my notes. Treat example content as invented. Do not install, connect accounts or send anything.\n\nContext: [Permitted article and destination format]"
+    "prompt": "Read the included page-saving extension source, README and AGENT-ARTIFACT-GUIDE.md. Ask about my destination and permitted article input. Wait for my answers, then draft one Markdown note from an article I am permitted to share. Keep the source attribution and separate summary from my notes. Treat example content as made up. Do not install, connect accounts or send anything.\n\nContext: [Permitted article and destination format]"
   },
   {
     "page": "decision-record",

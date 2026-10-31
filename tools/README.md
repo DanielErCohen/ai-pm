@@ -30,4 +30,4 @@ bash tools/build-skill-zips.sh
 
 ## Artifact packs
 
-Run `python3 tools/build-artifact-packs.py` after editing artifact sources or adaptation prompts. It builds reproducible source packs from sibling how-i-work and cv-tailor checkouts. Run `python3 tools/check-artifact-packs.py` to check source and prompt parity. See [ARTIFACTS.md](../ARTIFACTS.md).
+Run `python3 tools/build-artifact-packs.py` after editing artifact sources or adaptation prompts. It builds reproducible editable packs from sibling how-i-work and cv-tailor checkouts. Run `python3 tools/check-artifact-packs.py` to check source and prompt parity. See [ARTIFACTS.md](../ARTIFACTS.md).
