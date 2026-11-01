@@ -36,6 +36,8 @@
   /* Tabs with roving focus; last choice remembered */
   document.querySelectorAll('[data-tabs]').forEach(function (root) {
     var tabs = [].slice.call(root.querySelectorAll('[role="tab"]'));
+    /* Each kind of tab group remembers its own choice: install tabs by default, reader tabs via data-store */
+    var storeKey = root.getAttribute('data-store') || 'sk-install-tab';
     function select(tab, focus, remember) {
       tabs.forEach(function (t) {
         var on = t === tab;
@@ -44,11 +46,11 @@
         document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
       });
       if (focus) { tab.focus(); }
-      if (remember) { store('sk-install-tab', tab.getAttribute('data-key')); }
+      if (remember) { store(storeKey, tab.getAttribute('data-key')); }
     }
     function byKey(key) { return tabs.filter(function (t) { return t.getAttribute('data-key') === key; })[0]; }
     /* Order of choice: the remembered tab, then the tab named in data-default, then the first tab */
-    var start = byKey(store('sk-install-tab')) || byKey(root.getAttribute('data-default')) || tabs[0];
+    var start = byKey(store(storeKey)) || byKey(root.getAttribute('data-default')) || tabs[0];
     select(start, false, false);
     tabs.forEach(function (t, i) {
       t.addEventListener('click', function () { select(t, false, true); });
