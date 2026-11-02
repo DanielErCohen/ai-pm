@@ -50,7 +50,7 @@ Header parts, in order:
 
 ## Tool pages
 
-Nine of the ten tool pages follow one order: header (eyebrow, h1, one-sentence lede, used-in line), Start here, preview, the collapsed Setup and support panel (`#setup-support`), pager. Personal development review has no Setup and support panel and no "Why I built it" line: its option rows and pack row sit under the preview, then the pager. The header carries no buttons.
+Nine of the ten tool pages follow one order: header (eyebrow, h1, one-sentence lede, used-in line), Start here, preview, the collapsed Setup and support panel (`#setup-support`), pager. Personal development review has no Setup and support panel: its "Why I built it" line sits under the lede, and its option rows and pack row sit under the preview, then the pager. The header carries no buttons.
 
 - **Start here** (`.start`, card with an 8px left edge in the tool's category color, on phones too): an h2, then one line per assistant in a `.start-list`, each led by a small uppercase label (`.start-k`). Order: Claude app first where its route gives the whole tool and needs no terminal, then Claude Code, then other assistants. A tool with a different route (a text editor, a browser, an API key) names that route in the label instead. A prompt that works with nothing installed sits in the block as a `.codeblock`; a second prompt, such as the Skills reader brief, follows it with a `.start-note` line and its own id.
 - **First action:** the first row ends with one primary `a.button` (44px minimum height, same look as the pack pills): the download, or a jump to the install block. A jump link carries `data-tab="app"`, `"code"` or `"other"` so the install tab it names opens first. Three pages keep their primary elsewhere in the block: Skills (the amber Copy prompt button), Project start and Personal development review (the pack row). Text links inside a sentence are exempt from the 44px minimum; every button and standalone control in Start here meets it.
@@ -81,6 +81,7 @@ Nine of the ten tool pages follow one order: header (eyebrow, h1, one-sentence l
 - Status labels: live, stopped, work in progress. A paused project whose site stays up reads "online, development paused".
 - Dates show as Mmm 'YY. Timelines whose entries share a month use D Mmm 'YY; a year alone is fine when only the year is known.
 - No em-dashes or spaced en-dashes in copy.
+- Touch targets: every button, tab, disclosure summary, filter chip, chip link and header link (brand included) is at least 44px high. The nine step buttons on the cycle overview and the small chips (`.chip.sm`) keep their look and carry an invisible 44px hit area. Text links in a sentence, a list, a heading or a card foot are exempt.
 - Light mode only.
 - Reduced motion: transitions and animations are off, pseudo-elements included, and smooth scrolling falls back to instant.
 - Anchor targets clear the sticky header with `scroll-margin-top` (84px, 96px on phones). Do not add `scroll-padding` on `html`: the two offsets add up.

@@ -46,7 +46,7 @@
 .artifact #period{margin-top:4px}
 .artifact .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .artifact .demo-head .row{padding:4px;border-radius:12px;background:#EFF1EC;border:1px solid #DBE0D7;gap:3px}
-.artifact .demo-head button{min-height:38px;border-color:transparent;border-radius:8px;background:transparent;font-size:12px;font-weight:600;padding:8px 12px;color:#4D5953}
+.artifact .demo-head button{min-height:44px;border-color:transparent;border-radius:8px;background:transparent;font-size:12px;font-weight:600;padding:8px 12px;color:#4D5953}
 .artifact .demo-head button[aria-pressed=true]{border-color:var(--teal);background:white;color:var(--teal);box-shadow:0 1px 4px rgba(31,42,46,.12)}
 .artifact .demo-head button:hover{background:white}
 .artifact .tablist{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin:22px 28px 0;padding:5px;background:#F2F2ED;border:1px solid #DFE2D9;border-radius:13px}
@@ -56,7 +56,7 @@
 .artifact .tablist button:focus-visible{outline-offset:2px}
 .artifact .panel{padding:24px 28px 28px;min-height:280px;animation:panel-in 150ms ease-out}
 .artifact .panel>p{color:var(--muted);font-size:13px;margin-bottom:18px}
-.artifact .panel>p button{color:var(--teal);border-color:var(--control-line);background:var(--teal-soft);min-height:42px;font-size:13px;padding:9px 13px}
+.artifact .panel>p button{color:var(--teal);border-color:var(--control-line);background:var(--teal-soft);min-height:44px;font-size:13px;padding:9px 13px}
 .artifact .panel .entry{padding:24px;border:1px solid #D8DED7;border-left:3px solid var(--career);border-radius:14px;background:#FFFEFB;max-width:none}
 .artifact .entry>strong{display:block;font-size:20px;letter-spacing:-.015em;line-height:1.35;font-weight:650}
 .artifact .entry>p{max-width:80ch;margin:10px 0 0;line-height:1.7;color:#394448}
@@ -228,3 +228,14 @@
 .artifact .panel .entry{border-left-color:var(--cat,var(--career))}
 /* Copy fallback message sits above the prompt field and clears the sticky header */
 .artifact .copy-fallback{scroll-margin-top:96px;margin:0 0 8px;font-size:14px;color:var(--ink)}
+/* follow-up: Why I built it under the lede (Personal development review has no Setup and support panel) */
+.artifact .intro .whyline{margin:18px 0 0}
+.artifact details.whyline{border-bottom:0}
+.artifact .whyline>summary{min-height:44px;padding:0 0 0 24px;font-size:17px;font-weight:400}
+.artifact .whyline>summary::after{content:none}
+.artifact .whyline>ul{max-width:none;margin:10px 0 0;font-size:17px}
+.artifact .whyline>ul:last-child{margin-bottom:0}
+/* follow-up: 44px controls and focus rings that stay inside their scroll container */
+.artifact .actions>a:not(.button){display:inline-flex;align-items:center;min-height:44px}
+.artifact .panel:focus-visible{outline-offset:-3px}
+.artifact .tscroll:focus-visible{outline:3px solid var(--teal);outline-offset:-3px}

@@ -856,3 +856,29 @@ details.terms .gloss{margin:0 0 8px}
 .pick-list{max-width:46em;margin:0}
 .pick-list li{margin-bottom:.5em}
 .tsec h4{font-size:1.05rem;margin:1.3em 0 .3em}
+
+/* follow-up: 44px controls. A control whose look must stay small keeps it and gets an invisible 44px hit area. */
+header.site .wrap{padding-top:10px;padding-bottom:8px}
+.brand{padding:9px 0;margin-top:-9px;margin-bottom:-9px}
+nav.main a{display:inline-flex;align-items:center;min-height:44px}
+@media (max-width:640px){header.site .wrap{padding-top:5px;padding-bottom:6px}}
+a.chip:not(.sm),button.chip{min-height:44px}
+.chip.sm{position:relative}
+.chip.sm::after{content:"";position:absolute;inset:-8px 0}
+.pj-tools .chips{row-gap:12px}
+.cyc-overview .lg button{position:relative}
+.cyc-overview .lg button::after{content:"";position:absolute;inset:-8px 0}
+.cyc-overview .lg{row-gap:14px}
+.cyc-overview .lg p{margin-bottom:0}
+.professional-reading summary{padding:9px 0}
+
+/* follow-up: nothing widens the page at 320px with every panel open */
+.rules li{overflow-wrap:anywhere}
+@media (max-width:340px){
+ .tab{padding:12px 3px}
+ table.where th,table.where td{padding:10px 8px}
+ table.where{font-size:.9rem}
+ table.where thead th{font-size:.74rem;letter-spacing:.03em}
+ table.where td code{overflow-wrap:anywhere}
+ .book-pair>div{flex:0 1 120px}
+}
