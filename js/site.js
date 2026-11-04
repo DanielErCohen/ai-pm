@@ -11,8 +11,11 @@
   /* Copy buttons */
   function copyText(text) {
     if (navigator.clipboard && window.isSecureContext) {
-      return navigator.clipboard.writeText(text);
+      return navigator.clipboard.writeText(text).catch(function () { return legacyCopy(text); });
     }
+    return legacyCopy(text);
+  }
+  function legacyCopy(text) {
     return new Promise(function (resolve, reject) {
       var ta = document.createElement('textarea');
       ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.top = '-1000px';
@@ -30,7 +33,21 @@
     copyText(b.getAttribute('data-copy')).then(function () {
       b.classList.add('done'); live.textContent = 'Copied';
       clearTimeout(b._t); b._t = setTimeout(function () { b.classList.remove('done'); live.textContent = ''; }, 2000);
-    }, function () { live.textContent = 'Copy failed. Select the text and copy it by hand.'; });
+    }, function () {
+      var msg = 'Copy failed. Select the text and copy it by hand.';
+      live.textContent = msg;
+      var host = b.closest('.codeblock') || b;
+      var note = host.nextElementSibling;
+      if (!note || !note.classList.contains('copy-fail')) {
+        note = document.createElement('p'); note.className = 'copy-fail'; note.textContent = msg;
+        host.insertAdjacentElement('afterend', note);
+      }
+      var pre = host.querySelector && host.querySelector('pre');
+      if (pre && window.getSelection) {
+        var r = document.createRange(); r.selectNodeContents(pre);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      }
+    });
   });
 
   /* Tabs with roving focus; last choice remembered */
