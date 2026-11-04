@@ -12,7 +12,7 @@ document.querySelectorAll('[data-artifact-viewer]').forEach(function(root){
   root.querySelector('[data-mode-name]').textContent=empty?'Empty preview':root.getAttribute('data-example-label');
  });});
 });
-function legacyCopy(text){var ta=document.createElement('textarea');ta.value=text;ta.setAttribute('readonly','');ta.style.cssText='position:fixed;top:0;left:0;width:1px;height:1px;opacity:0';document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand('copy');}catch(error){ok=false;}document.body.removeChild(ta);return ok;}
+function legacyCopy(text){var ta=document.createElement('textarea');ta.value=text;ta.setAttribute('readonly','');ta.style.cssText='position:fixed;top:0;left:0;width:1px;height:1px;opacity:0';document.body.appendChild(ta);ta.select();ta.setSelectionRange(0,text.length);var ok=false;try{ok=document.execCommand('copy');}catch(error){ok=false;}document.body.removeChild(ta);return ok;}
 document.querySelectorAll('.artifact .copy-prompt').forEach(function(button){button.addEventListener('click',async function(){
  var root=button.closest('.artifact');var field=root.querySelector('.prompt');var group=button.closest('.actions');var status=group.querySelector('.copy-feedback')||(group.nextElementSibling&&group.nextElementSibling.matches('.copy-feedback')?group.nextElementSibling:root.querySelector('.copy-feedback'));
  root.querySelectorAll('.copy-feedback').forEach(function(n){n.textContent='';});

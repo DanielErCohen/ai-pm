@@ -19,7 +19,7 @@
     return new Promise(function (resolve, reject) {
       var ta = document.createElement('textarea');
       ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.top = '-1000px';
-      document.body.appendChild(ta); ta.select();
+      document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, text.length);
       try { document.execCommand('copy') ? resolve() : reject(); } catch (e) { reject(e); } finally { document.body.removeChild(ta); }
     });
   }
