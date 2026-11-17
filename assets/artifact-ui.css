@@ -239,3 +239,8 @@
 .artifact .actions>a:not(.button){display:inline-flex;align-items:center;min-height:44px}
 .artifact .panel:focus-visible{outline-offset:-3px}
 .artifact .tscroll:focus-visible{outline:3px solid var(--teal);outline-offset:-3px}
+/* Work task board: the sample screenshot is cropped to the top of the board on wide screens and shown whole on phones */
+.artifact .shot-crop{display:block;overflow:hidden;aspect-ratio:1600/995}
+.artifact .shot-crop img{display:block;width:100%;height:auto}
+.artifact figcaption{margin-top:12px;font-size:14px;line-height:1.6;color:var(--muted)}
+@media (max-width:640px){.artifact .shot-crop{aspect-ratio:auto}}
