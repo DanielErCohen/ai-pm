@@ -44,7 +44,7 @@
   window.claude = { use: async (name) => name === "db" ? db : name === "user" ? { can: async () => true } : name === "sample" && q.get("ask") !== "off" ? sample : null };
 })();
 </script>
-<div style="padding:8px 16px;text-align:center;font:13px/1.4 var(--font, system-ui, sans-serif);background:var(--primary-light, #E7ECFF);color:var(--text, #1b1f2a);border-bottom:1px solid var(--border, #d0d5e2)">This is a made-up sample board. Every person and figure is invented, and your edits stay in this browser tab.</div>
+<div style="padding:8px 16px;text-align:center;font:13px/1.4 var(--font, system-ui, sans-serif);background:var(--primary-light, #E7ECFF);color:var(--text, #1b1f2a);border-bottom:1px solid var(--border, #d0d5e2)">This is a made-up sample board. Every person and figure is invented. Your edits stay in this browser tab, and Ask Claude answers with a fixed line here.</div>
 <title>Work Task Board</title>
 <script>
 /* ---------------------------------------------------------------------------------------------
