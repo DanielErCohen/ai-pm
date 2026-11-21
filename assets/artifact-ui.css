@@ -199,6 +199,7 @@
 .artifact .start-t{min-width:0;overflow-wrap:anywhere}
 .artifact .start .codeblock{margin:6px 0 4px}
 .artifact .start-note{margin:10px 0 0;font-size:.95rem;color:var(--muted)}
+.artifact .start-t .start-p{margin:0}
 .artifact .start-pack{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:4px 0 0;padding-top:16px;border-top:1px solid var(--line)}
 .artifact .start-pack .action-help{flex-basis:100%;order:3;margin:0;font-size:.92rem;color:var(--muted)}
 .artifact .start-pack .copy-feedback{flex-basis:100%;order:4}
