@@ -882,3 +882,18 @@ a.chip:not(.sm),button.chip{min-height:44px}
  table.where td code{overflow-wrap:anywhere}
  .book-pair>div{flex:0 1 120px}
 }
+/* Home hero: the tool cards flip through every tool (js/home-deck.js); the flip squashes and restores the card, so its tilt stays */
+.home-hero .deck.is-live .card .cb>p:not(.meta){min-height:2.9em}
+.deck .card.flip-out{animation:deck-out .26s ease-in forwards}
+.deck .card.flip-in{animation:deck-in .45s cubic-bezier(.2,1.4,.4,1)}
+@keyframes deck-out{to{scale:1 0;opacity:.3}}
+@keyframes deck-in{from{scale:1 0;opacity:.3}to{scale:1 1;opacity:1}}
+.deck-pause{justify-self:end;margin:2px 6% 0 0;background:none;border:0;padding:6px 2px;font:600 .82rem var(--sans);color:var(--muted);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.deck-pause:hover{color:var(--ink)}
+.deck-pause:focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:4px}
+/* Review fixes, 2026-11-21 */
+.deck .card .meta{flex-wrap:wrap}
+.deck .card .more{white-space:nowrap;margin-left:auto}
+.setting-grid{align-items:start}
+#second-brain .para-use+.btn,#second-brain .btn[href$="second-brain.html"]{white-space:nowrap}
+@media (max-width:360px){.artifact .actions a.button{font-size:.84rem;padding-left:12px;padding-right:12px;gap:6px;white-space:nowrap}.artifact .actions .filetype{flex:none}}
