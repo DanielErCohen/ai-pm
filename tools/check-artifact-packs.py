@@ -29,10 +29,7 @@ def check_zip(path,top,expected):
 def main():
  files=0
  for item in json.loads((SITE/'tools/artifact-manifest.json').read_text()):
-  root,paths=b.SOURCES[item['pack']]
-  expected=b.checked_files(root,paths)
-  expected['AGENT-ARTIFACT-GUIDE.md']=b.export_guide(root)
-  expected['adaptation-prompt.txt']=item['prompt'].encode()
+  expected=b.pack_files(item)
   path=SITE/'downloads'/f"{item['pack']}-artifact-pack.zip"
   files+=check_zip(path,item['pack'],expected)
   page=Page();page.feed((SITE/'toolkit'/f"{item['page']}.html").read_text())

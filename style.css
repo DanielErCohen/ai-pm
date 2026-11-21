@@ -489,7 +489,6 @@ code.nb{white-space:nowrap}
 .facts.glance div{border-top:5px solid var(--cc,var(--accent))}
 .facts.glance dd{font:700 1.2rem/1.3 var(--serif)}
 
-.hello-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:18px}
 
 .legal p{max-width:46em}
 
@@ -815,7 +814,6 @@ details.stepcard .step-body{padding:4px 26px 22px 88px;border-top:1px solid var(
 .cyc-overview .lg button:hover{background:color-mix(in srgb,var(--lc) 8%,transparent)}
 .ring-panel .rp-lab{font:700 .74rem var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--lc);margin:0 0 4px}
 .nw{white-space:nowrap}
-.sub-note{margin:10px 0 0;padding:8px 12px;border-left:4px solid var(--amber);background:#FFF7E6;border-radius:0 8px 8px 0;font-size:.95rem}
 @media (min-width:981px){.cyc-overview .ringwrap{align-items:start}.cyc-overview .ring-panels{position:sticky;top:96px;margin-top:40px}}
 
 /* section highlight on sub-pages, and where a tool sits in the nine steps */
@@ -898,5 +896,21 @@ a.chip:not(.sm),button.chip{min-height:44px}
 /* Minor review fixes, 2026-11-21 */
 .why li>.whyline>ul{padding-left:20px}
 .whyline-t::after{color:var(--accent,#0F6E6E)}
-.pj-grid>li:has(>.pj-cta),ul>li:has(>.pj-cta){grid-column:1/-1}
+ul>li:has(>.pj-cta){grid-column:1/-1}
 @media (max-width:980px){.home-hero .deck::before{opacity:.3}}
+/* Without JavaScript the install tabs cannot switch: hide the tab buttons and show every panel with a label */
+@media (scripting:none){
+.tablist,.artifact .tablist{display:none!important}
+.tabpanel[hidden],.artifact [role="tabpanel"][hidden]{display:block!important}
+[role="tabpanel"]+[role="tabpanel"]{margin-top:16px}
+[role="tabpanel"]::before{display:block;margin:0 0 10px;font:700 .78rem var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+[role="tabpanel"][id$="panel-app"]::before{content:"Claude app"}
+[role="tabpanel"][id$="panel-code"]::before{content:"Claude Code"}
+[role="tabpanel"][id$="panel-other"]::before{content:"Other assistants"}
+.reader-tabs [role="tabpanel"][id$="panel-app"]::before{content:"Claude app: one chat per reader"}
+.reader-tabs [role="tabpanel"][id$="panel-code"]::before{content:"Claude Code: subagents"}
+#panel-last_week::before{content:"Last week"}
+#panel-assessment::before{content:"Assessment today"}
+#panel-roadmap::before{content:"Improvement roadmap"}
+#panel-achievements::before{content:"Professional achievements"}
+}

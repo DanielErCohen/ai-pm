@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Internal link checker for the static site: files, #anchors, aria id references, CSS url(), duplicate ids.
 
+An aria reference to an id that the page's own inline scripts write as id="<name>" counts as satisfied, because
+the script creates that element when a panel opens (the Work task board demo does this for drTitle).
+
 Usage: python3 linkcheck.py [site-folder]
 The site folder defaults to the folder above this script. Exit code 0 means clean, 1 means a finding.
 """
@@ -18,9 +21,21 @@ class P(HTMLParser):
         self.ids = []
         self.refs = []      # (kind, value)
         self.idrefs = []    # (attr, id)
+        self.script = ''    # text of the inline scripts
+        self._in_script = False
+
+    def handle_endtag(self, tag):
+        if tag == 'script':
+            self._in_script = False
+
+    def handle_data(self, data):
+        if self._in_script:
+            self.script += data
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
+        if tag == 'script':
+            self._in_script = True
         if 'id' in a:
             self.ids.append(a['id'])
         if tag == 'a' and a.get('name'):
@@ -60,7 +75,7 @@ def main():
                 dup_ids.append((rel, i))
             seen.add(i)
         for kind, i in pr.idrefs:
-            if i not in seen:
+            if i not in seen and f'id="{i}"' not in pr.script:
                 broken_idrefs.append((rel, kind, i))
         for kind, ref in pr.refs:
             if ref.startswith(SKIP):

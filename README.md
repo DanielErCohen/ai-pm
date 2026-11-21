@@ -27,4 +27,4 @@ The skill zips in `downloads/` are built by `tools/build-skill-zips.sh` from [ho
 
 ## License
 
-The code and text are MIT, copyright Daniel Cohen 2026. The portrait, the product logos and the screenshots are not covered by the MIT license. The fonts are under the SIL Open Font License, which sits beside them in `assets/fonts/`. `js/count.js` is the GoatCounter visit counter under its ISC license. The notice sits at the top of the file.
+The code and text are MIT, copyright Daniel Cohen 2026 ([LICENSE](LICENSE)). The portrait, the product logos and the screenshots are not covered by the MIT license. The fonts are under the SIL Open Font License, which sits beside them in `assets/fonts/`. [NOTICE.md](NOTICE.md) lists these exceptions. `js/count.js` is the GoatCounter visit counter under its ISC license. The notice sits at the top of the file.

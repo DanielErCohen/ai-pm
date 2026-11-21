@@ -29,8 +29,10 @@ BROWSER_CANDIDATES = [
     os.environ.get("CHROME_PATH", ""),
     "/opt/pw-browsers/chromium",
     "/opt/pw-browsers/chromium-*/chrome-linux/chrome",
+    "/opt/pw-browsers/chromium-*/chrome-linux64/chrome",
     os.path.expanduser("~/Library/Caches/ms-playwright/chromium-*/chrome-mac*/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing"),
     os.path.expanduser("~/.cache/ms-playwright/chromium-*/chrome-linux/chrome"),
+    os.path.expanduser("~/.cache/ms-playwright/chromium-*/chrome-linux64/chrome"),
     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
 ]
 

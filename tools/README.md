@@ -4,7 +4,7 @@ Five scripts for checking the site and building the skill zips. Run each from th
 
 ## linkcheck.py
 
-Checks every internal link, `#anchor`, `aria-controls` and `aria-labelledby` reference, CSS `url()`, duplicate id and third-party font reference. Exit code 1 on any finding.
+Checks every internal link, `#anchor`, `aria-controls` and `aria-labelledby` reference, CSS `url()`, duplicate id and third-party font reference. An aria reference counts as satisfied when the same file's inline scripts write the id as `id="<name>"`, because the script creates that element when a panel opens (the Work task board demo does this for `drTitle`). Exit code 1 on any finding.
 
 ```bash
 python3 tools/linkcheck.py
