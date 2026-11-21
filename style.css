@@ -884,13 +884,14 @@ a.chip:not(.sm),button.chip{min-height:44px}
 }
 /* Home hero: the tool cards flip through every tool (js/home-deck.js); the flip squashes and restores the card, so its tilt stays */
 .home-hero .deck.is-live .card .cb>p:not(.meta){min-height:2.9em}
-.deck .card.flip-out{animation:deck-out .26s ease-in forwards}
-.deck .card.flip-in{animation:deck-in .45s cubic-bezier(.2,1.4,.4,1)}
+.deck .card.flip-out{animation:deck-out .21s ease-in forwards}
+.deck .card.flip-in{animation:deck-in .36s cubic-bezier(.2,1.4,.4,1)}
 @keyframes deck-out{to{scale:1 0;opacity:.3}}
 @keyframes deck-in{from{scale:1 0;opacity:.3}to{scale:1 1;opacity:1}}
-.deck-pause{justify-self:end;margin:2px 6% 0 0;background:none;border:0;padding:6px 2px;font:600 .82rem var(--sans);color:var(--muted);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
-.deck-pause:hover{color:var(--ink)}
-.deck-pause:focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:4px}
+.deck-all{justify-self:end;display:inline-flex;align-items:center;gap:6px;margin:2px 6% 0 0;padding:6px 2px;font:700 .95rem var(--sans);color:var(--accent,#0F6E6E);text-decoration:none}
+.deck-all:hover{text-decoration:underline;text-underline-offset:3px}
+.deck-all:focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:4px}
+@media (max-width:980px){.deck-all{justify-self:start;margin-right:0}}
 /* Review fixes, 2026-11-21 */
 .deck .card .meta{flex-wrap:wrap}
 .deck .card .more{white-space:nowrap;margin-left:auto}

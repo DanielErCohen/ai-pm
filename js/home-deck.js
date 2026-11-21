@@ -1,6 +1,6 @@
 /* Home page: the three tool cards in the hero flip, one at a time, through every tool.
    Without JavaScript, or with reduced motion, the first three cards stay as they are.
-   The cards pause while a pointer or the keyboard is on them, while the tab is hidden, and after Pause. */
+   The cards pause while a pointer or the keyboard is on them, and while the tab is hidden. */
 (function () {
   var deck = document.querySelector('.home-hero .deck');
   if (!deck || !window.matchMedia || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -22,7 +22,7 @@
   ];
   var cards = [].slice.call(deck.querySelectorAll('.card')).slice(0, 3);
   if (cards.length < 3) return;
-  var shown = [0, 1, 2], next = 3, slot = 0, hover = false, stopped = false;
+  var shown = [0, 1, 2], next = 3, slot = 0, hover = false;
 
   function fill(card, t) {
     card.className = card.className.replace(/\bcat-[a-z]+\b/, 'cat-' + t[0]);
@@ -34,7 +34,7 @@
     card.querySelector('.badge').textContent = t[4];
   }
   function flip() {
-    if (hover || stopped || document.hidden) return;
+    if (hover || document.hidden) return;
     var card = cards[slot], i = next;
     shown[slot] = i;
     do { next = (next + 1) % tools.length; } while (shown.indexOf(next) !== -1);
@@ -44,25 +44,14 @@
       fill(card, tools[i]);
       card.classList.remove('flip-out');
       card.classList.add('flip-in');
-      setTimeout(function () { card.classList.remove('flip-in'); }, 450);
-    }, 260);
+      setTimeout(function () { card.classList.remove('flip-in'); }, 360);
+    }, 208);
   }
   deck.addEventListener('mouseenter', function () { hover = true; });
   deck.addEventListener('mouseleave', function () { hover = false; });
   deck.addEventListener('focusin', function () { hover = true; });
   deck.addEventListener('focusout', function () { hover = false; });
 
-  var btn = document.createElement('button');
-  btn.type = 'button';
-  btn.className = 'deck-pause';
-  btn.setAttribute('aria-pressed', 'false');
-  btn.textContent = 'Pause the cards';
-  btn.addEventListener('click', function () {
-    stopped = !stopped;
-    btn.setAttribute('aria-pressed', String(stopped));
-    btn.textContent = stopped ? 'Play the cards' : 'Pause the cards';
-  });
-  deck.appendChild(btn);
   deck.classList.add('is-live');
-  setInterval(flip, 2600);
+  setInterval(flip, 2080);
 })();
