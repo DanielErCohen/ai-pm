@@ -610,7 +610,7 @@ code.nb{white-space:nowrap}
   
 }
 @media (max-width:340px){
-  nav.main a{padding:7px 3px;font-size:.78rem}
+  nav.main a{padding:7px 5px;font-size:.73rem}
 }
 
 /* A single entry and printable practice pages. */
@@ -896,5 +896,10 @@ a.chip:not(.sm),button.chip{min-height:44px}
 .deck .card .meta{flex-wrap:wrap}
 .deck .card .more{white-space:nowrap;margin-left:auto}
 .setting-grid{align-items:start}
-#second-brain .para-use+.btn,#second-brain .btn[href$="second-brain.html"]{white-space:nowrap}
+@media (min-width:641px){#second-brain .btn[href$="second-brain.html"]{white-space:nowrap}}
 @media (max-width:360px){.artifact .actions a.button{font-size:.84rem;padding-left:12px;padding-right:12px;gap:6px;white-space:nowrap}.artifact .actions .filetype{flex:none}}
+/* Minor review fixes, 2026-11-21 */
+.why li>.whyline>ul{padding-left:20px}
+.whyline-t::after{color:var(--accent,#0F6E6E)}
+.pj-grid>li:has(>.pj-cta),ul>li:has(>.pj-cta){grid-column:1/-1}
+@media (max-width:980px){.home-hero .deck::before{opacity:.3}}

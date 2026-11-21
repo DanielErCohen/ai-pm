@@ -187,7 +187,7 @@
 @media (max-width:640px){.artifact .tscroll.is-scroll::before{content:"Scroll sideways for the full table";display:block;font-size:12px;color:var(--muted,#5B6266);margin:0 0 4px}}
 .artifact-support>summary{position:relative;list-style:none;padding-right:56px}
 .artifact-support>summary::-webkit-details-marker{display:none}
-.artifact-support>summary::after{content:"";position:absolute;right:31px;top:25px;width:7px;height:7px;border-right:1.5px solid var(--accent,#0F6E6E);border-bottom:1.5px solid var(--accent,#0F6E6E);transform:rotate(45deg);transition:transform 140ms ease}
+.artifact-support>summary::after{content:"";position:absolute;right:25px;top:25px;width:7px;height:7px;border-right:1.5px solid var(--accent,#0F6E6E);border-bottom:1.5px solid var(--accent,#0F6E6E);transform:rotate(45deg);transition:transform 140ms ease}
 .artifact-support[open]>summary::after{transform:rotate(225deg);top:29px}
 
 /* Start here block (every tool page, directly under the header): one line per assistant, the pack as a secondary link */
