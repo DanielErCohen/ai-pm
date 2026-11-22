@@ -1,6 +1,6 @@
 # Design system
 
-The site follows the home page and the section pages built with it (Toolkit, Projects, Personal, About). Every page uses the tokens in `style.css` `:root`, one page header, one section pattern and the components below. Tool pages also load `assets/artifact-ui.css` for their previews; its last block makes their header, actions and container follow this system.
+The site follows the home page and the section pages built with it (Toolkit, Projects, Fun stuff, About). Every page uses the tokens in `style.css` `:root`, one page header, one section pattern and the components below. Tool pages also load `assets/artifact-ui.css` for their previews; its last block makes their header, actions and container follow this system.
 
 ## Tokens
 
@@ -24,7 +24,7 @@ Section colors mark where a reader is. Each section has a color for the circle a
 | Toolkit | teal `--accent` | teal | `.pagehead.s-toolkit` |
 | Projects | amber `--amber` | ochre #8A5A00 | `.pagehead.s-projects` |
 | How I work | blue `--c-method` | blue | `.pagehead.s-method` |
-| Personal | berry `--c-personal` | berry | `.pagehead.personal` |
+| Fun stuff (the tab was Personal; classes keep the name) | berry `--c-personal` | berry | `.pagehead.personal` |
 | Home, About | amber and teal | muted | `.hero`, `.about-hero` |
 
 Detail pages take the eyebrow color of what they show: a tool's category color, or a project's status color (live olive `--s-live`, stopped gray `--s-stopped`, work in progress ochre #8A5A00 for text and amber for the pill). Tool categories have their own colors (teal Setup, plum Skills, olive Routines, rust Career, ochre Small builds, blue Template), some shared with sections; the breadcrumb and nav carry the section. The nine steps use the home page's group colors: blue Understand, plum Choose, teal Deliver.
@@ -36,7 +36,7 @@ Type scale: h1 `clamp(2rem, 4.2vw, 3.1rem)` with -.01em tracking on every page, 
 One header per page, on the page background. Three variants share the eyebrow, h1, lede and actions:
 
 - **Hero** (Home, About): two circles and a visual on the right.
-- **Landing** (`.pagehead` with a section class; Toolkit, Projects, How I work, Personal): one 320px circle top right in the section color at .22 opacity. No breadcrumb.
+- **Landing** (`.pagehead` with a section class; Toolkit, Projects, How I work, Fun stuff): one 320px circle top right in the section color at .22 opacity. No breadcrumb.
 - **Detail** (`.pagehead.detail`; projects, Habits and principles; tool pages use `.artifact .intro`, styled the same): a breadcrumb bar above (`Section / Page`), no circle. The eyebrow names the kind of page: the tool category, "Side project", "How I work".
 
 Header parts, in order:
@@ -59,7 +59,7 @@ Ten of the eleven tool pages follow one order: header (eyebrow, h1, one-sentence
 - **Install tabs:** Claude app, Claude Code and Other, in that order, in one row at every width, each 44px high. "Other" reads "Other assistants" to screen readers. A group with no app route starts with Claude Code. Set `data-default="app"` on a tab group when its app route needs no terminal, and `data-default="code"` when Claude Code should open first. Each Claude Code tab opens with "These commands run in Terminal on macOS or Linux, or Git Bash on Windows."
 - **Reader tabs** (`.tabs.reader-tabs`): a prompt that starts subagents carries two tabs in the same block, "Claude app: one chat per reader" first and open by default, then "Claude Code: subagents". The app version is built on the one-chat-per-reader brief and says to paste it once per reader and merge the reports by hand. The labels may wrap to two lines on phones. Cycle steps 2, 4, 5 and 8 and Habits and principles cards 1 and 3 use them.
 - **Links into hidden content:** `js/site.js` opens every closed `details` around a link target, on click, on load and on hash change, and selects the tab whose panel holds it. A link with `data-tab` also selects the install tab it names. A tool page's Setup and support panel therefore opens from any Start here link into it.
-- **Disclosures** (`details`): every summary is at least 44px high and shows its state with a chevron or a plus. Five styles are in use. Panel: `.artifact-support` and `.options`, a bordered card with a bold summary and a teal chevron on the right. Inline: `details.sources` and `details.terms`, a teal semibold summary with a small chevron. Why line: `.whyline`, a plus or minus marker, one sentence and "Read more". Step card: `details.stepcard` on the nine steps. Example record: `.entry details`, a teal 13px summary inside a preview. `.professional-reading` on Personal is a bordered card with a native marker. Merging them onto the panel and inline styles is open work.
+- **Disclosures** (`details`): every summary is at least 44px high and shows its state with a chevron or a plus. Five styles are in use. Panel: `.artifact-support` and `.options`, a bordered card with a bold summary and a teal chevron on the right. Inline: `details.sources` and `details.terms`, a teal semibold summary with a small chevron. Why line: `.whyline`, a plus or minus marker, one sentence and "Read more". Step card: `details.stepcard` on the nine steps. Example record: `.entry details`, a teal 13px summary inside a preview. `.professional-reading` on Fun stuff is a bordered card with a native marker. Merging them onto the panel and inline styles is open work.
 
 ## Sections
 
@@ -74,6 +74,8 @@ Ten of the eleven tool pages follow one order: header (eyebrow, h1, one-sentence
 - **Chips and badges:** pills with a color dot (`.chip`), small outlined labels (`.badge`).
 - **Code and prompts:** dark `.codeblock` with a caption and one amber copy button, 44px high, with a white focus ring on the dark block.
 - **Pager:** `.pn` with Previous, All and Next where they exist, at the foot of detail pages, always visible.
+- **Draw card** (`.mn`, Fun stuff): a white card with the 8px berry left edge holding a made-up demo. It opens with a `.badge` "Made-up sample", then filter chips (`.chip.cat-personal`, `aria-pressed`) and a genre select, each 44px high, and a primary `.btn` that draws. The result sits in a dashed slip (`.mn-card`) with a reserved height, so nothing shifts when the pick changes. Titles flick past for under a second, then the slip settles with a bounce (`js/movie-night.js`, CSS `.rolling` and `.landed`); with reduced motion the pick appears at once. A visually hidden `aria-live="polite"` line announces each result. The sample list is in the page as plain text and the script reads it, so without JavaScript the list and a `<noscript>` line show.
+- **Pixel-art animation** (`.kart-anim`): a sprite sheet of 256 by 224 frames played with a CSS `steps()` animation in a `role="img"` element with an `aria-label` and `tabindex="0"`. It pauses on hover and focus and stands on the first frame with reduced motion, as the home page cards do. Pixel art uses `image-rendering: pixelated` at whole-number scales (2 wide, 1 on phones) and a `box-shadow` frame, never a border, so the scale stays whole. Stills beside it (`.kart-still`) are `img` elements with width, height and `loading="lazy"`.
 - **Footer:** the same dark footer on every page.
 
 ## Rules

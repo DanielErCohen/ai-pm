@@ -4,10 +4,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>A place for what I learn - Daniel Cohen</title>
-<meta content="My PARA second-brain structure, a template to borrow, and a small selection of current reading." name="description"/>
-<meta content="A place for what I learn - Daniel Cohen" property="og:title"/>
-<meta content="My PARA second-brain structure, a template to borrow, and a small selection of current reading." property="og:description"/>
+<title>Fun stuff - Daniel Cohen</title>
+<meta content="Two small things I built for fun, a movie picker and a kart game, then how I organize my notes and what I am reading." name="description"/>
+<meta content="Fun stuff - Daniel Cohen" property="og:title"/>
+<meta content="Two small things I built for fun, a movie picker and a kart game, then how I organize my notes and what I am reading." property="og:description"/>
 <meta content="https://danielercohen.github.io/ai-pm/personal/index.html" property="og:url"/>
 <meta content="https://danielercohen.github.io/ai-pm/assets/og-card.jpg" property="og:image"/><meta content="1200" property="og:image:width"/><meta content="627" property="og:image:height"/><meta content="PM tools I built and use, free to share: an open toolbox illustration" property="og:image:alt"/>
 <meta content="light" name="color-scheme"/>
@@ -15,6 +15,7 @@
 <link as="font" crossorigin="" href="../assets/fonts/source-serif-4-latin-700-normal.woff2" rel="preload" type="font/woff2"/>
 <link href="../style.css" rel="stylesheet"/>
 <script defer="" src="../js/site.js"></script>
+<script defer="" src="../js/movie-night.js"></script>
 <link href="https://danielercohen.github.io/ai-pm/personal/index.html" rel="canonical"/></head>
 <body>
 <svg aria-hidden="true" focusable="false" height="0" style="position:absolute" width="0"><defs>
@@ -35,8 +36,56 @@
 </div></header>
 <main id="main">
 <section class="pagehead personal"><div class="wrap">
-<p class="eyebrow">Personal</p><h1>A place for what I learn</h1>
-<p class="lede">My second brain holds product work alongside reading notes and plans for the garden. Here is the structure you can borrow, and what I am reading now.</p>
+<p class="eyebrow">Fun stuff</p><h1>Small things I built for fun</h1>
+<p class="lede">A movie picker and a kart game I made for fun, then how I organize my notes and what I am reading.</p>
+</div></section>
+<section aria-labelledby="mn-h" class="sec" id="movie-night"><div class="wrap">
+<div class="sec-head"><h2 id="mn-h">Movie Night</h2><p>Movie Night keeps a list of films and series and draws one title from the hat for the evening.</p></div>
+<div class="mn">
+<div class="mn-top"><span class="badge">Made-up sample</span><span class="mn-who">Two invented viewers, Erin and Josh</span></div>
+<div id="mn-demo"><noscript><p class="mn-nojs">The draw needs JavaScript. The sample list is below.</p></noscript>
+<ul class="mn-list" id="mn-list">
+<li data-title="Casablanca" data-year="1942" data-genre="Romance" data-erin="1" data-josh="0" data-service="0">Casablanca, 1942, Romance. Seen by Erin. Not on a service you have.</li>
+<li data-title="Some Like It Hot" data-year="1959" data-genre="Comedy" data-erin="0" data-josh="0" data-service="1">Some Like It Hot, 1959, Comedy. Seen by neither. On a service you have.</li>
+<li data-title="Psycho" data-year="1960" data-genre="Thriller" data-erin="1" data-josh="1" data-service="0">Psycho, 1960, Thriller. Seen by both. Not on a service you have.</li>
+<li data-title="The Godfather" data-year="1972" data-genre="Crime" data-erin="1" data-josh="0" data-service="1">The Godfather, 1972, Crime. Seen by Erin. On a service you have.</li>
+<li data-title="Jaws" data-year="1975" data-genre="Thriller" data-erin="0" data-josh="1" data-service="1">Jaws, 1975, Thriller. Seen by Josh. On a service you have.</li>
+<li data-title="Alien" data-year="1979" data-genre="Sci-fi" data-erin="1" data-josh="1" data-service="0">Alien, 1979, Sci-fi. Seen by both. Not on a service you have.</li>
+<li data-title="Back to the Future" data-year="1985" data-genre="Adventure" data-erin="0" data-josh="0" data-service="1">Back to the Future, 1985, Adventure. Seen by neither. On a service you have.</li>
+<li data-title="Die Hard" data-year="1988" data-genre="Action" data-erin="0" data-josh="1" data-service="0">Die Hard, 1988, Action. Seen by Josh. Not on a service you have.</li>
+<li data-title="Jurassic Park" data-year="1993" data-genre="Adventure" data-erin="0" data-josh="1" data-service="1">Jurassic Park, 1993, Adventure. Seen by Josh. On a service you have.</li>
+<li data-title="Pulp Fiction" data-year="1994" data-genre="Crime" data-erin="1" data-josh="1" data-service="0">Pulp Fiction, 1994, Crime. Seen by both. Not on a service you have.</li>
+<li data-title="Toy Story" data-year="1995" data-genre="Animation" data-erin="0" data-josh="0" data-service="1">Toy Story, 1995, Animation. Seen by neither. On a service you have.</li>
+<li data-title="The Matrix" data-year="1999" data-genre="Sci-fi" data-erin="0" data-josh="1" data-service="1">The Matrix, 1999, Sci-fi. Seen by Josh. On a service you have.</li>
+<li data-title="Spirited Away" data-year="2001" data-genre="Animation" data-erin="1" data-josh="0" data-service="0">Spirited Away, 2001, Animation. Seen by Erin. Not on a service you have.</li>
+<li data-title="Amélie" data-year="2001" data-genre="Romance" data-erin="0" data-josh="0" data-service="0">Amélie, 2001, Romance. Seen by neither. Not on a service you have.</li>
+<li data-title="Mad Max: Fury Road" data-year="2015" data-genre="Action" data-erin="1" data-josh="0" data-service="1">Mad Max: Fury Road, 2015, Action. Seen by Erin. On a service you have.</li>
+<li data-title="Parasite" data-year="2019" data-genre="Thriller" data-erin="0" data-josh="0" data-service="1">Parasite, 2019, Thriller. Seen by neither. On a service you have.</li>
+</ul></div>
+</div>
+<ul class="fun-facts">
+<li>The real one keeps one list of films and series for two people.</li>
+<li>It draws from the titles still to watch. A filter keeps it to the ones new to one of the two. Other filters cover films or series, titles on a streaming service they have, and maybes.</li>
+<li>Star ratings from both people feed the next pick. It leans towards genres they rate well and never rules a genre out.</li>
+<li>It runs as a private page for the two people who use it.</li>
+</ul>
+</div></section>
+<section aria-labelledby="ck-h" class="sec alt" id="couch-kart"><div class="wrap">
+<div class="sec-head"><h2 id="ck-h">Couch Kart</h2><p>Couch Kart is an original two-player kart racer that I built as a Super Nintendo game.</p></div>
+<div class="kart-media">
+<figure class="kart-fig"><div aria-label="Looping clip of the start of a race on the split screen: the countdown ends, GO appears and both karts pull away." class="kart-anim" role="img" tabindex="0"></div>
+<figcaption>The start of a race. The clip pauses on hover or focus.</figcaption></figure>
+<div class="kart-stills">
+<figure class="kart-still"><img alt="The Pick an Animal screen: 18 pixel-art animal portraits in a grid, from an otter and a T-Rex to a snail, each labelled Light, Medium or Heavy, with Player 1 and Player 2 prompts underneath." height="224" loading="lazy" src="../assets/screens/couch-kart-select.png" width="256"/><figcaption>Animal select: 18 animals to pick from.</figcaption></figure>
+<figure class="kart-still"><img alt="The cup results screen: a podium of three pixel-art animals under the heading Hedgehog wins. A hedgehog stands first for Computer 1 on 23 points, an axolotl second for Computer 2 and a red panda third for Player 1, both on 22 points." height="224" loading="lazy" src="../assets/screens/couch-kart-podium.png" width="256"/><figcaption>Cup results after the last race.</figcaption></figure>
+</div>
+</div>
+<ul class="fun-facts">
+<li>Two players race on one couch, with the screen split top and bottom. Each picks from 18 animals: real ones, dinosaurs and made-up ones.</li>
+<li>The track has coins, items and boosts. There is a cup over several tracks, battles, and up to three computer-driven karts.</li>
+<li>It is written in C, with hand-written assembly for the per-frame work. It ships as one 512 KB game file and runs on a retro game stick, through the stick's built-in Super Nintendo emulator.</li>
+<li>Every character, track and picture is original and nothing comes from Nintendo. It is a personal project started in Nov '26, and the game file is not published.</li>
+</ul>
 </div></section>
 <section aria-labelledby="sb-h" class="sec" id="second-brain"><div class="wrap">
 <div class="sec-head"><h2 id="sb-h">How I organize my second brain</h2><p>I use Tiago Forte's PARA method: Projects, Areas, Resources and Archive. Each has a different job.</p></div>
