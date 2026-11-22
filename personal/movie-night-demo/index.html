@@ -880,7 +880,7 @@ const clampStar = v => { const n = Math.round(Number(v)); return n >= 1 && n <= 
 function norm(x) {
   x = x || {};
   const ids = PEOPLE.map(p => p.id);
-  const first = ids[0] || "p1", second = ids[1] || "p2";
+  const first = "p1", second = "p2";
   const seenM = {}, starsM = {}, favM = {};
   const take = (src, out, f) => { if (src && typeof src === "object") Object.keys(src).forEach(k => { const v = f(src[k]); if (v) out[k] = v; }); };
   take(x.seen, seenM, v => !!v); take(x.stars, starsM, clampStar); take(x.fav, favM, v => !!v);
@@ -1160,11 +1160,12 @@ function whoLine(s, W) {
   return `${listJoin(yes)} ${yes.length > 1 ? "have" : "has"} seen it, new to ${listJoin(no)}`;
 }
 // One line on why this title: which watchers' picked genres it matches, or what it is close to, and who it is new to.
+const GENRE_WORDS = { comedy: "comedies", documentary: "documentaries", drama: "dramas", family: "family films", musical: "musicals", mystery: "mysteries", sitcom: "sitcoms", thriller: "thrillers", war: "war films", western: "westerns", reality: "reality TV" };
 function whyLine(r, s, W) {
   const lc = r.genres.map(x => x.toLowerCase());
   const likes = [];
   W.forEach(p => {
-    const m = p.genres.filter(g => lc.includes(g.toLowerCase())).map(g => g.toLowerCase());
+    const m = p.genres.filter(g => lc.includes(g.toLowerCase())).map(g => GENRE_WORDS[g.toLowerCase()] || g.toLowerCase());
     if (m.length) likes.push(W.length === 1 ? `You like ${listJoin(m)}` : `${p.name} likes ${listJoin(m)}`);
   });
   const parts = [];
@@ -1176,8 +1177,6 @@ function whyLine(r, s, W) {
     else if (pickFrom === "claude") parts.push("A new idea from Claude");
     else parts.push(s.progress === "later" ? "On your Maybe list" : s.progress === "want" ? "On your Want to watch list" : "Close to what you tend to like");
   }
-  const line = whoLine(s, W);
-  parts.push(/^(New|You)/.test(line) ? line[0].toLowerCase() + line.slice(1) : line);
   return parts.join("; ") + ".";
 }
 
@@ -1238,6 +1237,8 @@ function pickRow(r, mode) {
 }
 
 function renderTonight() {
+  const anyOurs = ROWS.some(r => r.ours), chipOurs = document.getElementById("chip-ours");
+  if (chipOurs) { chipOurs.hidden = !SERVICES.length || !anyOurs; if (!anyOurs && T.ours) { T.ours = false; chipOurs.setAttribute("aria-pressed", "false"); } }
   if (rolling || OB) return;
   const slot = document.getElementById("ticket-slot");
   const p = pool();
@@ -1704,7 +1705,7 @@ function renderOb(focus) {
       `<div class="nums" role="group" aria-label="How many people">${Array.from({ length: MAX_PEOPLE }, (_, k) => k + 1).map(n => `<button type="button" class="chip" data-ob="n" data-n="${n}" aria-pressed="${n === d.n}">${n}</button>`).join("")}</div>
        <div class="names" id="ob-names">${namesHtml()}</div>`, "Next");
   } else if (s.t === "where") {
-    html = obFrame("Where and what you stream", "Pick your country and tap the services you have. The five most used there are shown, and you can add others. The page uses them for its look-up links and the \"On our services\" switch. You can change both later in Settings.",
+    html = obFrame("Where and what you stream", "Pick your country and tap the services you have. The five most used there are shown, and you can add others. Claude uses them when it suggests new titles, and the \"On our services\" switch uses them for titles whose service is known. You can change both later in Settings.",
       `<label class="fld" style="max-width:260px">Country<select id="ob-country" data-obcountry>${countryOptions(d.country)}</select></label>
        <p class="ob-sub">Streaming services</p>${servicesHtml(d.services, "ob", d.country)}`, "Next");
   } else if (s.t === "genres") {
@@ -2150,8 +2151,10 @@ renderList(true);
     renderAll();
   });
   DB.collection("titles").onSnapshot(snap => {
+    const prevTitles = overrides;
     overrides = {};
     snap.docs.forEach(d => { if (d.exists && !writing("titles", d.id)) overrides[d.id] = d.data() || {}; });
+    Object.keys(prevTitles).forEach(id => { if (writing("titles", id) && !overrides[id]) overrides[id] = prevTitles[id]; });
     Object.keys(overrides).forEach(id => { delete PENDING_TITLES[id]; });
     if (!ready) { got("titles"); return; }
     buildRows();
