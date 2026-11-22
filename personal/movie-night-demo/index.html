@@ -378,7 +378,7 @@ const PICKS = [
   {"k": "movie", "t": "Mad Max: Fury Road", "y": "2015", "i": "8.1*", "g": ["Action", "Sci-fi"], "b": "A driver and a rebel commander race a war rig across the desert, chased by a warlord.", "w": "Rent only"},
   {"k": "movie", "t": "La La Land", "y": "2016", "i": "8.0*", "g": ["Musical", "Romance"], "b": "A jazz pianist and an actress chase their careers in Los Angeles and each other.", "w": "Netflix"},
   {"k": "movie", "t": "Parasite", "y": "2019", "i": "8.5*", "g": ["Thriller", "Drama", "Comedy"], "b": "A poor family works its way, one job at a time, into a rich family's house.", "w": "Prime Video"},
-  {"k": "movie", "t": "Rear Window", "y": "1954", "i": "8.5*", "g": ["Mystery", "Thriller", "Classic"], "b": "A photographer laid up with a broken leg suspects a neighbour across the courtyard of murder.", "w": "Rent only"}
+  {"k": "movie", "t": "Rear Window", "y": "1954", "i": "8.5*", "g": ["Mystery", "Thriller", "Classic"], "b": "A photographer laid up with a broken leg suspects a neighbor across the courtyard of murder.", "w": "Rent only"}
 ];
 
 // Sample marks for the in-memory store: [kind, title, saved state].
@@ -435,7 +435,7 @@ function memoryStore() {
 const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 function slug(s){ return s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
 function parseNum(v){ if (!v || v === "n/a") return null; const m = String(v).replace("*", "").match(/[\d.]+/); return m ? parseFloat(m[0]) : null; }
-const today = () => new Date().toISOString().slice(0, 10);
+const today = () => { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };   // the local day
 function niceDate(d){ if (!d) return ""; const x = new Date(d + "T12:00:00"); return isNaN(x) ? d : x.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }); }
 
 // Rows: base lists, then the batch details, then whatever the shared "titles" collection overrides or adds.
