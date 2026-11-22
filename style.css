@@ -608,8 +608,11 @@ code.nb{white-space:nowrap}
   .person .mono{width:42px;height:42px;font-size:.92rem}
   
 }
+@media (max-width:380px){
+  nav.main a{padding:7px 4px;font-size:.78rem}
+}
 @media (max-width:340px){
-  nav.main a{padding:7px 5px;font-size:.73rem}
+  nav.main a{padding:7px 3px;font-size:.73rem}
 }
 
 /* A single entry and printable practice pages. */
