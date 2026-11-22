@@ -1,0 +1,1002 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<!-- Demo copy of the Movie Night kit page: fonts are served from the fonts folder and the lists are a made-up sample held in memory. -->
+<title>Movie Night demo - Daniel Cohen</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+@font-face{font-family:"Limelight";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/limelight-latin.woff2) format("woff2")}
+@font-face{font-family:"DM Sans";font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/dmsans-latin.woff2) format("woff2")}
+.demobar{padding:8px 16px;text-align:center;font:13px/1.4 var(--body);background:var(--gold-soft);color:var(--ink);border-bottom:1px solid var(--line)}
+.demobar a{color:var(--velvet);font-weight:700;margin-left:6px}
+#memnote{display:none}
+/* Layout: a dark cinema marquee across the top with two tabs. "Tonight" deals one admission ticket
+   (the pick) with a tear-off stub; "The list" is a quiet set of rows to tick, rate and annotate.
+   Single light look by choice: the marquee and the ticket stub carry the cinema colours. */
+:root{
+  --ground:#f3eef0; --paper:#fffdfb; --ink:#1f1419; --muted:#6e5f66; --line:#e2d8dc;
+  --velvet:#8f1d2c; --velvet-deep:#5c0f1a; --gold:#e0ad4a; --gold-ink:#86600f; --gold-soft:#fbf1da;
+  --screen:#1a1216; --screen-fg:#f6ecdc; --screen-muted:#bfa9a0;
+  --ok:#1f6b4a; --ok-soft:#dff1e6; --warn:#8a4b00;
+  --display:"Limelight","Rockwell","Georgia",serif;
+  --body:"DM Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:15px/1.5 var(--body)}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--velvet);outline-offset:2px}
+h2{font:400 22px/1.2 var(--display);margin:0;text-wrap:balance}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin:0}
+
+/* Marquee */
+.marquee{background:var(--screen);color:var(--screen-fg)}
+.marquee :focus-visible{outline-color:var(--gold)}
+.bulbs{height:14px;background:radial-gradient(circle,var(--gold) 0 3px,transparent 3.6px) 0 50%/20px 14px repeat-x;opacity:.9}
+body.rolling .bulbs{animation:chase .28s steps(2) infinite}
+@keyframes chase{50%{background-position:10px 50%;opacity:.55}}
+.marquee-in{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;padding-block:14px 16px}
+.marquee .eyebrow{color:var(--gold)}
+h1{font:400 clamp(30px,6vw,46px)/1 var(--display);margin:4px 0 0;letter-spacing:.01em}
+.tabs{display:flex;gap:4px;margin-left:auto;background:rgba(255,255,255,.08);padding:4px;border-radius:999px}
+.tabs a{color:var(--screen-muted);text-decoration:none;font-weight:600;padding:7px 16px;border-radius:999px}
+.tabs a[aria-current="page"]{background:var(--gold);color:var(--screen)}
+.ghost{background:transparent;border:1px solid rgba(255,255,255,.3);color:var(--screen-fg);border-radius:999px;padding:7px 14px;font-weight:600;cursor:pointer}
+.status{min-height:1.4em;color:var(--warn);font-size:13px;margin:8px 0 0}
+
+main{padding-block:14px 48px}
+section[hidden]{display:none}
+
+/* Tonight: controls */
+.hat{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin-bottom:16px}
+.seg{display:inline-flex;background:#e9e0e4;border-radius:999px;padding:3px;gap:2px}
+.seg button{border:0;background:transparent;color:var(--muted);font-weight:600;padding:6px 14px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--paper);color:var(--ink);box-shadow:0 1px 2px rgba(60,10,20,.15)}
+.chip{border:1px solid var(--line);background:var(--paper);color:var(--muted);border-radius:999px;padding:6px 12px;font-weight:600;font-size:13px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--velvet);border-color:var(--velvet);color:#fff}
+.hatcount{color:var(--muted);font-size:13px;margin-left:auto;font-variant-numeric:tabular-nums}
+
+/* The ticket */
+.ticket{display:grid;grid-template-columns:minmax(0,1fr) 230px;background:var(--paper);border-radius:14px;overflow:hidden;position:relative;box-shadow:0 0 0 1px var(--line),0 22px 44px -28px rgba(60,10,20,.5)}
+.ticket.landed{animation:land .35s ease-out}
+@keyframes land{from{transform:scale(.975) rotate(-.4deg)}to{transform:none}}
+.tk-main{padding:26px 28px;min-width:0;display:flex;flex-direction:column;gap:12px}
+.tk-main .eyebrow{color:var(--velvet)}
+.tk-title{font:400 clamp(28px,5.2vw,44px)/1.08 var(--display);margin:0;text-wrap:balance;overflow-wrap:anywhere}
+.tk-blurb{font-size:17px;line-height:1.45;margin:0;max-width:60ch}
+.facts{display:grid;gap:6px;margin:0;font-size:14px}
+.facts div{display:flex;gap:8px}
+.facts dt{flex:0 0 78px;color:var(--muted);font-weight:600}
+.facts dd{margin:0;min-width:0}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;background:var(--gold-soft);color:var(--gold-ink);white-space:nowrap}
+.where{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:auto;padding-top:14px;border-top:1px dashed var(--line)}
+.where-label{flex-basis:100%;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.svc{font-size:13px;font-weight:600;padding:4px 12px;border-radius:999px;background:#ece4e8;color:#5b4b52}
+.svc.ours{background:var(--ok-soft);color:var(--ok)}
+.svc.none{background:transparent;border:1px dashed #cdbfc5;color:var(--muted)}
+.svc.link{background:transparent;border:1px solid var(--line);color:var(--velvet);text-decoration:none}
+.svc.link:hover{border-color:var(--velvet)}
+body.rolling .where{opacity:.35}
+.stub{background:var(--velvet);color:#fff;padding:24px 22px;border-left:2px dashed rgba(255,255,255,.5);position:relative;display:flex;flex-direction:column;gap:14px}
+.stub::before,.stub::after{content:"";position:absolute;left:-12px;width:22px;height:22px;border-radius:50%;background:var(--ground)}
+.stub::before{top:-11px}.stub::after{bottom:-11px}
+.stub .eyebrow{color:var(--gold)}
+.score{font:400 46px/1 var(--display);font-variant-numeric:tabular-nums}
+.score small{display:block;font:600 12px/1.4 var(--body);color:#f1cfd3;margin-top:4px}
+.stub a{color:#fff;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,.45);border-radius:999px;padding:7px 12px;text-align:center}
+.stub a:hover{background:rgba(255,255,255,.12)}
+.stub a.play{background:var(--gold);border-color:var(--gold);color:var(--screen)}
+.stub a:focus-visible{outline-color:var(--gold)}
+.admit{margin-top:auto;font:400 15px/1 var(--display);letter-spacing:.12em;color:#f1cfd3}
+body.rolling .tk-blurb,body.rolling .facts,body.rolling .tags,body.rolling .stub{opacity:.35}
+.calls{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;align-items:center}
+.btn{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:10px 18px;font-weight:600;cursor:pointer}
+.btn.primary{background:var(--velvet);border-color:var(--velvet);color:#fff}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:var(--screen)}
+.btn.small{padding:6px 12px;font-size:13px}
+.btn:disabled{opacity:.5;cursor:default}
+.reel{display:inline-block;width:18px;height:18px;vertical-align:-3px;margin-right:6px}
+body.rolling .reel{animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.seenask{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px;padding:12px 14px;background:var(--paper);border:1px solid var(--line);border-radius:12px}
+.seenask p{margin:0;font-weight:600;margin-right:6px}
+.emptyhat{background:var(--paper);border:1px dashed #cdbfc5;border-radius:14px;padding:32px 24px;text-align:center;color:var(--muted)}
+.emptyhat h2{color:var(--ink);margin-bottom:6px}
+
+/* Now showing and past picks */
+.block{margin-top:34px}
+.block > .eyebrow{color:var(--velvet);margin-bottom:10px}
+.picks{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.pick{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 16px;display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;gap:8px 18px;align-items:center}
+.pick-title{font-weight:700;overflow-wrap:anywhere}
+.pick-sub{color:var(--muted);font-size:13px}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;white-space:nowrap;background:#ece4e8;color:#5b4b52}
+.pill.watched{background:var(--ok-soft);color:var(--ok)}
+.pill.picked{background:var(--gold-soft);color:var(--gold-ink)}
+.pill.more{background:var(--ok-soft);color:var(--ok)}
+.pill.unclear{background:var(--gold-soft);color:var(--gold-ink)}
+.rate{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);font-weight:600;white-space:nowrap}
+.stars{display:inline-flex}
+.star{border:0;background:transparent;padding:2px 1px;font-size:19px;line-height:1;color:#d8cbd0;cursor:pointer}
+.star.on{color:var(--gold)}
+.star:disabled{cursor:default}
+.pick-acts{display:flex;gap:6px;flex-wrap:wrap}
+
+/* The list */
+.listbar{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin-bottom:10px}
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:8px}
+.filters label{display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--muted);font-weight:600;min-width:0}
+.filters input,.filters select,dialog input{font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:7px 10px;min-width:0;max-width:100%}
+.filters .grow{flex:1 1 200px}
+.filters .grow input{width:100%}
+.lede{margin:0 0 14px;color:var(--muted);max-width:70ch}
+.learned{margin:0 0 16px;padding:12px 16px;background:var(--paper);border:1px solid var(--line);border-radius:12px;max-width:80ch}
+.learned p{margin:0}
+.learned ul{margin:8px 0 0;padding-left:18px;color:var(--muted)}
+.learned .eyebrow{color:var(--velvet);margin-bottom:6px}
+.count{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;margin:0 0 10px}
+.count strong{color:var(--ink)}
+.rows{list-style:none;margin:0;padding:0;background:var(--paper);border:1px solid var(--line);border-radius:12px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 150px 168px 168px minmax(0,170px);gap:6px 16px;padding:12px 16px;border-bottom:1px solid var(--line);align-items:start}
+.row:last-child{border-bottom:0}
+.r-main{min-width:0}
+.r-title{font-weight:700;overflow-wrap:anywhere}
+.r-title a{color:inherit;text-decoration:none}
+.r-title a:hover{color:var(--velvet);text-decoration:underline}
+.r-meta{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;display:flex;flex-wrap:wrap;gap:2px 10px;align-items:center}
+.r-meta .flag{color:var(--warn)}
+.r-blurb{color:var(--muted);font-size:13px;margin-top:2px}
+.r-status select,.r-comment{width:100%;font-size:13px;background:transparent;border:1px solid var(--line);border-radius:8px;padding:6px 8px;min-width:0}
+.r-comment{border-color:transparent}
+.r-comment:hover{border-color:var(--line)}
+.r-comment:focus{background:var(--paper);border-color:var(--velvet);outline:none}
+.r-who{display:flex;flex-direction:column;gap:2px;font-size:13px}
+.r-who label{display:flex;align-items:center;gap:6px;font-weight:600;cursor:pointer}
+.r-who input{width:16px;height:16px;margin:0;accent-color:var(--velvet)}
+.empty{color:var(--muted);text-align:center;padding:28px 12px}
+.foot{color:var(--muted);font-size:12px;margin-top:20px;max-width:75ch}
+
+dialog{border:1px solid var(--line);border-radius:14px;padding:22px;width:min(440px,calc(100vw - 32px));background:var(--paper);color:var(--ink)}
+dialog::backdrop{background:rgba(26,18,22,.45)}
+dialog form{display:flex;flex-direction:column;gap:14px}
+dialog label.field{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:600;color:var(--muted)}
+dialog fieldset{border:0;padding:0;margin:0;min-width:0}
+dialog legend{font-size:12px;font-weight:600;color:var(--muted);padding:0;margin-bottom:6px}
+.radios,.checks{display:flex;gap:18px;flex-wrap:wrap}
+.radios label,.checks label{display:flex;align-items:center;gap:8px;font-weight:600;cursor:pointer}
+.radios input,.checks input{width:17px;height:17px;margin:0;accent-color:var(--velvet)}
+.formerr{color:var(--warn);font-size:13px;margin:0;min-height:1.2em}
+.actions{display:flex;justify-content:flex-end;gap:8px}
+
+@media (max-width:860px){
+  .row{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .r-main,.r-status,.r-comment{grid-column:1 / -1}
+  .pick{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .pick-main,.pick-acts{grid-column:1 / -1}
+}
+@media (max-width:640px){
+  .tabs{margin-left:0}
+  .ticket{grid-template-columns:minmax(0,1fr)}
+  .tk-main{padding:22px 20px}
+  .stub{border-left:0;border-top:2px dashed rgba(255,255,255,.5);flex-direction:row;flex-wrap:wrap;align-items:center}
+  .stub::before{left:-11px;top:-12px}
+  .stub::after{left:auto;right:-11px;top:-12px;bottom:auto}
+  .admit{margin:0 0 0 auto}
+  .hatcount{margin-left:0;flex-basis:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  body.rolling .bulbs,body.rolling .reel,.ticket.landed{animation:none}
+}
+.memnote{margin:10px 0 0;padding:6px 12px;background:var(--gold-soft);color:var(--gold-ink);border-radius:8px;font-size:13px;font-weight:600}
+.memnote[hidden]{display:none}
+</style>
+
+<div class="demobar">This is a made-up sample. Your changes stay in this browser tab. <a href="../index.html#movie-night">Copy it</a></div>
+
+<header class="marquee">
+  <div class="bulbs" aria-hidden="true"></div>
+  <div class="wrap marquee-in">
+    <div>
+      <p class="eyebrow" id="presents"></p>
+      <h1>Movie Night</h1>
+    </div>
+    <nav class="tabs" aria-label="Sections">
+      <a href="#tonight" data-view="tonight">Tonight</a>
+      <a href="#towatch" data-view="towatch">To watch</a>
+      <a href="#list" data-view="list">Seen</a>
+    </nav>
+    <button type="button" class="ghost" id="add-open">+ Add title</button>
+  </div>
+  <div class="bulbs" aria-hidden="true"></div>
+</header>
+
+<main class="wrap">
+  <p class="memnote" id="memnote" role="status" hidden></p>
+  <p class="status" id="status" role="status"></p>
+
+  <!-- Tonight -->
+  <section id="view-tonight">
+    <div class="hat">
+      <div class="seg" role="group" aria-label="What to pick from">
+        <button type="button" data-tk="movie" aria-pressed="true">Films</button>
+        <button type="button" data-tk="tv" aria-pressed="false">Series</button>
+        <button type="button" data-tk="any" aria-pressed="false">Either</button>
+      </div>
+      <button type="button" class="chip" data-tt="newB" id="chip-newb" aria-pressed="true"></button>
+      <button type="button" class="chip" data-tt="ours" id="chip-ours" aria-pressed="false"></button>
+      <button type="button" class="chip" data-tt="maybes" aria-pressed="false">Include maybes</button>
+      <span class="hatcount" id="hatcount"></span>
+    </div>
+    <div id="ticket-slot">
+      <div class="emptyhat"><h2>Loading your list</h2><p>Tonight's pick appears here once your saved list has loaded.</p></div>
+    </div>
+    <div class="block" id="showing-block" hidden>
+      <p class="eyebrow">Now showing</p>
+      <ul class="picks" id="showing"></ul>
+    </div>
+    <div class="block" id="history-block" hidden>
+      <p class="eyebrow">Past picks</p>
+      <ul class="picks" id="history"></ul>
+    </div>
+  </section>
+
+  <!-- The list -->
+  <section id="view-list" hidden>
+    <p class="lede" id="list-lede"></p>
+    <div class="learned" id="learned" hidden></div>
+    <div class="listbar">
+      <div class="seg" role="group" aria-label="Choose list">
+        <button type="button" data-lk="movie" aria-pressed="true">Films</button>
+        <button type="button" data-lk="tv" aria-pressed="false">Series</button>
+      </div>
+    </div>
+    <div class="filters">
+      <label class="grow" for="f-q">Search<input type="search" id="f-q" data-f="q" placeholder="Title or note"></label>
+      <label for="f-status">Status<select id="f-status" data-f="status">
+        <option value="all">All</option><option value="none">Not set</option><option value="want">Want to watch</option><option value="later">Maybe</option><option value="no">No</option><option value="watching">Watching</option><option value="watched">Watched</option>
+      </select></label>
+      <label for="f-seen">Seen by<select id="f-seen" data-f="seen"></select></label>
+      <label for="f-rated">Rated<select id="f-rated" data-f="rated"></select></label>
+      <label for="f-genre">Genre<select id="f-genre" data-f="genre"><option value="all">All</option></select></label>
+      <label for="f-sort">Sort<select id="f-sort" data-f="sort"></select></label>
+    </div>
+    <p class="count" id="count"></p>
+    <ul class="rows" id="rows"><li class="empty">Loading the list</li></ul>
+    <p class="foot" id="foot"></p>
+  </section>
+
+  <dialog id="add-dialog" aria-labelledby="add-heading">
+    <form id="add-form">
+      <h2 id="add-heading">Add a title</h2>
+      <fieldset>
+        <legend>Type</legend>
+        <div class="radios">
+          <label><input type="radio" name="kind" value="movie" id="add-kind-movie" checked>Film</label>
+          <label><input type="radio" name="kind" value="tv" id="add-kind-tv">Series</label>
+        </div>
+      </fieldset>
+      <label class="field" for="add-title">Title<input name="title" id="add-title" required maxlength="120" autocomplete="off"></label>
+      <fieldset>
+        <legend>Already seen by</legend>
+        <div class="checks">
+          <label><input type="checkbox" name="seenA" id="add-a"><span data-name="a"></span></label>
+          <label><input type="checkbox" name="seenB" id="add-b"><span data-name="b"></span></label>
+        </div>
+      </fieldset>
+      <label class="checks" for="add-want"><span style="display:flex;align-items:center;gap:8px;font-weight:600"><input type="checkbox" name="want" id="add-want" checked>We want to watch it</span></label>
+      <p class="formerr" id="add-err" role="alert"></p>
+      <div class="actions">
+        <button type="button" class="btn" id="add-cancel">Cancel</button>
+        <button type="submit" class="btn primary">Add</button>
+      </div>
+    </form>
+  </dialog>
+</main>
+
+<script>
+// ============================================================================
+// CONFIG: edit this block. Everything else in the page reads from it.
+// ============================================================================
+// The two people who watch together. The page stores ratings and "seen" marks
+// under the keys a and b, so you can rename a person later without losing data.
+const VIEWERS = { a: "Erin", b: "Josh" };
+// Streaming services you have. A title found there counts for the "On ..." filter.
+// The names must match the words used in the "w" and detail text of the lists below.
+const SERVICES = ["Netflix", "Prime Video", "Disney+"];
+// Where to look titles up. "search" is a JustWatch search address for your country.
+// "checked" is the date your streaming notes were checked, or "" for none.
+const REGION = { name: "the US", search: "https://www.justwatch.com/us/search?q=", checked: "" };
+// The line under the list.
+const FOOTNOTE = "* marks a figure typed from memory and not checked at the source. The streaming notes, marks, stars and notes in this sample are made up.";
+// true: always use the built-in in-memory store, even where a database exists.
+const FORCE_MEMORY = true;
+
+// ============================================================================
+// LISTS
+// Series: [rank or "", title, IMDb, Rotten Tomatoes, status (ended, more, unclear), detail].
+// Name a service at the start of the detail to show where it streams.
+// Films are in PICKS below. A film can also be a plain row in MOVIES:
+// [title, year, IMDb, Rotten Tomatoes, note].
+// The sample below is made up, apart from the titles and years.
+// ============================================================================
+const TV = [
+  { rows: [
+    ["","The Sopranos","9.2*","n/a","ended","Prime Video. Ended 2007, 6 seasons"],
+    ["","Seinfeld","8.9*","n/a","ended","Netflix. Ended 1998, 9 seasons"],
+    ["","Friends","8.9*","n/a","ended","Prime Video. Ended 2004, 10 seasons"],
+    ["","Fawlty Towers","8.8*","n/a","ended","Rent only. Two series, 1975 and 1979"],
+    ["","Planet Earth","9.4*","n/a","unclear","Disney+. First series 2006; later series are separate titles"],
+    ["","Squid Game","8.0*","n/a","ended","Netflix. Ended 2025, 3 seasons"],
+    ["","The X-Files","8.6*","n/a","unclear","Disney+. Ran 1993 to 2002, revived 2016 and 2018"],
+    ["","Cheers","7.8*","n/a","ended","Prime Video. Ended 1993, 11 seasons"]
+  ]}
+];
+
+const MOVIES = [
+  { rows: [] }
+];
+
+// About each series: up to three genre tags and one sentence. Keys match the titles in TV.
+const INFO = {
+  "The Sopranos": { g: ["Crime", "Drama"], b: "A New Jersey mob boss sees a therapist while his family and his crew pull at him from both sides." },
+  "Seinfeld": { g: ["Sitcom"], b: "A comedian and his three friends turn the small annoyances of New York life into plots." },
+  "Friends": { g: ["Sitcom"], b: "Six friends share coffee, apartments and bad timing in Manhattan." },
+  "Fawlty Towers": { g: ["Sitcom", "Classic"], b: "The owner of a seaside hotel loses a little more of his temper with each guest." },
+  "Planet Earth": { g: ["Documentary", "Nature"], b: "Wildlife filmed in every part of the world, one habitat per episode." },
+  "Squid Game": { g: ["Thriller", "Drama"], b: "Players in deep debt take part in children's games where the losers do not go home." },
+  "The X-Files": { g: ["Sci-Fi", "Mystery"], b: "Two FBI agents investigate cases that nobody else wants to explain." },
+  "Cheers": { g: ["Sitcom"], b: "The regulars of a Boston bar trade jokes with the people who run it." }
+};
+
+// Films: k is the kind, t the title, y the year, i the IMDb figure, g genre tags,
+// b one sentence, w where it streams (separate services with ;).
+const PICKS = [
+  {"k": "movie", "t": "Casablanca", "y": "1942", "i": "8.5*", "g": ["Romance", "War", "Classic"], "b": "A nightclub owner in wartime Morocco has to choose between an old love and doing the right thing.", "w": "Rent only"},
+  {"k": "movie", "t": "Some Like It Hot", "y": "1959", "i": "8.2*", "g": ["Comedy", "Classic"], "b": "Two musicians on the run from gangsters join an all-female band in disguise.", "w": "Prime Video"},
+  {"k": "movie", "t": "Psycho", "y": "1960", "i": "8.5*", "g": ["Horror", "Thriller", "Classic"], "b": "A woman who steals money stops for the night at a quiet motel with an odd owner.", "w": "Rent only"},
+  {"k": "movie", "t": "The Godfather", "y": "1972", "i": "9.2*", "g": ["Crime", "Drama"], "b": "A mafia family hands its power from the father to the youngest son.", "w": "Prime Video"},
+  {"k": "movie", "t": "Jaws", "y": "1975", "i": "8.1*", "g": ["Thriller", "Adventure"], "b": "A small beach town hires three men to hunt a great white shark.", "w": "Netflix"},
+  {"k": "movie", "t": "Alien", "y": "1979", "i": "8.5*", "g": ["Sci-fi", "Horror"], "b": "The crew of a cargo ship answers a distress call and brings something aboard.", "w": "Disney+"},
+  {"k": "movie", "t": "Back to the Future", "y": "1985", "i": "8.5*", "g": ["Sci-fi", "Comedy", "Adventure"], "b": "A teenager travels to 1955 and has to get his parents together.", "w": "Netflix"},
+  {"k": "movie", "t": "Die Hard", "y": "1988", "i": "8.2*", "g": ["Action", "Thriller"], "b": "A New York cop is the only one loose in a skyscraper taken over on Christmas Eve.", "w": "Disney+"},
+  {"k": "movie", "t": "Goodfellas", "y": "1990", "i": "8.7*", "g": ["Crime", "Drama"], "b": "A boy grows up to be a gangster and watches that life come apart.", "w": "Rent only"},
+  {"k": "movie", "t": "The Silence of the Lambs", "y": "1991", "i": "8.6*", "g": ["Thriller", "Crime"], "b": "A trainee FBI agent asks an imprisoned doctor for help catching a killer.", "w": "Prime Video"},
+  {"k": "movie", "t": "Jurassic Park", "y": "1993", "i": "8.2*", "g": ["Sci-fi", "Adventure"], "b": "A theme park of cloned dinosaurs loses its power on opening weekend.", "w": "Netflix; Prime Video"},
+  {"k": "movie", "t": "Pulp Fiction", "y": "1994", "i": "8.9*", "g": ["Crime", "Comedy"], "b": "Two hitmen, a boxer and a diner robbery, told out of order.", "w": "Rent only"},
+  {"k": "movie", "t": "The Shawshank Redemption", "y": "1994", "i": "9.3*", "g": ["Drama"], "b": "A banker sent to prison for murder makes a friend and plans his way out over many years.", "w": "Netflix"},
+  {"k": "movie", "t": "Toy Story", "y": "1995", "i": "8.3*", "g": ["Animation", "Family", "Adventure"], "b": "A boy's toys come alive when he leaves the room, and a new spaceman toy upsets the shelf.", "w": "Disney+"},
+  {"k": "movie", "t": "Titanic", "y": "1997", "i": "7.9*", "g": ["Romance", "Drama"], "b": "Two passengers from different classes fall in love on the ship's only voyage.", "w": "Disney+"},
+  {"k": "movie", "t": "The Matrix", "y": "1999", "i": "8.7*", "g": ["Sci-fi", "Action"], "b": "A hacker learns that his world is a simulation run by machines.", "w": "Netflix"},
+  {"k": "movie", "t": "Spirited Away", "y": "2001", "i": "8.6*", "g": ["Animation", "Fantasy", "Family"], "b": "A girl wanders into a spirit world and has to work in a bathhouse to free her parents.", "w": "Netflix"},
+  {"k": "movie", "t": "Amélie", "y": "2001", "i": "8.3*", "g": ["Romance", "Comedy"], "b": "A shy Paris waitress secretly arranges small kindnesses for the people around her.", "w": "Prime Video"},
+  {"k": "movie", "t": "Lost in Translation", "y": "2003", "i": "7.7*", "g": ["Drama", "Comedy"], "b": "A film actor and a young wife meet at a Tokyo hotel and keep each other company.", "w": "Rent only"},
+  {"k": "movie", "t": "Pan's Labyrinth", "y": "2006", "i": "8.2*", "g": ["Fantasy", "War", "Drama"], "b": "In 1944 Spain, a girl finds a way into a fairy-tale world while her stepfather hunts rebels.", "w": "Prime Video"},
+  {"k": "movie", "t": "Mad Max: Fury Road", "y": "2015", "i": "8.1*", "g": ["Action", "Sci-fi"], "b": "A driver and a rebel commander race a war rig across the desert, chased by a warlord.", "w": "Rent only"},
+  {"k": "movie", "t": "La La Land", "y": "2016", "i": "8.0*", "g": ["Musical", "Romance"], "b": "A jazz pianist and an actress chase their careers in Los Angeles and each other.", "w": "Netflix"},
+  {"k": "movie", "t": "Parasite", "y": "2019", "i": "8.5*", "g": ["Thriller", "Drama", "Comedy"], "b": "A poor family works its way, one job at a time, into a rich family's house.", "w": "Prime Video"},
+  {"k": "movie", "t": "Rear Window", "y": "1954", "i": "8.5*", "g": ["Mystery", "Thriller", "Classic"], "b": "A photographer laid up with a broken leg suspects a neighbour across the courtyard of murder.", "w": "Rent only"}
+];
+
+// Sample marks for the in-memory store: [kind, title, saved state].
+// a and b: seen by the first or second viewer. sa and sb: their stars (1 to 5).
+// progress: want, later, no, watching, watched or "". rec: picked, watched, seen or skipped, with the date.
+const ago = n => new Date(Date.now() - n * 864e5).toISOString().slice(0, 10);
+const SAMPLE_MARKS = [
+  ["movie", "Casablanca", { a: true, b: true, sa: 5, sb: 4, progress: "watched", rec: "watched", recAt: ago(41), comment: "Josh wants to see it again on a big screen." }],
+  ["movie", "The Godfather", { a: true, b: true, sa: 5, sb: 5, progress: "watched", comment: "Long, and worth it." }],
+  ["movie", "Back to the Future", { a: true, b: true, sa: 4, sb: 5, progress: "watched", rec: "watched", recAt: ago(9) }],
+  ["movie", "Toy Story", { a: true, b: true, sa: 4, sb: 4, progress: "watched", rec: "seen", recAt: ago(15) }],
+  ["movie", "Titanic", { a: true, b: true, sa: 3, sb: 5, progress: "watched", rec: "watched", recAt: ago(23), comment: "Josh cried. Erin did not." }],
+  ["movie", "La La Land", { a: true, b: true, sa: 4, sb: 3, progress: "watched" }],
+  ["movie", "The Matrix", { a: true, b: true, sa: 5, sb: 4, progress: "watched" }],
+  ["movie", "Jaws", { a: true, sa: 4, progress: "want", rec: "picked", recAt: ago(1), comment: "Erin's pick for this weekend." }],
+  ["movie", "Alien", { a: true, sa: 5, progress: "want", comment: "Lights off, Josh decides if he can take it." }],
+  ["movie", "Psycho", { a: true, sa: 4, progress: "want", rec: "skipped", recAt: ago(2) }],
+  ["movie", "Goodfellas", { a: true, sa: 4, progress: "later" }],
+  ["movie", "Pulp Fiction", { a: true, sa: 3, progress: "no", comment: "Josh says no for now." }],
+  ["movie", "Spirited Away", { a: true, sa: 5, progress: "want" }],
+  ["movie", "Die Hard", { b: true, sb: 4, progress: "want", comment: "Christmas film, to watch in December." }],
+  ["movie", "Amélie", { progress: "want" }],
+  ["movie", "Pan's Labyrinth", { progress: "want" }],
+  ["movie", "Parasite", { progress: "want", comment: "Both heard it is worth going in cold." }],
+  ["movie", "Mad Max: Fury Road", { progress: "want" }],
+  ["movie", "The Shawshank Redemption", { progress: "want" }],
+  ["movie", "Jurassic Park", { progress: "want" }],
+  ["movie", "Rear Window", { progress: "later" }],
+  ["movie", "Some Like It Hot", { progress: "later" }],
+  ["tv", "The Sopranos", { a: true, b: true, sa: 5, sb: 5, progress: "watched" }],
+  ["tv", "Friends", { a: true, b: true, sa: 4, sb: 3, progress: "watched", comment: "Josh prefers the early seasons." }],
+  ["tv", "Seinfeld", { a: true, sa: 4, progress: "want" }],
+  ["tv", "Squid Game", { b: true, sb: 4, progress: "want" }],
+  ["tv", "Fawlty Towers", { progress: "want", comment: "Twelve episodes in total, a good short one." }],
+  ["tv", "Planet Earth", { progress: "want" }],
+  ["tv", "The X-Files", { progress: "later" }]
+];
+
+// In-memory stand-in for the page's database. It has the same three calls the page uses:
+// collection(name).doc(id).set(value) and collection(name).onSnapshot(callback).
+function memoryStore() {
+  const data = { watched: {}, titles: {}, meta: {} };
+  SAMPLE_MARKS.forEach(([kind, title, state]) => { data.watched[(kind === "tv" ? "tv-" : "movie-") + slug(title)] = state; });
+  const subs = { watched: [], titles: [], meta: [] };
+  const snap = name => ({ docs: Object.keys(data[name]).map(id => ({ id, exists: true, data: () => JSON.parse(JSON.stringify(data[name][id])) })) });
+  const fire = name => subs[name].forEach(cb => cb(snap(name)));
+  return { collection: name => ({
+    doc: id => ({ set: value => { data[name][id] = JSON.parse(JSON.stringify(value)); setTimeout(() => fire(name), 0); return Promise.resolve(); } }),
+    onSnapshot: cb => { subs[name].push(cb); setTimeout(() => cb(snap(name)), 0); }
+  }) };
+}
+
+
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function slug(s){ return s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
+function parseNum(v){ if (!v || v === "n/a") return null; const m = String(v).replace("*", "").match(/[\d.]+/); return m ? parseFloat(m[0]) : null; }
+const today = () => new Date().toISOString().slice(0, 10);
+function niceDate(d){ if (!d) return ""; const x = new Date(d + "T12:00:00"); return isNaN(x) ? d : x.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }); }
+
+// Rows: base lists, then the batch details, then whatever the shared "titles" collection overrides or adds.
+let overrides = {};
+let ROWS = [];
+let BY_ID = {};
+function buildRows() {
+  const rows = [], by = {};
+  const put = r => { rows.push(r); by[r.id] = r; };
+  TV.forEach(sec => sec.rows.forEach(r => {
+    const info = INFO[r[1]] || { g: [], b: "" };
+    put({ id: "tv-" + slug(r[1]), kind: "tv", rank: r[0] === "" ? null : r[0], title: r[1], imdb: r[2], rt: r[3], status: r[4], detail: r[5], genres: info.g, blurb: info.b });
+  }));
+  MOVIES.forEach(sec => sec.rows.forEach(r => {
+    put({ id: "movie-" + slug(r[0]), kind: "movie", title: r[0], year: r[1], imdb: r[2], rt: r[3], note: r[4], genres: [], blurb: "" });
+  }));
+  PICKS.forEach(p => {
+    const id = (p.k === "tv" ? "tv-" : "movie-") + slug(p.t);
+    const extra = { blurb: p.b || "", genres: p.g || [], where: p.w || "", ours: !!p.o };
+    if (by[id]) {
+      Object.assign(by[id], extra);
+      if (parseNum(by[id].imdb) == null && p.i) by[id].imdb = p.i;
+    } else {
+      put(Object.assign({ id, kind: p.k, rank: null, title: p.t, year: p.y || "", imdb: p.i || "n/a", rt: "n/a", status: p.s || "unclear", detail: p.d || "", note: "" }, extra));
+    }
+  });
+  Object.keys(overrides).forEach(id => {
+    const o = overrides[id];
+    if (by[id]) {
+      const keep = { blurb: by[id].blurb, genres: by[id].genres };
+      Object.assign(by[id], o);
+      if (!by[id].blurb) by[id].blurb = keep.blurb;
+      if (!by[id].genres || !by[id].genres.length) by[id].genres = keep.genres;
+    } else if (o.added) {
+      put(Object.assign({ id, rank: null, imdb: "n/a", rt: "n/a", status: "unclear", genres: [], blurb: "", detail: "", note: "", year: "" }, o));
+    }
+  });
+  rows.forEach(r => {
+    if (r.kind !== "tv") r.kind = "movie";
+    if (!Array.isArray(r.genres)) r.genres = [];
+    // A title counts as ours when its streaming note or detail names one of your services.
+    const text = (r.where || "") + " " + (r.detail || "");
+    r.ours = r.ours || SERVICES.some(s => text.includes(s));
+  });
+  ROWS = rows; BY_ID = by;
+  fillGenres();
+}
+
+// Saved state per title, from the shared "watched" collection.
+const clampStar = v => { const n = Math.round(Number(v)); return n >= 1 && n <= 5 ? n : 0; };
+const norm = x => Object.assign({}, x, {
+  a: !!x.a, b: !!x.b,
+  comment: typeof x.comment === "string" ? x.comment : "",
+  progress: typeof x.progress === "string" ? x.progress : "",
+  sa: clampStar(x.sa), sb: clampStar(x.sb),
+  rec: typeof x.rec === "string" ? x.rec : "",
+  recAt: typeof x.recAt === "string" ? x.recAt : ""
+});
+const EMPTY = Object.freeze(norm({}));
+let seen = {}, server = {};
+const dirty = {}, queue = {};
+let DB = null, ready = false, readOnly = false;
+const st = id => seen[id] || EMPTY;
+const canWrite = () => !!DB && ready && !readOnly;
+
+const $status = document.getElementById("status");
+function setStatus(msg) { $status.textContent = msg; }
+
+function save(id) {
+  const run = async () => {
+    try { await DB.collection("watched").doc(id).set(Object.assign({}, st(id))); }
+    catch (err) {
+      const code = err && err.code;
+      if (code === "invalid_argument" || code === "revoked" || code === "not_granted") { readOnly = true; setStatus("This view can't save changes, so the page is read-only."); }
+      else { if (server[id]) seen[id] = server[id]; else delete seen[id]; setStatus("Couldn't save that change. Try again."); }
+      renderAll();
+    } finally { dirty[id] = Math.max(0, (dirty[id] || 1) - 1); }
+  };
+  queue[id] = (queue[id] || Promise.resolve()).then(run);
+}
+function mutate(id, patch) {
+  if (!canWrite()) { setStatus("Changes can't be saved in this view."); return false; }
+  seen[id] = Object.assign({}, st(id), patch);
+  dirty[id] = (dirty[id] || 0) + 1;
+  setStatus("");
+  save(id);
+  return true;
+}
+
+const STATUS = [["", "Not set"], ["want", "Want to watch"], ["later", "Maybe"], ["no", "No"], ["watching", "Watching"], ["watched", "Watched"]];
+const SHOW_LABEL = { ended: "Ended", more: "More to come", unclear: "Unclear" };
+
+function starsHtml(id, who, title) {
+  const v = st(id)[who === "a" ? "sa" : "sb"];
+  const name = esc(VIEWERS[who]);
+  let h = `<span class="stars" role="group" aria-label="${name}'s rating for ${esc(title)}">`;
+  for (let n = 1; n <= 5; n++) h += `<button type="button" class="star${n <= v ? " on" : ""}" data-star="${id}" data-who="${who}" data-n="${n}" aria-label="${n} star${n > 1 ? "s" : ""}" aria-pressed="${n === v}">★</button>`;
+  return h + "</span>";
+}
+function imdbHtml(v) {
+  if (!v || v === "n/a") return "";
+  const flagged = String(v).endsWith("*");
+  return `IMDb ${esc(String(v).replace("*", ""))}${flagged ? '<span class="flag" title="Not checked at the source">*</span>' : ""}`;
+}
+const trailerUrl = r => "https://www.youtube.com/results?search_query=" + encodeURIComponent(`${r.title} ${r.year || ""} official trailer`.replace(/\s+/g, " "));
+const whereUrl = r => REGION.search + encodeURIComponent(r.title);
+const describe = r => r.blurb || r.note || r.detail || "";
+// Where it streams, one pill per service; the services in SERVICES stand out.
+function whereHtml(r) {
+  const parts = r.where ? r.where.split(";").map(s => s.trim()).filter(Boolean) : [];
+  const wasChecked = parts.length > 0;
+  const pills = parts.map(s => `<span class="svc${SERVICES.some(x => s.startsWith(x)) ? " ours" : ""}">${esc(s)}</span>`).join("");
+  return `<div class="where"><span class="where-label">Where to watch in ${esc(REGION.name)}${wasChecked && REGION.checked ? " · checked " + esc(REGION.checked) : ""}</span>${pills || `<span class="svc none">Not checked yet</span>`}<a class="svc link" href="${whereUrl(r)}" target="_blank" rel="noopener">Check JustWatch</a></div>`;
+}
+
+/* ---------- Tonight ---------- */
+const T = { kind: "movie", newB: true, ours: false, maybes: false };
+let pickId = null, rolling = false, seenAsk = false, justLanded = false;
+const shown = new Set();
+
+function pool() {
+  return ROWS.filter(r => {
+    const s = st(r.id);
+    if (T.kind !== "any" && r.kind !== T.kind) return false;
+    if (!(s.progress === "want" || (T.maybes && s.progress === "later"))) return false;
+    if (s.rec === "watched" || s.rec === "seen" || s.rec === "picked") return false;
+    if (T.newB && s.b) return false;
+    if (T.ours && !r.ours) return false;
+    return true;
+  });
+}
+
+function roll(animate) {
+  if (rolling) return;
+  learn();
+  const p = pool();
+  let cands = p.filter(r => !shown.has(r.id));
+  if (!cands.length) { shown.clear(); cands = p.filter(r => r.id !== pickId); if (!cands.length) cands = p; }
+  seenAsk = false;
+  if (!cands.length) { pickId = null; renderTonight(); return; }
+  const next = weightedPick(cands);
+  shown.add(next.id);
+  const el = document.getElementById("tk-title");
+  const still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!animate || still || !el || p.length < 2) { pickId = next.id; justLanded = !!animate; renderTonight(); return; }
+  rolling = true;
+  document.body.classList.add("rolling");
+  let i = 0;
+  const total = 13;
+  const tick = () => {
+    if (i < total) { el.textContent = p[Math.floor(Math.random() * p.length)].title; i++; setTimeout(tick, 45 + i * i * 1.7); }
+    else { rolling = false; document.body.classList.remove("rolling"); pickId = next.id; justLanded = true; renderTonight(); }
+  };
+  tick();
+}
+
+function whoLine(s) {
+  if (s.a && s.b) return "You have both seen it";
+  if (s.a) return `${esc(VIEWERS.a)} has seen it, new to ${esc(VIEWERS.b)}`;
+  if (s.b) return `${esc(VIEWERS.b)} has seen it, new to ${esc(VIEWERS.a)}`;
+  return "New to both of you";
+}
+
+function ticketHtml(r) {
+  const s = st(r.id);
+  const kind = r.kind === "tv" ? "Series" : "Film";
+  const sub = r.kind === "tv" ? (SHOW_LABEL[r.status] || "") : (r.year || "");
+  const score = parseNum(r.imdb);
+  const flagged = String(r.imdb || "").endsWith("*");
+  const tags = (r.genres || []).slice(0, 4).map(g => `<span class="tag">${esc(g)}</span>`).join("");
+  const off = canWrite() ? "" : " disabled";
+  return `<article class="ticket${justLanded ? " landed" : ""}" aria-live="polite">
+    <div class="tk-main">
+      <p class="eyebrow">${kind}${sub ? " · " + esc(sub) : ""}${s.progress === "later" ? " · a maybe" : ""}</p>
+      <h2 class="tk-title" id="tk-title">${esc(r.title)}</h2>
+      ${describe(r) ? `<p class="tk-blurb">${esc(describe(r))}</p>` : ""}
+      ${tags ? `<div class="tags">${tags}</div>` : ""}
+      <dl class="facts">
+        <div><dt>Seen</dt><dd>${whoLine(s)}</dd></div>
+        ${r.kind === "tv" && r.detail ? `<div><dt>Seasons</dt><dd>${esc(r.detail)}</dd></div>` : ""}
+        ${s.comment ? `<div><dt>Your note</dt><dd>${esc(s.comment)}</dd></div>` : ""}
+      </dl>
+      ${whereHtml(r)}
+    </div>
+    <div class="stub">
+      <p class="eyebrow">IMDb</p>
+      <div class="score">${score != null ? score.toFixed(1) : "–"}<small>${score == null ? "no rating yet" : flagged ? "from memory, unchecked" : "out of 10"}${r.rt && r.rt !== "n/a" ? " · RT " + esc(r.rt) : ""}</small></div>
+      <a class="play" href="${trailerUrl(r)}" target="_blank" rel="noopener">▶ Trailer on YouTube</a>
+      <span class="admit" aria-hidden="true">ADMIT TWO</span>
+    </div>
+  </article>
+  <div class="calls">
+    <button type="button" class="btn primary" data-act="watch" data-id="${r.id}"${off}>We're watching this</button>
+    <button type="button" class="btn gold" data-act="skip" data-id="${r.id}"><svg class="reel" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="10" cy="5" r="1.7" fill="currentColor"/><circle cx="10" cy="15" r="1.7" fill="currentColor"/><circle cx="5" cy="10" r="1.7" fill="currentColor"/><circle cx="15" cy="10" r="1.7" fill="currentColor"/><circle cx="10" cy="10" r="1.2" fill="currentColor"/></svg>Not tonight, roll again</button>
+    <button type="button" class="btn" data-act="seen-open" data-id="${r.id}"${off}>Already seen it</button>
+  </div>
+  ${seenAsk ? `<div class="seenask"><p>Who had already seen it?</p>
+    <button type="button" class="btn small" data-act="seen-a" data-id="${r.id}">${esc(VIEWERS.a)}</button>
+    <button type="button" class="btn small" data-act="seen-b" data-id="${r.id}">${esc(VIEWERS.b)}</button>
+    <button type="button" class="btn small" data-act="seen-both" data-id="${r.id}">Both of us</button>
+    <button type="button" class="btn small" data-act="seen-cancel">Cancel</button></div>` : ""}`;
+}
+
+const REC_LABEL = { picked: "Picked", watched: "Watched", seen: "Already seen", skipped: "Skipped" };
+function pickRow(r, mode) {
+  const s = st(r.id);
+  const rateable = mode === "showing" || s.rec === "watched" || s.rec === "seen";
+  const rate = rateable
+    ? `<span class="rate">${esc(VIEWERS.a)} ${starsHtml(r.id, "a", r.title)}</span><span class="rate">${esc(VIEWERS.b)} ${starsHtml(r.id, "b", r.title)}</span>`
+    : `<span></span><span></span>`;
+  const acts = mode === "showing"
+    ? `<span class="pick-acts"><button type="button" class="btn small primary" data-act="watched" data-id="${r.id}">We watched it</button><button type="button" class="btn small" data-act="notwatched" data-id="${r.id}">Didn't watch it</button></span>`
+    : `<span class="pill ${s.rec}">${REC_LABEL[s.rec] || ""}</span>`;
+  return `<li class="pick"><div class="pick-main"><div class="pick-title">${esc(r.title)}</div><div class="pick-sub">${mode === "showing" ? "Picked " : ""}${esc(niceDate(s.recAt))}</div></div>${rate}${acts}</li>`;
+}
+
+function renderTonight() {
+  if (rolling) return;
+  const slot = document.getElementById("ticket-slot");
+  const p = pool();
+  const noun = T.kind === "tv" ? "series" : T.kind === "movie" ? (p.length === 1 ? "film" : "films") : (p.length === 1 ? "title" : "titles");
+  document.getElementById("hatcount").textContent = ready ? `${p.length} ${noun} in the hat` : "";
+  const r = pickId && BY_ID[pickId];
+  if (!ready) {
+    slot.innerHTML = `<div class="emptyhat"><h2>Loading your list</h2><p>Tonight's pick appears here once your saved list has loaded.</p></div>`;
+  } else if (!r) {
+    slot.innerHTML = `<div class="emptyhat"><h2>The hat is empty</h2><p>Nothing matches these switches. Turn one off above, or mark more titles as Want to watch in the list.</p></div>`;
+  } else {
+    slot.innerHTML = ticketHtml(r);
+  }
+  justLanded = false;
+  const showing = ROWS.filter(x => st(x.id).rec === "picked").sort((a, b) => st(b.id).recAt.localeCompare(st(a.id).recAt));
+  document.getElementById("showing-block").hidden = !showing.length;
+  document.getElementById("showing").innerHTML = showing.map(x => pickRow(x, "showing")).join("");
+  const hist = ROWS.filter(x => ["watched", "seen", "skipped"].includes(st(x.id).rec)).sort((a, b) => st(b.id).recAt.localeCompare(st(a.id).recAt) || a.title.localeCompare(b.title)).slice(0, 40);
+  document.getElementById("history-block").hidden = !hist.length;
+  document.getElementById("history").innerHTML = hist.map(x => pickRow(x, "history")).join("");
+  if (!canWrite()) document.querySelectorAll("#view-tonight .star, #view-tonight [data-act='watched'], #view-tonight [data-act='notwatched']").forEach(b => { b.disabled = true; });
+}
+
+/* ---------- The list ---------- */
+const L = { mode: "seen", kind: "movie", q: "", status: "all", seen: "all", rated: "all", genre: "all", sort: "default" };
+const LEDE = {
+  seen: "Everything at least one of you has seen. Rate it with stars, or set a status if one of you wants to watch it together.",
+  towatch: "What one or both of you haven't seen and haven't passed on: want to watch first, then maybes, then titles not sorted yet. Tick a name once someone has seen it."
+};
+// Seen: at least one of you saw it (or you're watching it). To watch: not seen by both, not watched, not a pass.
+const isSeen = s => s.a || s.b || s.progress === "watching" || s.progress === "watched";
+function inMode(s) {
+  if (L.mode === "seen") return isSeen(s);
+  if (s.a && s.b) return false;
+  if (s.progress === "watched" || s.progress === "watching" || s.rec === "watched" || s.rec === "seen") return false;
+  if (s.progress === "no" && L.status !== "no") return false;
+  return true;
+}
+const WANT_RANK = { want: 0, later: 1, "": 2, no: 3 };
+
+/* ---------- Learning from your answers ----------
+   Every star, want, maybe and pass is a vote for or against the title's genres.
+   The genre scores order the To watch list (after want and maybe) and weight tonight's pick,
+   so the page drifts towards what you rate well without ever ruling a genre out.
+   Notes Claude keeps between sessions live in the "meta" collection, doc "taste" ({ notes: [..], updated }). */
+let NOTES = [], NOTES_AT = "";
+let LEARN = { g: {}, n: 0 };
+function signal(s) {
+  const stars = [s.sa, s.sb].filter(Boolean);
+  if (stars.length) return stars.reduce((a, b) => a + b, 0) / stars.length - 3; // 5 stars counts +2, 1 star -2
+  if (s.progress === "want") return 1;
+  if (s.progress === "later") return 0.3;
+  if (s.progress === "no") return -1.5;
+  if (s.rec === "skipped") return -0.5;
+  if (s.progress === "watched" || (s.a && s.b)) return 0.5;
+  return null;
+}
+function learn() {
+  const sum = {}, cnt = {}, label = {};
+  let n = 0;
+  ROWS.forEach(r => {
+    const v = signal(st(r.id));
+    if (v == null || !(r.genres || []).length) return;
+    n++;
+    r.genres.forEach(x => { const k = x.toLowerCase(); if (!label[k]) label[k] = x; sum[k] = (sum[k] || 0) + v; cnt[k] = (cnt[k] || 0) + 1; });
+  });
+  const g = {};
+  // The +3 keeps a genre with one or two answers from swinging the picks.
+  Object.keys(sum).forEach(k => { g[k] = { score: sum[k] / (cnt[k] + 3), n: cnt[k], label: label[k] }; });
+  LEARN = { g, n };
+}
+function fit(r) {
+  const gs = (r.genres || []).map(x => LEARN.g[x.toLowerCase()]).filter(Boolean);
+  return gs.length ? gs.reduce((a, b) => a + b.score, 0) / gs.length : 0;
+}
+// Weighted draw: a title in a well-liked genre comes up about twice as often as one in a neutral genre.
+function weightedPick(c) {
+  const w = c.map(r => Math.exp(Math.max(-1.5, Math.min(1.5, fit(r)))));
+  let x = Math.random() * w.reduce((a, b) => a + b, 0);
+  for (let i = 0; i < c.length; i++) { x -= w[i]; if (x <= 0) return c[i]; }
+  return c[c.length - 1];
+}
+function renderLearned() {
+  const el = document.getElementById("learned");
+  if (!el) return;
+  if (L.mode !== "towatch" || !ready) { el.hidden = true; return; }
+  const gs = Object.keys(LEARN.g).filter(k => LEARN.g[k].n >= 3).sort((a, b) => LEARN.g[b].score - LEARN.g[a].score);
+  const top = gs.filter(k => LEARN.g[k].score > 0.15).slice(0, 5);
+  const low = gs.filter(k => LEARN.g[k].score < -0.05).slice(-4).reverse();
+  const list = a => a.map(k => esc(LEARN.g[k].label)).join(", ");
+  el.innerHTML = `<p class="eyebrow">What the page has learned</p>`
+    + `<p>From ${LEARN.n} of your answers, this list and tonight's pick lean towards ${top.length ? list(top) : "no genre yet"}${low.length ? `, and away from ${list(low)}` : ""}. Every star, want, maybe and pass you set updates it.</p>`
+    + (NOTES.length ? `<ul>${NOTES.map(t => `<li>${esc(t)}</li>`).join("")}</ul>` : "");
+  el.hidden = false;
+}
+
+function fillGenres() {
+  const sel = document.getElementById("f-genre");
+  const counts = {};
+  ROWS.filter(r => r.kind === L.kind).forEach(r => (r.genres || []).forEach(g => { counts[g] = (counts[g] || 0) + 1; }));
+  const names = Object.keys(counts).sort((a, b) => a.localeCompare(b));
+  if (L.genre !== "all" && !counts[L.genre]) L.genre = "all";
+  sel.innerHTML = `<option value="all">All</option>` + names.map(g => `<option value="${esc(g)}"${g === L.genre ? " selected" : ""}>${esc(g)} (${counts[g]})</option>`).join("");
+}
+
+function passes(r) {
+  if (r.kind !== L.kind) return false;
+  const s = st(r.id);
+  if (!inMode(s)) return false;
+  if (L.q) {
+    const q = L.q.trim().toLowerCase();
+    if (!(r.title + " " + (r.note || "") + " " + (r.blurb || "") + " " + s.comment).toLowerCase().includes(q)) return false;
+  }
+  if (L.status !== "all" && (L.status === "none" ? s.progress !== "" : s.progress !== L.status)) return false;
+  if (L.seen === "none" && (s.a || s.b)) return false;
+  if (L.seen === "newb" && s.b) return false;
+  if (L.seen === "a" && !s.a) return false;
+  if (L.seen === "b" && !s.b) return false;
+  if (L.seen === "both" && !(s.a && s.b)) return false;
+  // Rated: stars given. "One of you still to rate" means someone who saw it hasn't given stars yet.
+  if (L.rated === "any" && !(s.sa || s.sb)) return false;
+  if (L.rated === "both" && !(s.sa && s.sb)) return false;
+  if (L.rated === "a" && !s.sa) return false;
+  if (L.rated === "b" && !s.sb) return false;
+  if (L.rated === "none" && (s.sa || s.sb)) return false;
+  if (L.rated === "missing" && !((s.a && !s.sa) || (s.b && !s.sb))) return false;
+  if (L.genre !== "all" && !(r.genres || []).includes(L.genre)) return false;
+  return true;
+}
+function sortRows(rows) {
+  if (L.sort === "default" && L.mode === "towatch") {
+    const f = r => Math.round(fit(r) * 4) / 4; // coarse steps, so IMDb still orders titles of similar fit
+    return rows.slice().sort((a, b) => ((WANT_RANK[st(a.id).progress] ?? 2) - (WANT_RANK[st(b.id).progress] ?? 2))
+      || (f(b) - f(a)) || ((parseNum(b.imdb) ?? -1) - (parseNum(a.imdb) ?? -1)) || a.title.localeCompare(b.title));
+  }
+  const key = L.sort === "default" ? (L.kind === "tv" ? "rank" : "title") : L.sort;
+  const val = r => key === "rank" ? r.rank : key === "imdb" ? parseNum(r.imdb) : key === "year" ? (parseInt(r.year, 10) || null) : key === "sa" ? (st(r.id).sa || null) : key === "sb" ? (st(r.id).sb || null) : r.title.toLowerCase();
+  const m = key === "title" || key === "rank" ? 1 : -1;
+  return rows.slice().sort((a, b) => {
+    const x = val(a), y = val(b);
+    if (x == null && y == null) return a.title.localeCompare(b.title);
+    if (x == null) return 1;
+    if (y == null) return -1;
+    return (typeof x === "number" ? (x - y) * m : String(x).localeCompare(String(y)) * m) || a.title.localeCompare(b.title);
+  });
+}
+function rowHtml(r) {
+  const s = st(r.id);
+  const off = canWrite() ? "" : " disabled";
+  const meta = [];
+  if (r.kind === "movie" && r.year) meta.push(esc(r.year));
+  if (r.kind === "tv" && r.rank != null) meta.push("#" + r.rank + " readers' list");
+  const im = imdbHtml(r.imdb); if (im) meta.push(im);
+  if (r.rt && r.rt !== "n/a") meta.push("RT " + esc(r.rt));
+  if (r.kind === "tv" && r.status) meta.push(`<span class="pill ${esc(r.status)}">${SHOW_LABEL[r.status] || ""}</span>`);
+  if (s.rec) meta.push(`<span class="pill ${esc(s.rec)}">${REC_LABEL[s.rec] || ""}${s.recAt ? " " + esc(niceDate(s.recAt)) : ""}</span>`);
+  const lines = [describe(r), r.kind === "tv" && r.blurb ? r.detail : "", r.kind === "movie" && r.blurb ? r.note : "", r.where ? "Streaming: " + r.where : ""].filter(Boolean);
+  const opts = STATUS.map(([v, l]) => `<option value="${v}"${v === s.progress ? " selected" : ""}>${l}</option>`).join("");
+  const who = (w, name) => `<div class="r-who"><label><input type="checkbox" data-seen="${r.id}" data-who="${w}"${s[w] ? " checked" : ""}${off} id="s-${w}-${r.id}">${esc(name)} saw</label>${starsHtml(r.id, w, r.title).replace(/<button /g, "<button" + off + " ")}</div>`;
+  const q = encodeURIComponent(r.title + (r.kind === "tv" ? " TV series" : " " + (r.year || "") + " film"));
+  return `<li class="row" data-row="${r.id}">
+    <div class="r-main"><div class="r-title"><a href="https://www.google.com/search?q=${q}" target="_blank" rel="noopener">${esc(r.title)}</a></div>
+      <div class="r-meta">${meta.map(m => `<span>${m}</span>`).join("")}</div>
+      ${lines.map(l => `<div class="r-blurb">${esc(l)}</div>`).join("")}</div>
+    <div class="r-status"><select data-progress="${r.id}" id="p-${r.id}" aria-label="Status of ${esc(r.title)}"${off}>${opts}</select></div>
+    ${who("a", VIEWERS.a)}${who("b", VIEWERS.b)}
+    <input type="text" class="r-comment" data-comment="${r.id}" id="c-${r.id}" maxlength="500" placeholder="Add a note" aria-label="Note on ${esc(r.title)}" value="${esc(s.comment)}"${off}>
+  </li>`;
+}
+let pendingList = false;
+function renderList(force) {
+  const box = document.getElementById("rows");
+  const a = document.activeElement;
+  if (!force && a && box.contains(a) && (a.tagName === "INPUT" && a.type === "text" || a.tagName === "SELECT")) { pendingList = true; return; }
+  pendingList = false;
+  learn();
+  renderLearned();
+  const all = ROWS.filter(r => r.kind === L.kind && inMode(st(r.id)));
+  const rows = sortRows(ROWS.filter(passes));
+  const q = L.q.trim();
+  box.innerHTML = rows.length ? rows.map(rowHtml).join("")
+    : `<li class="empty">${q ? `Nothing matches "${esc(q)}". <button type="button" class="btn small" data-act="quickadd">Add it as a ${L.kind === "tv" ? "series" : "film"}</button>` : "Nothing matches these filters."}</li>`;
+  const d = rows.filter(r => st(r.id).a).length, j = rows.filter(r => st(r.id).b).length;
+  const w = rows.filter(r => st(r.id).progress === "want").length;
+  document.getElementById("count").innerHTML = L.mode === "towatch"
+    ? `Showing <strong>${rows.length}</strong> of ${all.length} · want to watch <strong>${w}</strong> · ${esc(VIEWERS.a)} saw <strong>${d}</strong> · ${esc(VIEWERS.b)} saw <strong>${j}</strong>`
+    : `Showing <strong>${rows.length}</strong> of ${all.length} · ${esc(VIEWERS.a)} saw <strong>${d}</strong> · ${esc(VIEWERS.b)} saw <strong>${j}</strong>`;
+}
+function refreshRow(id) {
+  const el = document.querySelector(`[data-row="${CSS.escape(id)}"]`);
+  const r = BY_ID[id];
+  if (el && r) el.outerHTML = rowHtml(r);
+}
+function renderAll() { renderTonight(); renderList(); }
+
+/* ---------- Views ---------- */
+function showView() {
+  const v = location.hash === "#list" ? "list" : location.hash === "#towatch" ? "towatch" : "tonight";
+  document.getElementById("view-tonight").hidden = v !== "tonight";
+  document.getElementById("view-list").hidden = v === "tonight";
+  if (v !== "tonight") {
+    const mode = v === "towatch" ? "towatch" : "seen";
+    document.getElementById("list-lede").textContent = LEDE[mode];
+    if (mode !== L.mode) { L.mode = mode; renderList(true); }
+    renderLearned();
+  }
+  document.querySelectorAll(".tabs a").forEach(a => { if (a.dataset.view === v) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+}
+window.addEventListener("hashchange", showView);
+
+/* ---------- Events ---------- */
+function addTitle(kind, title, sawA, sawB, want, onErr, onDone) {
+  const id = (kind === "tv" ? "tv-" : "movie-") + slug(title);
+  if (BY_ID[id]) { onErr("That title is already in the list."); return; }
+  if (!canWrite()) { onErr("Changes can't be saved in this view."); return; }
+  onErr("Saving…");
+  DB.collection("titles").doc(id).set({ added: true, kind, title }).then(() => {
+    if (sawA || sawB || want) mutate(id, { a: sawA, b: sawB, progress: want ? "want" : "" });
+    onErr(""); onDone();
+  }, () => onErr("Couldn't save. Try again."));
+}
+
+document.addEventListener("click", e => {
+  const star = e.target.closest("[data-star]");
+  if (star) {
+    const id = star.dataset.star, who = star.dataset.who, n = Number(star.dataset.n);
+    const key = who === "a" ? "sa" : "sb";
+    const next = st(id)[key] === n ? 0 : n;
+    const patch = { [key]: next };
+    if (next) patch[who] = true;
+    if (mutate(id, patch)) { renderTonight(); refreshRow(id); }
+    return;
+  }
+  const tk = e.target.closest("[data-tk]");
+  if (tk) { T.kind = tk.dataset.tk; document.querySelectorAll("[data-tk]").forEach(b => b.setAttribute("aria-pressed", String(b === tk))); shown.clear(); pickId = null; roll(false); return; }
+  const tt = e.target.closest("[data-tt]");
+  if (tt) { const k = tt.dataset.tt; T[k] = !T[k]; tt.setAttribute("aria-pressed", String(T[k])); shown.clear(); pickId = null; roll(false); return; }
+  const lk = e.target.closest("[data-lk]");
+  if (lk) { L.kind = lk.dataset.lk; document.querySelectorAll("[data-lk]").forEach(b => b.setAttribute("aria-pressed", String(b === lk))); fillGenres(); renderList(true); return; }
+  const act = e.target.closest("[data-act]");
+  if (!act) return;
+  const id = act.dataset.id, a = act.dataset.act;
+  if (a === "skip") { if (id && canWrite() && !st(id).rec) mutate(id, { rec: "skipped", recAt: today() }); roll(true); renderList(); }
+  else if (a === "watch") { if (mutate(id, { rec: "picked", recAt: today() })) { pickId = null; roll(false); renderList(); } }
+  else if (a === "seen-open") { seenAsk = true; renderTonight(); }
+  else if (a === "seen-cancel") { seenAsk = false; renderTonight(); }
+  else if (a === "seen-a" || a === "seen-b") {
+    seenAsk = false;
+    if (mutate(id, { [a === "seen-a" ? "a" : "b"]: true })) { if (!pool().some(r => r.id === id)) { pickId = null; roll(false); } else renderTonight(); renderList(); }
+  }
+  else if (a === "seen-both") { seenAsk = false; if (mutate(id, { a: true, b: true, progress: "watched", rec: "seen", recAt: today() })) { pickId = null; roll(false); renderList(); } }
+  else if (a === "watched") { if (mutate(id, { a: true, b: true, progress: "watched", rec: "watched", recAt: st(id).recAt || today() })) renderAll(); }
+  else if (a === "notwatched") { if (mutate(id, { rec: "skipped" })) renderAll(); }
+  else if (a === "quickadd") {
+    const title = L.q.trim();
+    if (title) addTitle(L.kind, title, false, false, true, msg => setStatus(msg), () => {});
+  }
+});
+
+document.addEventListener("change", e => {
+  const el = e.target;
+  if (el.dataset.comment) { if (mutate(el.dataset.comment, { comment: el.value.trim() })) renderTonight(); return; }
+  if (el.dataset.progress) { if (mutate(el.dataset.progress, { progress: el.value })) renderTonight(); else el.value = st(el.dataset.progress).progress; return; }
+  if (el.dataset.seen) { if (mutate(el.dataset.seen, { [el.dataset.who]: el.checked })) renderTonight(); else el.checked = !el.checked; return; }
+  if (el.dataset.f && el.dataset.f !== "q") { L[el.dataset.f] = el.value; renderList(true); }
+});
+document.addEventListener("input", e => { if (e.target.dataset.f === "q") { L.q = e.target.value; renderList(true); } });
+document.addEventListener("focusout", () => { if (pendingList) setTimeout(() => renderList(), 0); });
+
+const addDialog = document.getElementById("add-dialog");
+const addForm = document.getElementById("add-form");
+const addErr = document.getElementById("add-err");
+document.getElementById("add-open").addEventListener("click", () => {
+  addForm.reset();
+  addForm.elements.kind.value = location.hash === "#list" || location.hash === "#towatch" ? L.kind : (T.kind === "tv" ? "tv" : "movie");
+  addErr.textContent = "";
+  addDialog.showModal();
+  addForm.elements.title.focus();
+});
+document.getElementById("add-cancel").addEventListener("click", () => addDialog.close());
+addForm.addEventListener("submit", e => {
+  e.preventDefault();
+  const f = addForm.elements;
+  const title = f.title.value.trim();
+  if (!title) { addErr.textContent = "Enter a title."; return; }
+  addTitle(f.kind.value, title, f.seenA.checked, f.seenB.checked, f.want.checked, msg => { addErr.textContent = msg; }, () => addDialog.close());
+});
+
+/* ---------- Start ---------- */
+function applyViewers() {
+  const A = esc(VIEWERS.a), B = esc(VIEWERS.b), $ = id => document.getElementById(id);
+  $("presents").textContent = `${VIEWERS.a} & ${VIEWERS.b} present`;
+  $("chip-newb").textContent = `New to ${VIEWERS.b}`;
+  const list = SERVICES.length > 1 ? SERVICES.slice(0, -1).join(", ") + " or " + SERVICES[SERVICES.length - 1] : (SERVICES[0] || "");
+  $("chip-ours").textContent = "On " + list;
+  $("chip-ours").hidden = !SERVICES.length;
+  $("f-seen").innerHTML = `<option value="all">Anyone or no one</option><option value="none">New to both</option><option value="newb">New to ${B}</option><option value="a">${A}</option><option value="b">${B}</option><option value="both">Both</option>`;
+  $("f-rated").innerHTML = `<option value="all">Rated or not</option><option value="any">Rated by either</option><option value="both">Rated by both</option><option value="a">Rated by ${A}</option><option value="b">Rated by ${B}</option><option value="missing">One of you still to rate</option><option value="none">Not rated yet</option>`;
+  $("f-sort").innerHTML = `<option value="default">Default</option><option value="title">Title</option><option value="imdb">IMDb, high first</option><option value="year">Year, new first</option><option value="sa">${A}'s stars</option><option value="sb">${B}'s stars</option>`;
+  document.querySelectorAll("[data-name]").forEach(el => { el.textContent = VIEWERS[el.dataset.name]; });
+  $("foot").textContent = FOOTNOTE;
+}
+applyViewers();
+buildRows();
+showView();
+renderList(true);
+
+(async () => {
+  let db = null;
+  if (!FORCE_MEMORY) { try { db = await (window.claude && window.claude.use ? window.claude.use("db") : null); } catch (e) { db = null; } }
+  if (!db) {
+    db = memoryStore();
+    const note = document.getElementById("memnote");
+    note.textContent = "Sample mode: nothing is saved. Changes last until you close this tab.";
+    note.hidden = false;
+  }
+  DB = db;
+  DB.collection("watched").onSnapshot(snap => {
+    server = {};
+    snap.docs.forEach(d => { if (d.exists) server[d.id] = norm(d.data() || {}); });
+    const next = {};
+    Object.keys(server).forEach(id => { next[id] = dirty[id] ? st(id) : server[id]; });
+    Object.keys(seen).forEach(id => { if (dirty[id] && !next[id]) next[id] = seen[id]; });
+    seen = next;
+    const first = !ready;
+    ready = true;
+    if (first || !pickId) { if (first) renderList(true); roll(false); renderList(); } else renderAll();
+  }, err => {
+    if (err && (err.code === "revoked" || err.code === "not_granted")) { readOnly = true; setStatus("This view can't save changes, so the page is read-only."); }
+    else setStatus("Couldn't load saved changes. Reload to try again.");
+    renderAll();
+  });
+  DB.collection("titles").onSnapshot(snap => {
+    overrides = {};
+    snap.docs.forEach(d => { if (d.exists) overrides[d.id] = d.data() || {}; });
+    buildRows();
+    renderAll();
+  }, () => setStatus("Couldn't load the title list. Reload to try again."));
+  DB.collection("meta").onSnapshot(snap => {
+    const d = snap.docs.find(x => x.id === "taste" && x.exists);
+    const data = d ? d.data() || {} : {};
+    NOTES = Array.isArray(data.notes) ? data.notes.filter(t => typeof t === "string").slice(0, 12) : [];
+    NOTES_AT = typeof data.updated === "string" ? data.updated : "";
+    renderLearned();
+  }, () => {});
+})();
+</script>

@@ -15,7 +15,6 @@
 <link as="font" crossorigin="" href="../assets/fonts/source-serif-4-latin-700-normal.woff2" rel="preload" type="font/woff2"/>
 <link href="../style.css" rel="stylesheet"/>
 <script defer="" src="../js/site.js"></script>
-<script defer="" src="../js/movie-night.js"></script>
 <link href="https://danielercohen.github.io/ai-pm/personal/index.html" rel="canonical"/></head>
 <body>
 <svg aria-hidden="true" focusable="false" height="0" style="position:absolute" width="0"><defs>
@@ -37,31 +36,17 @@
 <main id="main">
 <section class="pagehead personal"><div class="wrap">
 <p class="eyebrow">Fun stuff</p><h1>Small things I built for fun</h1>
-<p class="lede">A movie picker and a kart game, then how I organize my notes and what I am reading.</p>
+<p class="lede">A movie picker and a kart game, then how I organize my notes and what I am reading. The first two are free to copy.</p>
 </div></section>
 <section aria-labelledby="mn-h" class="sec" id="movie-night"><div class="wrap">
 <div class="sec-head"><h2 id="mn-h">Movie Night</h2><p>Movie Night keeps a list of films and series and draws one title from the hat for the evening.</p></div>
-<div class="mn">
-<div class="mn-top"><span class="badge">Made-up sample</span><span class="mn-who">Two invented viewers, Erin and Josh</span></div>
-<div id="mn-demo"><noscript><p class="mn-nojs">The draw needs JavaScript. The sample list is below.</p></noscript>
-<ul class="mn-list" id="mn-list">
-<li data-title="Casablanca" data-year="1942" data-genre="Romance" data-erin="1" data-josh="0" data-service="0">Casablanca, 1942, Romance. Seen by Erin. Not on a service you have.</li>
-<li data-title="Some Like It Hot" data-year="1959" data-genre="Comedy" data-erin="0" data-josh="0" data-service="1">Some Like It Hot, 1959, Comedy. Seen by neither. On a service you have.</li>
-<li data-title="Psycho" data-year="1960" data-genre="Thriller" data-erin="1" data-josh="1" data-service="0">Psycho, 1960, Thriller. Seen by both. Not on a service you have.</li>
-<li data-title="The Godfather" data-year="1972" data-genre="Crime" data-erin="1" data-josh="0" data-service="1">The Godfather, 1972, Crime. Seen by Erin. On a service you have.</li>
-<li data-title="Jaws" data-year="1975" data-genre="Thriller" data-erin="0" data-josh="1" data-service="1">Jaws, 1975, Thriller. Seen by Josh. On a service you have.</li>
-<li data-title="Alien" data-year="1979" data-genre="Sci-fi" data-erin="1" data-josh="1" data-service="0">Alien, 1979, Sci-fi. Seen by both. Not on a service you have.</li>
-<li data-title="Back to the Future" data-year="1985" data-genre="Adventure" data-erin="0" data-josh="0" data-service="1">Back to the Future, 1985, Adventure. Seen by neither. On a service you have.</li>
-<li data-title="Die Hard" data-year="1988" data-genre="Action" data-erin="0" data-josh="1" data-service="0">Die Hard, 1988, Action. Seen by Josh. Not on a service you have.</li>
-<li data-title="Jurassic Park" data-year="1993" data-genre="Adventure" data-erin="0" data-josh="1" data-service="1">Jurassic Park, 1993, Adventure. Seen by Josh. On a service you have.</li>
-<li data-title="Pulp Fiction" data-year="1994" data-genre="Crime" data-erin="1" data-josh="1" data-service="0">Pulp Fiction, 1994, Crime. Seen by both. Not on a service you have.</li>
-<li data-title="Toy Story" data-year="1995" data-genre="Animation" data-erin="0" data-josh="0" data-service="1">Toy Story, 1995, Animation. Seen by neither. On a service you have.</li>
-<li data-title="The Matrix" data-year="1999" data-genre="Sci-fi" data-erin="0" data-josh="1" data-service="1">The Matrix, 1999, Sci-fi. Seen by Josh. On a service you have.</li>
-<li data-title="Spirited Away" data-year="2001" data-genre="Animation" data-erin="1" data-josh="0" data-service="0">Spirited Away, 2001, Animation. Seen by Erin. Not on a service you have.</li>
-<li data-title="Amélie" data-year="2001" data-genre="Romance" data-erin="0" data-josh="0" data-service="0">Amélie, 2001, Romance. Seen by neither. Not on a service you have.</li>
-<li data-title="Mad Max: Fury Road" data-year="2015" data-genre="Action" data-erin="1" data-josh="0" data-service="1">Mad Max: Fury Road, 2015, Action. Seen by Erin. On a service you have.</li>
-<li data-title="Parasite" data-year="2019" data-genre="Thriller" data-erin="0" data-josh="0" data-service="1">Parasite, 2019, Thriller. Seen by neither. On a service you have.</li>
-</ul></div>
+<div class="fun-demo">
+<div class="fun-demo-head"><span class="badge">Made-up sample</span><span>Erin and Josh are invented. The demo opens the whole page.</span></div>
+<div class="fun-demo-body">
+<a class="fun-shot" href="movie-night-demo/index.html" aria-label="Open the demo of Movie Night on a made-up sample"><picture><source media="(max-width:640px)" srcset="../assets/screens/movie-night-phone.png" width="390" height="844"/><img class="shot" src="../assets/screens/movie-night-desktop.png" width="1100" height="900" loading="lazy" alt="Movie Night on a desktop screen, shown on a made-up sample. A dark marquee header reads Erin and Josh present Movie Night, with tabs for Tonight, To watch and Seen. Below are filters for films, series or either, and a ticket with tonight&#x27;s pick: Spirited Away, a 2001 film that Erin has seen and Josh has not, on Netflix. Three buttons follow: We&#x27;re watching this, Not tonight, roll again and Already seen it. Under them are the latest pick, Jaws, with a star rating from each of the two, and the past picks."/></picture></a>
+<div class="fun-actions"><a class="btn primary" href="movie-night-demo/index.html">Open the demo <svg class="i" aria-hidden="true"><use href="#i-arrow"></use></svg></a><a class="btn" href="https://github.com/DanielErCohen/fun-stuff/tree/main/movie-night">Copy it from GitHub</a></div>
+<p class="fun-note">The demo is a made-up sample. Your changes stay in the browser tab.</p>
+</div>
 </div>
 <ul class="fun-facts">
 <li>My own Movie Night keeps one list of films and series for two people.</li>
@@ -69,6 +54,13 @@
 <li>Star ratings from both people feed the next pick. It leans towards genres they rate well and never rules a genre out.</li>
 <li>It runs as a private page for the two people who use it.</li>
 </ul>
+<div class="fun-copy">
+<h3>Copy it</h3>
+<p>Download the repository as a ZIP and unzip it, then open the Code tab in the Claude desktop app, press + New with the unzipped folder available and paste this line.</p>
+<div class="fun-actions"><a class="btn" href="https://github.com/DanielErCohen/fun-stuff/archive/refs/heads/main.zip">Download ZIP</a></div>
+<div class="codeblock"><div class="cb-cap">Set up your Movie Night</div><pre class="wrap"><code>Read setup.md in the movie-night folder I downloaded and set up my Movie Night. Ask me the questions first and publish nothing until I confirm.</code></pre><button class="copy" data-copy="Read setup.md in the movie-night folder I downloaded and set up my Movie Night. Ask me the questions first and publish nothing until I confirm." type="button"><svg aria-hidden="true" class="i"><use href="#i-copy"></use></svg><span class="no">Copy</span><span class="ok"><svg aria-hidden="true" class="i"><use href="#i-check"></use></svg> Copied</span></button></div>
+<p>It needs a Claude plan that can publish a private page with a database. No other person has run this setup. Whether a second person can save changes from their own account is untested.</p>
+</div>
 </div></section>
 <section aria-labelledby="ck-h" class="sec alt" id="couch-kart"><div class="wrap">
 <div class="sec-head"><h2 id="ck-h">Couch Kart</h2><p>Couch Kart is an original two-player kart racer that I built as a Super Nintendo game.</p></div>
@@ -84,8 +76,20 @@
 <li>Two players race on one couch, with the screen split top and bottom. Each picks from 18 animals: real ones, dinosaurs and made-up ones.</li>
 <li>The track has coins, items and boosts. There is a cup over several tracks, battles, and up to three computer-driven karts.</li>
 <li>It runs on a retro game stick, a small device that plugs into the TV and plays old Super Nintendo games through an emulator, a program that imitates the console. The game is one 512 KB file, written in C with hand-written assembly where speed matters.</li>
-<li>Every character, track and picture is original. Nothing comes from Nintendo. It is a personal project, started in Nov '26. The game file is not published.</li>
+<li>Every character, track and picture is original. Nothing comes from Nintendo. It is a personal project, started in Nov '26. The game file is published in the repository under the MIT licence.</li>
 </ul>
+<div class="fun-copy">
+<h3>Copy it</h3>
+<p>The source, the tools and the game file are free to copy.</p>
+<div class="fun-actions"><a class="btn" href="https://github.com/DanielErCohen/fun-stuff/tree/main/couch-kart">Couch Kart on GitHub</a><a class="btn" href="https://github.com/DanielErCohen/fun-stuff/raw/main/couch-kart/couch-kart.sfc">Download the game file</a></div>
+<p class="fun-note">The game file plays in a Super Nintendo emulator, or on a device that has one.</p>
+</div>
+<div class="fun-copy">
+<h3>Change it with your own Claude</h3>
+<p>Open Claude Code in the unzipped folder and paste one of these prompts. I have tried neither.</p>
+<div class="codeblock"><div class="cb-cap">Make it playable in a browser</div><pre class="wrap"><code>Read README.md and docs/engine.md. I want to play couch-kart.sfc in a web browser. Propose how to run it on a web page with an open-source Super Nintendo emulator that is compiled for the browser. Before you choose an emulator, name its licence and say what that licence allows, including whether I can publish the page. Ask me before you add any file, download or dependency. Keep couch-kart.sfc unchanged. Then build one page with keyboard controls for two players.</code></pre><button class="copy" data-copy="Read README.md and docs/engine.md. I want to play couch-kart.sfc in a web browser. Propose how to run it on a web page with an open-source Super Nintendo emulator that is compiled for the browser. Before you choose an emulator, name its licence and say what that licence allows, including whether I can publish the page. Ask me before you add any file, download or dependency. Keep couch-kart.sfc unchanged. Then build one page with keyboard controls for two players." type="button"><svg aria-hidden="true" class="i"><use href="#i-copy"></use></svg><span class="no">Copy</span><span class="ok"><svg aria-hidden="true" class="i"><use href="#i-check"></use></svg> Copied</span></button></div>
+<div class="codeblock"><div class="cb-cap">Make it multiplayer beyond one couch</div><pre class="wrap"><code>Read README.md and docs/engine.md. I want more than two people to be able to play Couch Kart together. Explain the two routes: more local players on one screen, which the console and the frame budget limit, or play over the network through an emulator&#x27;s netplay, which needs no change to the game. Recommend one and say why. Ask me before you build anything.</code></pre><button class="copy" data-copy="Read README.md and docs/engine.md. I want more than two people to be able to play Couch Kart together. Explain the two routes: more local players on one screen, which the console and the frame budget limit, or play over the network through an emulator&#x27;s netplay, which needs no change to the game. Recommend one and say why. Ask me before you build anything." type="button"><svg aria-hidden="true" class="i"><use href="#i-copy"></use></svg><span class="no">Copy</span><span class="ok"><svg aria-hidden="true" class="i"><use href="#i-check"></use></svg> Copied</span></button></div>
+</div>
 </div></section>
 <section aria-labelledby="sb-h" class="sec" id="second-brain"><div class="wrap">
 <div class="sec-head"><h2 id="sb-h">How I organize my second brain</h2><p>I use Tiago Forte's PARA method: Projects, Areas, Resources and Archive. Each has a different job.</p></div>

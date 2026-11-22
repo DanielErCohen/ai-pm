@@ -41,6 +41,9 @@ class P(HTMLParser):
         if tag == 'a' and a.get('name'):
             self.ids.append(a['name'])
         for k in ('href', 'src'):
+            # a same-page link with data-view is a view switch the page's own script handles
+            if k == 'href' and 'data-view' in a and (a[k] or '').startswith('#'):
+                continue
             if k in a and a[k] is not None:
                 self.refs.append((f'{tag}[{k}]', a[k]))
         for k in ('aria-controls', 'aria-labelledby', 'aria-describedby'):

@@ -917,31 +917,19 @@ ul>li:has(>.pj-cta){grid-column:1/-1}
 #panel-roadmap::before{content:"Improvement roadmap"}
 #panel-achievements::before{content:"Professional achievements"}
 }
-/* Fun stuff page: the Movie Night draw demo (js/movie-night.js) and the Couch Kart pictures. Berry is the section color. */
-.mn{background:var(--surface);border:1px solid var(--line);border-left:8px solid var(--c-personal);border-radius:var(--r);padding:24px}
-.mn-top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-bottom:16px}
-.mn-who{font-size:.9rem;color:var(--muted)}
-.mn-list{margin:0;font-size:.95rem}
-.mn-nojs{margin:0 0 12px;font-weight:600}
-.mn-controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
-.mn-chips{display:flex;flex-wrap:wrap;gap:10px}
-.mn-genre{display:flex;align-items:center;gap:8px;font:600 .92rem/1.2 var(--sans)}
-.mn-genre select{min-height:44px;font:600 .92rem/1.2 var(--sans);color:var(--ink);background:var(--surface);border:2px solid var(--c-personal);border-radius:99px;padding:9px 14px;cursor:pointer}
-.mn-count{margin:14px 0 12px;font-size:.9rem;color:var(--muted)}
-.mn-card{min-height:14.5rem;padding:18px 20px;background:#FFFDF8;border:2px dashed #D8CFC0;border-radius:12px}
-.mn-card p{margin:0}
-.mn-kind{font:700 .78rem/1.4 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--c-personal)}
-.mn-title{font:700 clamp(1.4rem,3.4vw,1.9rem)/1.2 var(--serif);letter-spacing:-.01em;margin:6px 0 8px;overflow-wrap:anywhere}
-.mn-meta{font-weight:600}
-.mn-seen{color:var(--muted)}
-.mn-status{margin-top:10px;font-size:.9rem;color:#2C373B}
-.mn-card.rolling{animation:mn-wiggle .1s ease-in-out infinite alternate}
-.mn-card.landed{animation:mn-land .5s cubic-bezier(.2,1.5,.4,1)}
-@keyframes mn-wiggle{from{transform:rotate(-.7deg)}to{transform:rotate(.7deg)}}
-@keyframes mn-land{from{transform:translateY(-10px) scale(.96)}to{transform:none}}
-.mn-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-.mn .btn:disabled{opacity:.45;cursor:default;transform:none}
-.mn .mock-note{margin:12px 0 0}
+/* Fun stuff page: the Movie Night picture card, the copy blocks and the Couch Kart pictures. Berry is the section color. */
+.fun-demo{background:var(--surface);border:1px solid var(--line);border-left:8px solid var(--c-personal);border-radius:var(--r);overflow:hidden}
+.fun-demo-head{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:16px 24px;background:#FBF8F2;border-bottom:1px solid var(--line);font-size:.92rem;color:var(--muted)}
+.fun-demo-body{padding:20px 24px 24px}
+.fun-shot{display:block}
+.fun-shot .shot{max-width:1100px;margin:0 auto}
+.fun-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.fun-note{margin:12px 0 0;font-size:.92rem;color:var(--muted)}
+.fun-copy{max-width:46em;margin-top:36px}
+.fun-copy h3{margin:0 0 8px}
+.fun-copy p{margin:0 0 14px}
+.fun-copy .fun-actions{margin:0 0 16px}
+.fun-copy .fun-note{margin:-4px 0 0}
 .fun-facts{max-width:46em;margin:24px 0 0}
 .kart-media{display:flex;flex-wrap:wrap;align-items:flex-start;gap:24px 28px}
 .kart-fig{--s:2;width:calc(256px*var(--s));margin:0;flex:none}
@@ -955,4 +943,4 @@ ul>li:has(>.pj-cta){grid-column:1/-1}
 .kart-still{display:flex;flex-wrap:wrap;align-items:flex-start;gap:10px 16px;margin:0}
 .kart-still img{display:block;flex:none;width:256px;height:224px;max-width:none;image-rendering:pixelated;box-shadow:0 0 0 1px var(--line)}
 .kart-still figcaption{flex:1 1 9em}
-@media (max-width:600px){.mn{padding:18px}.kart-fig{--s:1}}
+@media (max-width:600px){.fun-demo-head{padding:14px 16px}.fun-demo-body{padding:16px 14px 20px}.kart-fig{--s:1}}
