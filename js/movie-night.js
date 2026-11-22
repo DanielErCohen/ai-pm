@@ -80,7 +80,7 @@
   var live = el('p', 'sr-only');
   live.setAttribute('aria-live', 'polite');
   live.setAttribute('aria-atomic', 'true');
-  var note = el('p', 'mock-note', 'Nothing is saved. A reload puts the sample back as it was.');
+  var note = el('p', 'mock-note', 'Nothing is saved. Refreshing the page puts the sample back.');
 
   [controls, count, card, actions, live, note].forEach(function (e) { host.appendChild(e); });
 
