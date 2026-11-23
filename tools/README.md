@@ -1,6 +1,6 @@
 # Site tools
 
-Five scripts for checking the site and building the skill zips. Run each from this repository's root folder. The site itself has no build step.
+Six scripts for checking the site, building the skill zips and framing the demos. Run each from this repository's root folder. The site itself has no build step.
 
 ## linkcheck.py
 
@@ -31,3 +31,12 @@ bash tools/build-skill-zips.sh
 ## Artifact packs
 
 Run `python3 tools/build-artifact-packs.py` after editing artifact sources or adaptation prompts. It builds reproducible editable packs from sibling how-i-work and cv-tailor checkouts. Run `python3 tools/check-artifact-packs.py` to check source and prompt parity. See [ARTIFACTS.md](../ARTIFACTS.md).
+
+## demo-bar.py
+
+Puts the site's top bar on a demo page: the brand on the left and a "Back to" button on the right, frozen at the top while the page scrolls. Run it again after rebuilding a demo; it replaces its own earlier bar.
+
+```bash
+python3 tools/demo-bar.py toolkit/work-task-board-demo/index.html ../work-task-board.html "Work task board"
+python3 tools/demo-bar.py personal/movie-night-demo/index.html ../index.html#movie-night "Fun stuff"
+```
