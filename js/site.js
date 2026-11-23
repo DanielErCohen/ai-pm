@@ -23,6 +23,15 @@
       try { document.execCommand('copy') ? resolve() : reject(); } catch (e) { reject(e); } finally { document.body.removeChild(ta); }
     });
   }
+  /* Demos and other sites open in a new tab, so this site stays open behind them */
+  Array.prototype.forEach.call(document.querySelectorAll('a[href]'), function (a) {
+    if (a.hasAttribute('target') || !/^https?:$/.test(a.protocol)) { return; }
+    if (a.host !== location.host || /-demo\//.test(a.pathname)) {
+      a.target = '_blank';
+      a.rel = (a.rel ? a.rel + ' ' : '') + 'noopener';
+    }
+  });
+
   var live = document.createElement('div');
   live.setAttribute('role', 'status'); live.setAttribute('aria-live', 'polite');
   live.style.cssText = 'position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden';
